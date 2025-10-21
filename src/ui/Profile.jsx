@@ -12,7 +12,7 @@ function Profile() {
   const iconSize = "w-6 h-6 text-gray-500";
   // Simplified styles for the profile dropdown button
   const profileButtonClass =
-    "flex items-center gap-3 p-1 pl-3 relative bg-white rounded-full shadow-md hover:shadow-lg transition-shadow duration-200";
+    "flex items-center cursor-pointer gap-3 p-1 pl-3 relative bg-white rounded-full shadow-md hover:shadow-lg transition-shadow duration-200";
 
   return (
     <div

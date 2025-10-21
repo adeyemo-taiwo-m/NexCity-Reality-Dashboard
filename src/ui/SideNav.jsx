@@ -13,6 +13,7 @@ import { BsHouses } from "react-icons/bs";
 import LogoutBtn from "./LogoutBtn";
 import NavLinkItem from "./NavLinkItem";
 import MainSIdeNav from "./MainSIdeNav";
+import { HiX } from "react-icons/hi";
 
 function SideNav({ isOpen = false, onClose = () => {} }) {
   return (
@@ -36,10 +37,10 @@ function SideNav({ isOpen = false, onClose = () => {} }) {
               <div className="font-semibold">Menu</div>
               <button
                 onClick={onClose}
-                className="p-2 rounded-md bg-gray-100 hover:bg-gray-200"
+                className=" cursor-pointer h-8 w-8 flex justify-center items-center rounded-md lap:hidden hover:text-normal-hover text-normal bg-light hover:bg-light-hover "
                 aria-label="Close menu"
               >
-                ✕
+                <HiX />
               </button>
             </div>
             <MainSIdeNav />
