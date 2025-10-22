@@ -4,7 +4,7 @@ import PropertySnapShotHeader from "./PropertySnapShotHeader.jsx";
 
 function PropertySnapShot() {
   return (
-    <div className="mt-8 bg-white p-6 rounded-xl shadow-sm">
+    <div className=" bg-white p-6 rounded-xl shadow-sm">
       <PropertySnapShotHeader />
 
       <div className="grid grid-cols-3 gap-4">

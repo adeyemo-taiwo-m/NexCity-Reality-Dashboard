@@ -3,7 +3,7 @@ import Heading from "../../ui/Heading";
 
 export const PropertyPerformanceOverviewSection = () => {
   return (
-    <section className="bg-white rounded-xl p-6 shadow-sm mt-8">
+    <section className="bg-white p-8 rounded-xl shadow-sm">
       <div className="flex items-center justify-between mb-4">
         <Heading type="h2">Property Performance Overview</Heading>
         <FaChartLine className="text-normal text-xl" />

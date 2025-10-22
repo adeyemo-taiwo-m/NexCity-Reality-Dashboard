@@ -32,7 +32,7 @@ function Button({
 
   const variants = {
     primary:
-      "bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500/40 shadow-sm hover:shadow-md",
+      "h-12 px-4 inline-flex items-center justify-center gap-2 bg-[#054484] text-white rounded-md transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#054484] focus:ring-offset-2",
     secondary:
       "bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 focus:ring-gray-200/50 shadow-sm",
 

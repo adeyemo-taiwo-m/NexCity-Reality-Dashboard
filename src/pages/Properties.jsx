@@ -1,8 +1,17 @@
-import React from "react";
-import Heading from "../ui/Heading";
+import SearchBar from "../features/properties/SearchBar";
+import Header from "../features/properties/Header";
+import PropertyList from "../features/properties/PropertiesList";
 
 function Properties() {
-  return <Heading>Properties</Heading>;
+  return (
+    <section className="flex-col flex gap-6">
+      <Header />
+      <SearchBar />
+      <div>
+        <PropertyList />
+      </div>
+    </section>
+  );
 }
 
 export default Properties;
