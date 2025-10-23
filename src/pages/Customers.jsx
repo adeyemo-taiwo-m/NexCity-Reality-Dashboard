@@ -4,6 +4,8 @@ import Header from "../features/customers/Header";
 import CustomersSearchBar from "../features/customers/CustomersSearchBar";
 import ClientCount from "../features/dashboard/ClientCount";
 import CustomersListTable from "../features/customers/CustomersListTable";
+import { HiOutlineDownload } from "react-icons/hi";
+import Button from "../ui/Button";
 
 function Customers() {
   return (
@@ -11,6 +13,11 @@ function Customers() {
       <Header />
       <CustomersSearchBar />
       <CustomersListTable />
+      <div>
+        <Button variant="tertiary" Icon={HiOutlineDownload}>
+          Export
+        </Button>
+      </div>
     </section>
   );
 }

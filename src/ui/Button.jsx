@@ -1,56 +1,42 @@
 import React from "react";
 import { HiOutlinePlus } from "react-icons/hi2";
 
-/**
- * Reusable Button component for dashboards.
- * Supports variants, icons, and full responsiveness.
- *
- * @param {object} props
- * @param {string} props.children - Button label text.
- * @param {React.ElementType} [props.Icon=HiOutlinePlus] - Icon component (from react-icons).
- * @param {"primary" | "secondary" | "danger" | "ghost"} [props.variant='primary'] - Button style type.
- * @param {boolean} [props.fullWidth=false] - If true, makes the button full width.
- * @param {boolean} [props.loading=false] - Displays a loading spinner.
- * @param {string} [props.className] - Extra Tailwind classes.
- * @param {function} [props.onClick] - Click handler.
- */
-function Button({
+const Button = ({
   children,
   Icon = HiOutlinePlus,
   variant = "primary",
-  fullWidth = false,
-  loading = false,
+  fullWidth,
+  loading,
   className = "",
   ...props
-}) {
-  const baseClasses = `
+}) => {
+  const base = `
     inline-flex items-center justify-center gap-2 font-medium rounded-lg
-    px-4 py-2 text-sm transition-all duration-200
+    px-4 py-2 text-sm transition-all duration-200 cursor-pointer
     focus:outline-none focus:ring-4 disabled:opacity-50 disabled:cursor-not-allowed
     ${fullWidth ? "w-full" : ""}
   `;
 
-  const variants = {
+  const styles = {
     primary:
       "h-12 px-4 inline-flex items-center justify-center gap-2 bg-[#054484] text-white rounded-md transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#054484] focus:ring-offset-2",
     secondary:
       "bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 focus:ring-gray-200/50 shadow-sm",
-
+    tertiary:
+      "h-12 px-4 inline-flex items-center justify-center gap-2 bg-gold text-neutral-700 rounded-md transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#054484] focus:ring-offset-2",
     danger:
       "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500/40 shadow-sm hover:shadow-md",
-
     ghost:
-      "bg-transparent text-indigo-600 hover:bg-indigo-50 focus:ring-indigo-100/50",
+      "mt-6 sm:mt-0 flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-100 transition-all duration-200 shadow-sm",
   };
 
   return (
     <button
       type="button"
-      className={`${baseClasses} ${variants[variant]} ${className}`}
       disabled={loading}
+      className={`${base} ${styles[variant]} ${className}`}
       {...props}
     >
-      {/* Show spinner if loading */}
       {loading ? (
         <svg
           className="animate-spin h-5 w-5 text-current"
@@ -75,11 +61,9 @@ function Button({
       ) : (
         Icon && <Icon className="w-5 h-5" aria-hidden="true" />
       )}
-
-      {/* Button Text */}
       <span className={loading ? "opacity-75" : ""}>{children}</span>
     </button>
   );
-}
+};
 
 export default Button;

@@ -9,7 +9,7 @@ function StatSection() {
     indigo: "text-indigo-500 bg-indigo-50",
   };
   return (
-    <div className="grid grid-cols-4 gap-6">
+    <div className="grid lap:grid-cols-4 tab:grid-cols-2 grid-cols-1 gap-6">
       {statsData.map((stat) => (
         <div
           key={stat.id}

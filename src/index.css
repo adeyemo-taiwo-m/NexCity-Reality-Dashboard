@@ -38,6 +38,8 @@
 
   /* Red */
   --color-red-light: #ffdadc;
+  /* God */
+  --color-gold: #ffe393;
   /* Background */
   --color-content-bg: #f8f8f8;
 
@@ -68,4 +70,47 @@ body,
 /* If using Tailwind's base, ensure it inherits the font */
 .font-sans {
   font-family: var(--font-sans);
+}
+
+/* styles.css or globals.css */
+.property-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Base font size for mobile */
+html {
+  font-size: 14px;
+}
+
+/* Tab screens and up */
+@media (min-width: 40rem) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Lap and desk screens inherit 16px unless you want different sizes */
+
+@media (min-width: 40rem) {
+  /* tab */
+  .property-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  /* lap */
+  .property-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 80rem) {
+  /* desk */
+  .property-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

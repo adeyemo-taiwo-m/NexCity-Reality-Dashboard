@@ -9,7 +9,7 @@ function TransactionsListTable() {
   return (
     <div className="bg-white min-w-[40rem] shadow-md rounded-2xl overflow-x-auto">
       <table className="min-w-full divide-y divide-neutral-200">
-        <thead className="bg-gray-50">
+        <thead className="bg-light">
           <tr className="text-xs font-semibold uppercase tracking-wide text-gray-600">
             <th className="px-6 py-3 text-left whitespace-nowrap">Property</th>
             <th className="px-6 py-3 text-center whitespace-nowrap">Type</th>
