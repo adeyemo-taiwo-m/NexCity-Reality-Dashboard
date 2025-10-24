@@ -8,7 +8,7 @@ import PropertySnapShotHeader from "./PropertySnapShotHeader.jsx";
 
 function PropertySnapShot() {
   return (
-    <div className="bg-white p-6   rounded-xl shadow-sm  overflow-hidden">
+    <div className="bg-white p-6  rounded-xl shadow-sm overflow-hidden ">
       <PropertySnapShotHeader />
 
       <Swiper
@@ -18,30 +18,22 @@ function PropertySnapShot() {
         pagination={{ clickable: true }}
         loop
         className="w-full"
-        style={{
-          width: "100%",
-          maxWidth: "100%",
-        }}
         breakpoints={{
-          // custom breakpoints matching your Tailwind config
           0: { slidesPerView: 1 },
-          640: { slidesPerView: 1 }, // below tab breakpoint
-          1024: { slidesPerView: 2 }, // between tab and lap
-          1280: { slidesPerView: 3 }, // desktop
+          640: { slidesPerView: 1 },
+          1024: {
+            slidesPerView: 1, // Show 1 slide in the constrained container
+            spaceBetween: 16,
+          },
+          1280: {
+            slidesPerView: 1, // Show 1 slide in the constrained container
+            spaceBetween: 16,
+          },
         }}
       >
         {propertySnapshotData.map((property) => (
-          <SwiperSlide
-            key={property.id}
-            className="flex justify-center !w-full"
-            style={{
-              width: "100%",
-              maxWidth: "100%",
-            }}
-          >
-            <div className="w-full max-w-full overflow-hidden">
-              <PropertyDetails property={property} />
-            </div>
+          <SwiperSlide key={property.id} className="!w-full">
+            <PropertyDetails property={property} />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -26,9 +26,7 @@ function Dashboard() {
           <div className="flex flex-col gap-6  overflow-hidden">
             {" "}
             <ClientCount />
-            <div className="w-[43rem] lap:w-[60rem]">
-              <PropertySnapShot />
-            </div>
+            <PropertySnapShot />
           </div>
           <div className="lap:flex-1 w-full max-w-full overflow-hidden">
             {" "}
