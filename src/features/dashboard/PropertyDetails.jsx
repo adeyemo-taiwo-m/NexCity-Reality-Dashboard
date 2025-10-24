@@ -1,4 +1,5 @@
 import React from "react";
+import Heading from "../../ui/Heading";
 
 function PropertyDetails({ property }) {
   return (
@@ -12,7 +13,7 @@ function PropertyDetails({ property }) {
         className="w-full h-40 object-cover"
       />
       <div className="p-3 flex flex-col gap-2">
-        <h3 className="font-semibold text-normal text-sm">{property.title}</h3>
+        <Heading type="h3">{property.title}</Heading>
         <p className="text-xs text-neutral-500 truncate">{property.location}</p>
         <div className="flex justify-between items-center">
           <span className="font-bold text-neutral-800">{property.price}</span>

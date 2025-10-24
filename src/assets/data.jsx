@@ -405,3 +405,24 @@ export const profileData = {
   profileImage: "profile.png",
   socials: ["facebook", "linkedIn", "pinterest", "twitter"],
 };
+
+export const propertyNames = [
+  { label: "The Maple Haven" },
+  { label: "Oceanview Suites" },
+  { label: "Sunset Estate" },
+  { label: "Pinecrest Residency" },
+];
+
+export const agentsNames = [
+  { label: "John Doe" },
+  { label: "Sarah Johnson" },
+  { label: "Michael Brown" },
+  { label: "Emily Davis" },
+];
+
+export const status = [
+  { label: "Available" },
+  { label: "Sold" },
+  { label: "Pending" },
+  { label: "Under Maintenance" },
+];

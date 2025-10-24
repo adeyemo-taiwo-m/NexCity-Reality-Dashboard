@@ -2,6 +2,7 @@ import React from "react";
 import { HiChevronDown, HiSearch } from "react-icons/hi";
 import DropdownBtn from "../../ui/DropdownBtn";
 import SearchInput from "../../ui/SearchInput";
+import { agentsNames, status } from "../../assets/data";
 
 function SearchBar() {
   return (
@@ -13,6 +14,7 @@ function SearchBar() {
         {/* Assigned Agent */}
 
         <DropdownBtn
+          items={agentsNames}
           icon={
             <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
           }
@@ -20,6 +22,7 @@ function SearchBar() {
           Agent
         </DropdownBtn>
         <DropdownBtn
+          items={status}
           icon={
             <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
           }
