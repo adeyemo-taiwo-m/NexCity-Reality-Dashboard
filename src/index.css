@@ -114,3 +114,71 @@ html {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* === Slick Core Styles === */
+.slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  user-select: none;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.slick-slide {
+  display: none;
+  float: left;
+  height: 100%;
+  min-height: 1px;
+}
+.slick-slide img {
+  display: block;
+  width: 100%;
+  border-radius: 0.5rem; /* Rounded corners for images */
+}
+
+.slick-initialized .slick-slide {
+  display: block;
+}
+
+/* === Dots === */
+.slick-dots {
+  position: absolute;
+  bottom: -30px;
+  display: flex !important;
+  justify-content: center;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.slick-dots li {
+  margin: 0 4px;
+}
+.slick-dots button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d1d5db; /* gray-300 */
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.slick-dots li.slick-active button {
+  background: #0ea5e9; /* sky-500 */
+}
+
+/* === Optional: Remove arrows (if using custom ones) === */
+.slick-prev,
+.slick-next {
+  display: none !important;
+}

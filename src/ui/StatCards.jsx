@@ -1,8 +1,7 @@
 import React from "react";
-import { statsData } from "../../assets/data";
-import Heading from "../../ui/Heading";
+import Heading from "./Heading";
 
-function StatSection() {
+function StatCards({ statData }) {
   const colorClasses = {
     blue: "text-blue-500 bg-blue-50",
     green: "text-green-500 bg-green-50",
@@ -11,7 +10,7 @@ function StatSection() {
   };
   return (
     <div className="grid lap:grid-cols-4 tab:grid-cols-2 grid-cols-1 gap-2 tab:gap-4 lap:gap-6">
-      {statsData.map((stat) => (
+      {statData.map((stat) => (
         <div
           key={stat.id}
           className="bg-white text-normal rounded-lg p-4 flex items-center gap-4 shadow-sm"
@@ -29,4 +28,4 @@ function StatSection() {
   );
 }
 
-export default StatSection;
+export default StatCards;

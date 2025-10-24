@@ -1,46 +1,55 @@
 import React from "react";
 import { HiCalendar } from "react-icons/hi";
+import { formatCurrency } from "../../utils/helpers";
 
-function PropertyCard() {
+function PropertyCard({ property }) {
+  const { title, location, price, status, listedBy, date, image } = property;
+
   return (
-    <div className="flex items-center bg-[var(--color-white)] rounded-xl shadow-sm overflow-hidden w-full max-w-4xl mx-auto p-4">
+    <div className="flex flex-col font-normal bg-[var(--color-white)] rounded-xl shadow-sm overflow-hidden w-full max-w-4xl mx-auto p-4 gap-4">
       {/* Image */}
       <img
-        src="/house.png"
-        alt="Cedar Ridge Residences"
-        className="w-40 h-28 object-cover rounded-lg"
+        src={image || "/house.png"}
+        alt={title}
+        className="w-full h-48 object-cover rounded-lg"
       />
 
       {/* Content */}
-      <div className="flex justify-between items-center flex-1 ml-4">
+      <div className="flex flex-col tab:flex-row justify-between w-full gap-4">
         {/* Left Section */}
-        <div className="flex flex-col gap-1">
-          <h2 className="text-lg font-semibold text-[var(--color-neutral-900)]">
-            Cedar Ridge Residences
+        <div className="flex flex-col gap-1 flex-1">
+          <h2 className="lap:text-lg text-md font-semibold text-[var(--color-neutral-900)]">
+            {title}
           </h2>
-          <p className="text-sm text-[var(--color-neutral-500)]">
-            3-Bedroom Duplex, Lekki Phase 1, Lagos
-          </p>
+          <p className="text-sm text-[var(--color-neutral-500)]">{location}</p>
 
-          <div className="flex items-center gap-2 text-sm text-[var(--color-neutral-500)] mt-1">
+          <div className="flex flex-wrap items-center gap-2 text-sm text-[var(--color-neutral-500)] mt-1">
             <span>
               Listed by{" "}
               <span className="font-semibold text-[var(--color-neutral-700)]">
-                Adeyemo Taiwo M
+                {listedBy}
               </span>
             </span>
-            <HiCalendar className="text-[var(--color-neutral-500)] text-base" />
-            <span>24 Feb</span>
+            <div className="flex items-center gap-1">
+              <HiCalendar className="text-[var(--color-normal)] text-base" />
+              <span>{date}</span>
+            </div>
           </div>
         </div>
 
         {/* Right Section */}
-        <div className="flex flex-col items-end gap-2">
-          <span className="bg-[var(--color-green-light)] text-[var(--color-dark)] text-sm font-medium px-4 py-1 rounded-full">
-            Available
+        <div className="flex tab:flex-col tab:items-end justify-between tab:justify-center gap-2 tab:gap-4">
+          <span
+            className={`text-sm font-medium px-4 py-1 rounded-full whitespace-nowrap self-start tab:self-auto ${
+              status === "Available"
+                ? "bg-[var(--color-green-light)] text-[var(--color-dark)]"
+                : "bg-[var(--color-red-light)] text-[var(--color-neutral-800)]"
+            }`}
+          >
+            {status}
           </span>
           <span className="text-[var(--color-normal)] font-semibold text-lg">
-            $100,000
+            {formatCurrency(price)}
           </span>
         </div>
       </div>

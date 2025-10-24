@@ -1,79 +1,31 @@
-import React from "react";
-import AgentRow from "./AgentRow";
+import React, { useState } from "react";
 import Pagination from "../../ui/Pagination";
+import { mockAgents } from "../../assets/data";
+import AgentRow from "./AgentRow";
 
-const mockAgents = [
-  {
-    name: "Adeyemo",
-    email: "ade@gmail.com",
-    phone: "070123456789",
-    listed: 14,
-    clients: 15,
-    status: "Active",
-  },
-  {
-    name: "Sarah John",
-    email: "sarah@gmail.com",
-    phone: "080112233445",
-    listed: 14,
-    clients: 15,
-    status: "Active",
-  },
-  {
-    name: "Michael Obi",
-    email: "mike@gmail.com",
-    phone: "09012349876",
-    listed: 14,
-    clients: 15,
-    status: "Inactive",
-  },
-  {
-    name: "Jane Doe",
-    email: "jane@gmail.com",
-    phone: "070111122233",
-    listed: 14,
-    clients: 15,
-    status: "Active",
-  },
-  {
-    name: "Peter King",
-    email: "peter@gmail.com",
-    phone: "081234567890",
-    listed: 14,
-    clients: 15,
-    status: "Inactive",
-  },
-  {
-    name: "Taiwo A.",
-    email: "taiwo@gmail.com",
-    phone: "070555666777",
-    listed: 14,
-    clients: 15,
-    status: "Active",
-  },
-];
+import AgentCards from "./AgentCards";
 
 function AgentListTable() {
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = useState(1);
 
   return (
-    <div className="bg-white min-w-[40rem] lap:overflow-hidden shadow-md rounded-2xl overflow-x-auto">
-      {/* ✅ Make table scrollable on smaller screens */}
-      <div className="overflow-x-auto w-full">
-        <table className="min-w-full divide-y p-4 divide-neutral-200">
-          <thead className="bg-light p-4 text-neutral-700">
-            <tr className="text-xs font-semibold p-4 uppercase tracking-wide text-neutral-700">
-              <th className="px-6 py-3 text-left whitespace-nowrap">Agent</th>
-              <th className="px-6 py-3 text-left whitespace-nowrap">Email</th>
-              <th className="px-6 py-3 text-left whitespace-nowrap">Phone</th>
+    <div className="bg-white shadow-md rounded-2xl">
+      {/* ✅ Desktop/Laptop Table */}
+      <div className="hidden lap:block w-full overflow-x-auto rounded-2xl">
+        <table className="min-w-[800px] w-full text-sm text-left text-neutral-700 border-collapse">
+          <thead className="bg-gray-50 text-xs font-semibold uppercase tracking-wide text-neutral-600">
+            <tr>
+              <th className="px-6 py-3 whitespace-nowrap">Agent</th>
+              <th className="px-6 py-3 whitespace-nowrap">Email</th>
+              <th className="px-6 py-3 whitespace-nowrap">Phone</th>
               <th className="px-6 py-3 text-center whitespace-nowrap">
                 Listed
               </th>
               <th className="px-6 py-3 text-center whitespace-nowrap">
                 Clients
               </th>
-              <th className="px-6 py-3 text-left whitespace-nowrap">Status</th>
-              <th className="px-6 py-3 text-left whitespace-nowrap">Actions</th>
+              <th className="px-6 py-3 whitespace-nowrap">Status</th>
+              <th className="px-6 py-3 whitespace-nowrap">Actions</th>
             </tr>
           </thead>
 
@@ -93,7 +45,10 @@ function AgentListTable() {
         </table>
       </div>
 
-      <div>
+      {/* ✅ Mobile/Tablet Cards */}
+      <AgentCards />
+      {/* ✅ Pagination (shared) */}
+      <div className="border-t border-neutral-200 px-6 py-4">
         <Pagination
           currentPage={page}
           totalPages={3}

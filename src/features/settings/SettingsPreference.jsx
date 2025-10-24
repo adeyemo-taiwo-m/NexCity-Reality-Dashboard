@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SelectInput from "../../ui/SelectInput";
 import ToggleSwitch from "../../ui/ToggleSwitch";
+import SettingsP from "../../ui/SettingsP";
 
 function SettingsPreference() {
   const [darkMode, setDarkMode] = useState(false);
@@ -8,7 +9,7 @@ function SettingsPreference() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <span>Dark Mode</span>
+        <SettingsP>Dark Mode</SettingsP>
         <ToggleSwitch
           checked={darkMode}
           onChange={setDarkMode}
@@ -17,12 +18,12 @@ function SettingsPreference() {
       </div>
 
       <div className="flex justify-between items-center">
-        <span>Currency</span>
+        <SettingsP>Currency</SettingsP>
         <SelectInput options={["₦ NGN", "$ USD", "£ GBP"]} />
       </div>
 
       <div className="flex justify-between items-center">
-        <span>Date Format</span>
+        <SettingsP>Date Format</SettingsP>
         <SelectInput options={["Oct 18, 2025", "18/10/2025"]} />
       </div>
     </div>

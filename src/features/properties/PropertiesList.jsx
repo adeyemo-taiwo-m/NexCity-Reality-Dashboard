@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import PropertyCard from "./PropertyCard";
 import Pagination from "../../ui/Pagination";
+import { properties } from "../../assets/data";
 
 function PropertyList() {
   const [page, setPage] = useState(1);
-  const properties = Array(10).fill({});
+
+  // 🏡 Sample property data
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
       <div className="property-grid">
-        {properties.map((_, index) => (
-          <PropertyCard key={index} />
+        {properties.map((property) => (
+          <PropertyCard key={property.id} property={property} />
         ))}
       </div>
 

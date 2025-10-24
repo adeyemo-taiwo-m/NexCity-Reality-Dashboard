@@ -7,7 +7,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     <div className="flex justify-between items-center bg-[#e5f6fb] p-3 rounded-b-2xl text-[--color-normal]">
       {/* Prev Button */}
       <button
-        className="flex items-center gap-1 text-[--color-normal] hover:text-[--color-dark]"
+        className="flex items-center gap-1 text-[--color-normal] hover:text-[--color-dark] disabled:opacity-40"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
@@ -16,15 +16,15 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       </button>
 
       {/* Page Numbers */}
-      <div className="flex gap-6">
+      <div className="flex gap-4">
         {pages.map((page) => (
           <button
             key={page}
             onClick={() => onPageChange(page)}
-            className={`w-8 h-8 flex items-center justify-center rounded-full font-medium transition-all
+            className={`relative w-8 h-8 flex items-center justify-center rounded-full font-medium transition-all duration-300
               ${
                 currentPage === page
-                  ? "bg-[--color-dark] text-[--color-white]"
+                  ? "bg-[--color-dark] text-normal shadow-md scale-110"
                   : "text-[--color-normal] hover:text-[--color-dark]"
               }`}
           >
@@ -35,7 +35,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
       {/* Next Button */}
       <button
-        className="flex items-center gap-1 text-[--color-normal] hover:text-[--color-dark]"
+        className="flex items-center gap-1 text-[--color-normal] hover:text-[--color-dark] disabled:opacity-40"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >

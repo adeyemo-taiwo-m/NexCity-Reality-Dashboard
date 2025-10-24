@@ -1,50 +1,47 @@
 import { propertySnapshotData } from "../../assets/data.jsx";
-
+import PropertyDetails from "./PropertyDetails.jsx";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 import PropertySnapShotHeader from "./PropertySnapShotHeader.jsx";
 
 function PropertySnapShot() {
   return (
-    <div className=" bg-white p-6 rounded-xl shadow-sm">
+    <div className="bg-white p-6 rounded-xl shadow-sm  overflow-hidden">
+      {" "}
+      {/* Changed overflow-x-hidden to overflow-hidden */}
       <PropertySnapShotHeader />
-
-      <div className="grid grid-cols-3 gap-4">
-        {propertySnapshotData.map((property) => (
-          <div
-            key={property.id}
-            className="bg-blue-50 rounded-lg overflow-hidden shadow-sm"
-          >
-            <img
-              src={property.image}
-              alt={property.title}
-              className="w-full h-40 object-cover"
-            />
-            <div className="p-3 flex flex-col gap-2">
-              <h3 className="font-semibold text-normal text-sm">
-                {property.title}
-              </h3>
-              <p className="text-xs text-neutral-500 truncate">
-                {property.location}
-              </p>
-              <div className="flex justify-between items-center">
-                <span className="font-bold text-neutral-800">
-                  {property.price}
-                </span>
-                <span
-                  className={`text-xs px-2 py-1 rounded ${
-                    property.status === "Available"
-                      ? "bg-yellow-100 text-yellow-700"
-                      : "bg-red-100 text-red-600"
-                  }`}
-                >
-                  {property.status}
-                </span>
+      <div className="!w-full">
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          spaceBetween={16}
+          slidesPerView={1}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          pagination={{ clickable: true }}
+          loop
+          className="w-full max-w-full" // Added max-w-full here
+          style={{
+            width: "100%",
+            maxWidth: "100%",
+            overflow: "hidden",
+          }}
+        >
+          {propertySnapshotData.map((property) => (
+            <SwiperSlide
+              key={property.id}
+              className="!w-full flex justify-center"
+            >
+              <div className="w-full max-w-full overflow-hidden">
+                {" "}
+                {/* Added overflow-hidden and max-w-full */}
+                <PropertyDetails property={property} />
               </div>
-            </div>
-          </div>
-        ))}
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );
 }
-
 export default PropertySnapShot;

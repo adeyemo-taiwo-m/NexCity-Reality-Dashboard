@@ -9,7 +9,7 @@ import Transactions from "./pages/Transactions";
 
 function App() {
   return (
-    <div className="flex justify-center items-center w-screen h-screen">
+    <div className="flex  justify-center items-center w-screen h-screen">
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>

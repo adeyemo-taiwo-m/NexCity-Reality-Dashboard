@@ -1,5 +1,6 @@
 import React from "react";
 import { FaHome } from "react-icons/fa"; // optional icon for better visuals
+import Button from "../../ui/Button";
 
 export default function ClientCount() {
   return (
@@ -18,18 +19,12 @@ export default function ClientCount() {
         {/* Message */}
         <p className="leading-snug">
           <span className="font-semibold">23 customers</span> just booked some
-          properties — check them out now!
+          properties
         </p>
       </div>
 
       {/* Button */}
-      <button
-        type="button"
-        className=" inline-flex items-center justify-center px-4 py-2 bg-light text-[#054484] font-medium text-sm rounded-lg shadow hover:bg-light-hover transition-all duration-200"
-        aria-label="View recently booked properties"
-      >
-        View Properties
-      </button>
+      <Button variant="light">View more</Button>
     </aside>
   );
 }

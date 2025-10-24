@@ -6,11 +6,11 @@ const CustomersStatusBadge = ({ status }) => {
   switch (status) {
     case "Closed":
     case "Completed":
-      styles = "bg-[#d1fae5] text-[#065f46]"; // green
+      styles = "bg-[#fef9c3] text-[#92400e]"; // green
       break;
     case "Active":
     case "Pending":
-      styles = "bg-[#fef9c3] text-[#92400e]"; // yellow
+      styles = "bg-[#d1fae5] text-[#065f46]"; // yellow
       break;
     case "Cancelled":
       styles = "bg-[#fee2e2] text-[#991b1b]"; // red

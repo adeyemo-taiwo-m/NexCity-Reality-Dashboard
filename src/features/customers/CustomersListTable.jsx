@@ -2,13 +2,15 @@ import React from "react";
 import CustomerRow from "./CustomerRow";
 import Pagination from "../../ui/Pagination";
 import { customersDetails } from "../../assets/data";
+import CustomerCards from "./CustomerCard";
 
 function CustomersListTable() {
   const [page, setPage] = React.useState(1);
 
   return (
-    <div className="bg-white min-w-[40rem] shadow-md rounded-2xl overflow-x-auto">
-      <div className="overflow-x-auto w-full">
+    <div className="bg-white shadow-md rounded-2xl overflow-hidden">
+      {/* ---- TABLE VIEW (laptop and up) ---- */}
+      <div className="hidden lap:block overflow-x-auto">
         <table className="min-w-full divide-y divide-neutral-200">
           <thead className="bg-light text-neutral-700">
             <tr className="text-xs font-semibold uppercase tracking-wide text-neutral-700">
@@ -39,21 +41,14 @@ function CustomersListTable() {
 
           <tbody className="divide-y divide-neutral-200">
             {customersDetails.map((customer, i) => (
-              <CustomerRow
-                key={i}
-                avatarUrl={customer.avatarUrl}
-                name={customer.name}
-                email={customer.email}
-                interestedProperty={customer.interestedProperty}
-                dealType={customer.dealType}
-                amount={customer.amount}
-                status={customer.status}
-                activity={customer.activity}
-              />
+              <CustomerRow key={i} {...customer} />
             ))}
           </tbody>
         </table>
       </div>
+
+      {/* ---- CARD VIEW (tablet & mobile) ---- */}
+      <CustomerCards />
 
       <div className="border-t border-neutral-200">
         <Pagination
