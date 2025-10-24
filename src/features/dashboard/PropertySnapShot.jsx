@@ -8,40 +8,45 @@ import PropertySnapShotHeader from "./PropertySnapShotHeader.jsx";
 
 function PropertySnapShot() {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm  overflow-hidden">
-      {" "}
-      {/* Changed overflow-x-hidden to overflow-hidden */}
+    <div className="bg-white p-6   rounded-xl shadow-sm  overflow-hidden">
       <PropertySnapShotHeader />
-      <div className="!w-full">
-        <Swiper
-          modules={[Autoplay, Pagination]}
-          spaceBetween={16}
-          slidesPerView={1}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
-          loop
-          className="w-full max-w-full" // Added max-w-full here
-          style={{
-            width: "100%",
-            maxWidth: "100%",
-            overflow: "hidden",
-          }}
-        >
-          {propertySnapshotData.map((property) => (
-            <SwiperSlide
-              key={property.id}
-              className="!w-full flex justify-center"
-            >
-              <div className="w-full max-w-full overflow-hidden">
-                {" "}
-                {/* Added overflow-hidden and max-w-full */}
-                <PropertyDetails property={property} />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        spaceBetween={16}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        pagination={{ clickable: true }}
+        loop
+        className="w-full"
+        style={{
+          width: "100%",
+          maxWidth: "100%",
+        }}
+        breakpoints={{
+          // custom breakpoints matching your Tailwind config
+          0: { slidesPerView: 1 },
+          640: { slidesPerView: 1 }, // below tab breakpoint
+          1024: { slidesPerView: 2 }, // between tab and lap
+          1280: { slidesPerView: 3 }, // desktop
+        }}
+      >
+        {propertySnapshotData.map((property) => (
+          <SwiperSlide
+            key={property.id}
+            className="flex justify-center !w-full"
+            style={{
+              width: "100%",
+              maxWidth: "100%",
+            }}
+          >
+            <div className="w-full max-w-full overflow-hidden">
+              <PropertyDetails property={property} />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 }
+
 export default PropertySnapShot;

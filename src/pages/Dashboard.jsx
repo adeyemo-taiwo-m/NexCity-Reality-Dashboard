@@ -25,9 +25,10 @@ function Dashboard() {
           {/* Added width constraints */}
           <div className="flex flex-col gap-6  overflow-hidden">
             {" "}
-            {/* Critical fix here */}
             <ClientCount />
-            <PropertySnapShot />
+            <div className="w-[43rem] lap:w-[60rem]">
+              <PropertySnapShot />
+            </div>
           </div>
           <div className="lap:flex-1 w-full max-w-full overflow-hidden">
             {" "}

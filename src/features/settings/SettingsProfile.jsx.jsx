@@ -48,10 +48,8 @@ function SettingsProfile() {
       >
         {/* Agent Info */}
         <div className="flex flex-col items-center tab:items-start mt-4 tab:mt-0 space-y-2">
-          <h2 className="text-lg tab:text-xl font-semibold text-gray-900">
-            {name}
-          </h2>
-          <p className="text-sm text-gray-500 font-normal">{role}</p>
+          <h2 className="text-[1.2rem] font-medium text-gray-900">{name}</h2>
+          <p className="text-base text-gray-500 font-normal">{role}</p>
 
           {/* Social Links */}
           <div className="flex space-x-3 mt-3">

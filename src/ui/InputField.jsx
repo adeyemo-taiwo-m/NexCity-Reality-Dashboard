@@ -4,7 +4,8 @@ function InputField({ type = "text", placeholder, defaultValue }) {
       type={type}
       placeholder={placeholder}
       defaultValue={defaultValue}
-      className="w-full border text-neutral-400 focus:text-neutral-600 border-neutral-200 rounded-md px-4 py-3 
+      className="w-full border text-neutral-400 placeholder:font-normal placeholder:text-neutral-400 
+                 focus:text-neutral-600 border-neutral-200 rounded-md px-4 py-3  
                  focus:outline-none focus:ring-2 focus:ring-normal transition"
     />
   );
