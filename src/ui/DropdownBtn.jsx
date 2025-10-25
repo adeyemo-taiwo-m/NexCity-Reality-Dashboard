@@ -33,7 +33,7 @@ function DropdownBtn({ type, children, items = [] }) {
         <div
           className={`
             absolute right-0 mt-2 w-50 font-normal rounded-md border 
-            border-[var(--color-normal)]/50  
+            border-white  
             bg-white/90 
             backdrop-blur-sm 
             shadow-sm 

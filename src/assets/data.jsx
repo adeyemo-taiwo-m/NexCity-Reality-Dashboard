@@ -426,3 +426,37 @@ export const status = [
   { label: "Pending" },
   { label: "Under Maintenance" },
 ];
+
+export const agentSortOptions = [
+  { label: "Price (Low to High)" },
+  { label: "Price (High to Low)" },
+  { label: "Newest Listings" },
+];
+
+export const customerSortOptions = [
+  { label: "Amount (High to Low)" },
+  { label: "Amount (Low to High)" },
+  { label: "Date (Newest First)" },
+];
+
+export const customerStatusOptions = [
+  { label: "Completed" },
+  { label: "Pending" },
+  { label: "Closed" },
+];
+
+export const transactionDate = [
+  { label: "Newest First" },
+  { label: "Oldest First" },
+  { label: "This Month" },
+];
+export const transactionAmount = [
+  { label: "High to Low" },
+  { label: "Low to High" },
+  { label: "Above ₦50,000,000" },
+];
+export const transactionType = [
+  { label: "Sale" },
+  { label: "Rent" },
+  { label: "Lease" },
+];

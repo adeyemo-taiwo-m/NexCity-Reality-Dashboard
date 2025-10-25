@@ -4,7 +4,7 @@ function Filter({ field, defaultValue = "last7" }) {
   const [selectedTimeRange, setSelectedTimeRange] = useState(defaultValue);
 
   return (
-    <div className="bg-white p-1 rounded-lg shadow-sm flex ">
+    <div className="bg-white p-2 rounded-lg shadow-sm flex ">
       {field.map((option) => (
         <button
           key={option.id}

@@ -27,7 +27,7 @@ const Button = ({
     danger:
       "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500/40 shadow-sm hover:shadow-md",
     ghost:
-      "mt-6 sm:mt-0 flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-100 transition-all duration-200 shadow-sm",
+      " sm:mt-0 flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-100 transition-all duration-200 shadow-sm",
     light:
       "inline-flex items-center ml-4 justify-center p-2 bg-light text-[#054484] font-medium text-sm rounded-lg shadow hover:bg-light-hover transition-all duration-200",
   };

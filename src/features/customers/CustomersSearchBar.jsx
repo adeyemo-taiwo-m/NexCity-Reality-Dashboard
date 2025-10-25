@@ -3,6 +3,7 @@ import { HiChevronDown, HiSearch } from "react-icons/hi";
 import DropdownBtn from "../../ui/DropdownBtn";
 import Filter from "../../ui/Filter";
 import SearchInput from "../../ui/SearchInput";
+import { customerSortOptions, customerStatusOptions } from "../../assets/data";
 
 function AgentsSearchBar() {
   return (
@@ -22,14 +23,16 @@ function AgentsSearchBar() {
         </DropdownBtn> */}
 
         <DropdownBtn
+          items={customerSortOptions}
           icon={
             <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
           }
         >
-          Agent
+          Sort
         </DropdownBtn>
 
         <DropdownBtn
+          items={customerStatusOptions}
           icon={
             <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
           }
