@@ -10,14 +10,14 @@ export default function ClientCount() {
       aria-label="Property booking notification"
     >
       {/* Left section */}
-      <div className="flex items-center  gap-4 text-sm md:text-base text-gray-100">
+      <div className="flex items-center w-2/3 gap-4 text-sm md:text-base text-gray-100">
         {/* Icon or Image */}
         <div className="flex items-center justify-center w-10 h-10 bg-light/10 rounded-full">
           <FaHome className="text-light text-xl" aria-hidden="true" />
         </div>
 
         {/* Message */}
-        <p className="leading-snug">
+        <p className="leading-snug font-normal text-sm">
           <span className="font-semibold">23 customers</span> just booked some
           properties
         </p>

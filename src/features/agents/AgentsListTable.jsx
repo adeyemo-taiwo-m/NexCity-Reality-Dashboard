@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import Pagination from "../../ui/Pagination";
-import { mockAgents } from "../../assets/data";
 import AgentRow from "./AgentRow";
 
 import AgentCards from "./AgentCards";
+import useAgents from "./useAgents";
+import LoadingState from "../../ui/LoadingState";
+import EmptyState from "../../ui/EmptyState";
 
 function AgentListTable() {
   const [page, setPage] = useState(1);
+  const { agents, isPending } = useAgents();
 
+  // --- Loading State ---
+  if (isPending) {
+    return <LoadingState entityName="properties" />;
+  }
+
+  // --- Empty State ---
+  if (!agents || agents.length === 0) {
+    return <EmptyState entityName="properties" />;
+  }
   return (
     <div className="bg-white shadow-md rounded-2xl">
       {/* ✅ Desktop/Laptop Table */}
@@ -30,7 +42,7 @@ function AgentListTable() {
           </thead>
 
           <tbody className="divide-y divide-neutral-200">
-            {mockAgents.map((agent, i) => (
+            {agents.map((agent, i) => (
               <AgentRow
                 key={i}
                 name={agent.name}

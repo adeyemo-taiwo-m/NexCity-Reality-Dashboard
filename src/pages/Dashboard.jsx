@@ -11,7 +11,7 @@ import StatCards from "../ui/StatCards";
 
 function Dashboard() {
   return (
-    <section className="w-full min-h-screen bg-gray-50 overflow-hidden">
+    <section className="w-full min-h-screen  overflow-hidden">
       {" "}
       {/* Added overflow-hidden */}
       <div className="mx-auto flex flex-col gap-8 w-full ">
@@ -20,15 +20,15 @@ function Dashboard() {
         {/* Header */}
         <Header />
         <StatCards statData={statsData} />
-        <div className="flex flex-col gap-6 lap:flex-row  w-full max-w-full">
+        <div className="flex flex-col gap-6 lap:flex-row  ">
           {" "}
           {/* Added width constraints */}
-          <div className="flex flex-col gap-6  overflow-hidden">
+          <div className="flex  flex-col gap-6  overflow-hidden">
             {" "}
             <ClientCount />
             <PropertySnapShot />
           </div>
-          <div className="lap:flex-1 w-full max-w-full overflow-hidden">
+          <div className="  overflow-hidden">
             {" "}
             {/* Added overflow-hidden */}
             <RecentHouseMap />

@@ -11,7 +11,7 @@ const Button = ({
   ...props
 }) => {
   const base = `
-    inline-flex items-center justify-center gap-2 font-medium rounded-lg
+    inline-flex items-center  justify-center gap-2 font-medium rounded-lg
     px-4 py-2 text-sm transition-all duration-200 cursor-pointer
     focus:outline-none focus:ring-4 disabled:opacity-50 disabled:cursor-not-allowed
     ${fullWidth ? "w-full" : ""}
@@ -29,7 +29,7 @@ const Button = ({
     ghost:
       " sm:mt-0 flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-100 transition-all duration-200 shadow-sm",
     light:
-      "inline-flex items-center ml-4 justify-center p-2 bg-light text-[#054484] font-medium text-sm rounded-lg shadow hover:bg-light-hover transition-all duration-200",
+      "inline-flex h-12  items-center justify-center p-2 bg-light text-[#054484] font-medium text-sm rounded-lg shadow hover:bg-light-hover transition-all duration-200",
   };
 
   return (

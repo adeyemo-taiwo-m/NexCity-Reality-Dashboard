@@ -1,11 +1,24 @@
 import { useState } from "react";
 import TransactionRow from "./TransactionRow";
 import Pagination from "../../ui/Pagination";
-import { transactionDetails } from "../../assets/data";
 import TransactionCards from "./TransactionCards";
+import useTransactions from "./useTransactions";
+import LoadingState from "../../ui/LoadingState";
+import EmptyState from "../../ui/EmptyState";
 
 function TransactionsListTable() {
   const [page, setPage] = useState(1);
+  const { transactions, isPending } = useTransactions();
+
+  // --- Loading State ---
+  if (isPending) {
+    return <LoadingState entityName="properties" />;
+  }
+
+  // --- Empty State ---
+  if (!transactions || transactions.length === 0) {
+    return <EmptyState entityName="properties" />;
+  }
 
   return (
     <div className="bg-white shadow-md rounded-2xl overflow-hidden">
@@ -35,7 +48,7 @@ function TransactionsListTable() {
           </thead>
 
           <tbody className="divide-y divide-neutral-200">
-            {transactionDetails.map((txn, i) => (
+            {transactions.map((txn, i) => (
               <TransactionRow key={i} {...txn} />
             ))}
           </tbody>

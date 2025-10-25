@@ -1,11 +1,24 @@
 import React from "react";
 import CustomerRow from "./CustomerRow";
 import Pagination from "../../ui/Pagination";
-import { customersDetails } from "../../assets/data";
 import CustomerCards from "./CustomerCard";
+import useCustomers from "./useCustomers";
+import EmptyState from "../../ui/EmptyState";
+import LoadingState from "../../ui/LoadingState";
 
 function CustomersListTable() {
   const [page, setPage] = React.useState(1);
+  const { customers, isPendingCustomers } = useCustomers();
+  console.log(customers);
+  // --- Loading State ---
+  if (isPendingCustomers) {
+    return <LoadingState entityName="customers" />;
+  }
+
+  // --- Empty State ---
+  if (!customers || customers.length === 0) {
+    return <EmptyState entityName="customers" />;
+  }
 
   return (
     <div className="bg-white shadow-md rounded-2xl overflow-hidden">
@@ -40,7 +53,7 @@ function CustomersListTable() {
           </thead>
 
           <tbody className="divide-y divide-neutral-200">
-            {customersDetails.map((customer, i) => (
+            {customers.map((customer, i) => (
               <CustomerRow key={i} {...customer} />
             ))}
           </tbody>

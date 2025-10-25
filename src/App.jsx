@@ -6,22 +6,28 @@ import Agents from "./pages/Agents";
 import Customers from "./pages/Customers";
 import Settings from "./pages/Settings";
 import Transactions from "./pages/Transactions";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function App() {
+  const queryClient = new QueryClient();
   return (
     <div className="flex  justify-center items-center w-screen h-screen">
-      <BrowserRouter>
-        <Routes>
-          <Route element={<AppLayout />}>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="properties" element={<Properties />} />
-            <Route path="agents" element={<Agents />} />
-            <Route path="customers" element={<Customers />} />
-            <Route path="transactions" element={<Transactions />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <BrowserRouter>
+          <Routes>
+            <Route element={<AppLayout />}>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="properties" element={<Properties />} />
+              <Route path="agents" element={<Agents />} />
+              <Route path="customers" element={<Customers />} />
+              <Route path="transactions" element={<Transactions />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
     </div>
   );
 }

@@ -20,7 +20,7 @@ const TransactionRow = ({
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
           <img
-            src={propertyImage}
+            src={propertyImage || "/house.png"}
             onError={(e) => (e.currentTarget.src = fallbackImage)}
             alt={property}
             className="h-10 w-10 rounded-lg object-cover"

@@ -1,4 +1,3 @@
-import React from "react";
 import { HiCalendar } from "react-icons/hi";
 import { formatCurrency } from "../../utils/helpers";
 

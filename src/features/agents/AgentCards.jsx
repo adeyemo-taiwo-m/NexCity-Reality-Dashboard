@@ -1,13 +1,27 @@
 import React from "react";
-import { mockAgents } from "../../assets/data";
 import AgentStatusBadge from "./AgentStatusBagde";
 import { HiOutlineEllipsisVertical } from "react-icons/hi2";
+import useAgents from "./useAgents";
+import LoadingState from "../../ui/LoadingState";
+import EmptyState from "../../ui/EmptyState";
 
 function AgentCards() {
+  const { agents, isPending } = useAgents();
+
+  // --- Loading State ---
+  if (isPending) {
+    return <LoadingState entityName="properties" />;
+  }
+
+  // --- Empty State ---
+  if (!agents || agents.length === 0) {
+    return <EmptyState entityName="properties" />;
+  }
+
   return (
     <div className="block lap:hidden p-4">
       <div className="grid grid-cols-1 tab:grid-cols-2 gap-4">
-        {mockAgents.map((agent, i) => (
+        {agents.map((agent, i) => (
           <div
             key={i}
             className="bg-gray-50 border border-neutral-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow"

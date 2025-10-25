@@ -1,12 +1,25 @@
-import React from "react";
-import { transactionDetails } from "../../assets/data";
 import { HiOutlineEllipsisVertical } from "react-icons/hi2";
+import useTransactions from "./useTransactions";
+import EmptyState from "../../ui/EmptyState";
+import LoadingState from "../../ui/LoadingState";
 
 function TransactionCards() {
+  const { transactions, isPending } = useTransactions();
+
+  // --- Loading State ---
+  if (isPending) {
+    return <LoadingState entityName="properties" />;
+  }
+
+  // --- Empty State ---
+  if (!transactions || transactions.length === 0) {
+    return <EmptyState entityName="properties" />;
+  }
+
   return (
     <div className="block lap:hidden p-4">
       <div className="grid grid-cols-1 tab:grid-cols-2 lap:grid-cols-3 gap-4">
-        {transactionDetails.map((txn, i) => (
+        {transactions.map((txn, i) => (
           <div
             key={i}
             className="bg-gray-50 border border-neutral-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
@@ -15,7 +28,7 @@ function TransactionCards() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <img
-                  src={txn.propertyImage}
+                  src={txn.propertyImage || "/house.png"}
                   alt={txn.property}
                   className="w-10 h-10 rounded-md object-cover"
                 />

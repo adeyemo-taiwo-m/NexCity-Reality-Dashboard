@@ -1,13 +1,25 @@
-import React from "react";
-import { customersDetails } from "../../assets/data";
 import { HiOutlineEllipsisVertical } from "react-icons/hi2";
 import { formatCurrency } from "../../utils/helpers";
+import useCustomers from "./useCustomers";
+import LoadingState from "../../ui/LoadingState";
+import EmptyState from "../../ui/EmptyState";
 
 function CustomerCards() {
+  const { customers, isPendingCustomers } = useCustomers();
+  console.log(customers);
+  // --- Loading State ---
+  if (isPendingCustomers) {
+    return <LoadingState entityName="customers" />;
+  }
+
+  // --- Empty State ---
+  if (!customers || customers.length === 0) {
+    return <EmptyState entityName="customers" />;
+  }
   return (
     <div className="block lap:hidden p-4">
       <div className="grid grid-cols-1 tab:grid-cols-2 lap:grid-cols-3 gap-4">
-        {customersDetails.map((customer, i) => (
+        {customers.map((customer, i) => (
           <div
             key={i}
             className="bg-gray-50 border border-neutral-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
