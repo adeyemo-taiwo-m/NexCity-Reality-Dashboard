@@ -3,6 +3,7 @@ import { HiOutlinePlus } from "react-icons/hi2";
 
 const Button = ({
   children,
+  onClick,
   Icon,
   variant = "primary",
   fullWidth,
@@ -34,6 +35,7 @@ const Button = ({
 
   return (
     <button
+      onClick={onClick}
       type="button"
       disabled={loading}
       className={`${base} ${styles[variant]} ${className}`}

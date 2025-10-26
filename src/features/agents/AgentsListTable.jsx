@@ -10,6 +10,7 @@ import EmptyState from "../../ui/EmptyState";
 function AgentListTable() {
   const [page, setPage] = useState(1);
   const { agents, isPending } = useAgents();
+  // console.log(agents);
 
   // --- Loading State ---
   if (isPending) {
@@ -34,7 +35,7 @@ function AgentListTable() {
                 Listed
               </th>
               <th className="px-6 py-3 text-center whitespace-nowrap">
-                Clients
+                Closed Deals
               </th>
               <th className="px-6 py-3 whitespace-nowrap">Status</th>
               <th className="px-6 py-3 whitespace-nowrap">Actions</th>
@@ -45,11 +46,12 @@ function AgentListTable() {
             {agents.map((agent, i) => (
               <AgentRow
                 key={i}
+                agentId={agent.id}
                 name={agent.name}
                 email={agent.email}
                 phone={agent.phone}
                 propertiesListed={agent.listed}
-                clientsManaged={agent.clients}
+                closedDeals={agent.closedDeals}
                 status={agent.status}
               />
             ))}

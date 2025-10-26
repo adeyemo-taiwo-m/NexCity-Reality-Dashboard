@@ -6,7 +6,7 @@ function Heading({ children, type }) {
     h2: " tab:text-2xl text-xl  font-semibold text-normal",
     h3: " tab:text-1xl text-lg  font-semibold text-normal",
   };
-  return <p className={styles[type] || styles.h1}>{children}</p>;
+  return <div className={styles[type] || styles.h1}>{children}</div>;
 }
 
 export default Heading;

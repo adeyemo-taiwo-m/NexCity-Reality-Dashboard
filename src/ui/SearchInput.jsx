@@ -1,19 +1,37 @@
-import React from "react";
-import { HiSearch } from "react-icons/hi";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
-function SearchInput({ field }) {
+function SearchInput() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchValue, setSearchValue] = useState(
+    searchParams.get("name") || ""
+  );
+
+  // ⏱ Debounce (wait 300ms after typing stops)
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const value = searchValue.trim();
+
+      if (value !== "") {
+        searchParams.set("name", value);
+      } else {
+        searchParams.delete("name");
+      }
+
+      setSearchParams(searchParams);
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [searchValue, searchParams, setSearchParams]);
+
   return (
-    <div className="flex items-center w-full max-w-sm relative">
-      <HiSearch className="absolute left-3 text-[var(--color-neutral-500)] " />
-      <input
-        type="text"
-        placeholder={`Search ${field}...`}
-        className="w-full h-10 pl-8 pr-4 text-sm border border-[var(--color-neutral-200)] rounded-md 
-                         text-[var(--color-neutral-800)] placeholder:text-[var(--color-neutral-500)] placeholder:font-normal
-                         focus:outline-none focus:ring-2 focus:ring-[var(--color-normal)] focus:border-[var(--color-normal)] 
-                         bg-[var(--color-white)]"
-      />
-    </div>
+    <input
+      type="text"
+      placeholder="Search agents..."
+      value={searchValue}
+      onChange={(e) => setSearchValue(e.target.value)}
+      className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-normal transition-all duration-200"
+    />
   );
 }
 

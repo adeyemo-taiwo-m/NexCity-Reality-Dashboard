@@ -1,7 +1,7 @@
 import React from "react";
 
 const AgentStatusBadge = ({ status }) => {
-  const isActive = status === "Active";
+  const isActive = status === "active";
 
   return (
     <span

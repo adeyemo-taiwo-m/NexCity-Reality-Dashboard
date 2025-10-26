@@ -427,15 +427,14 @@ export const status = [
   { label: "Under Maintenance" },
 ];
 
-export const agentSortOptions = [
-  { label: "Price (Low to High)" },
-  { label: "Price (High to Low)" },
-  { label: "Newest Listings" },
+export const dealsSortOptions = [
+  { label: "Price (Low to High)", value: "closedDeals-asc" },
+  { label: "Price (High to Low)", value: "closedDeals-desc" },
 ];
 
 export const customerSortOptions = [
-  { label: "Amount (High to Low)" },
-  { label: "Amount (Low to High)" },
+  { label: "Amount (High to Low)", value: "asc" },
+  { label: "Amount (Low to High)", value: "desc" },
   { label: "Date (Newest First)" },
 ];
 

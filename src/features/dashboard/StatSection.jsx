@@ -1,8 +1,14 @@
 import React from "react";
 import { statsData } from "../../assets/data";
 import Heading from "../../ui/Heading";
+import useProperties from "./useProperties";
 
 function StatSection() {
+  const { properties, isPending } = useProperties();
+  if (isPending) return null;
+  console.log(properties);
+  // const totalProperties = properties ? proprties.length : 0;
+
   const colorClasses = {
     blue: "text-blue-500 bg-blue-50",
     green: "text-green-500 bg-green-50",

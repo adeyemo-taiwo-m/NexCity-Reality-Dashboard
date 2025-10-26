@@ -6,7 +6,6 @@ import EmptyState from "../../ui/EmptyState";
 
 function CustomerCards() {
   const { customers, isPendingCustomers } = useCustomers();
-  console.log(customers);
   // --- Loading State ---
   if (isPendingCustomers) {
     return <LoadingState entityName="customers" />;
