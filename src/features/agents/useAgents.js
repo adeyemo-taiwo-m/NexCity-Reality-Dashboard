@@ -12,7 +12,6 @@ function useAgents() {
 
   // Search Filter
   const searchQuery = searchParams.get("name") || "";
-  console.log(searchQuery);
   // Sort
   const sortByRaw = searchParams.get("sortBy") || "closedDeals-asc";
   const [sortField, direction] = sortByRaw && sortByRaw.split("-");

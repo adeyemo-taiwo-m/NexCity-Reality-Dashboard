@@ -8,51 +8,52 @@ import {
   transactionDate,
   transactionType,
 } from "../../assets/data";
+import SearchBarSection from "../../ui/SearchBarSection";
 
 function AgentsSearchBar() {
   return (
-    <div className="flex items-center justify-between w-full bg-[var(--color-white)] rounded-lg p-3 gap-4 shadow-sm">
-      <SearchInput field={"by name"} />
+    <SearchBarSection
+      item1={<SearchInput field={"by name"} />}
+      item2={
+        <div className="flex items-center gap-2 tab:gap-3">
+          {/* Assigned Agent */}
 
-      {/* Dropdowns */}
-      <div className="flex items-center gap-3">
-        {/* Assigned Agent */}
+          <DropdownBtn
+            items={transactionDate}
+            icon={
+              <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
+            }
+          >
+            Date
+          </DropdownBtn>
 
-        <DropdownBtn
-          items={transactionDate}
-          icon={
-            <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
-          }
-        >
-          Date
-        </DropdownBtn>
+          <DropdownBtn
+            items={transactionType}
+            icon={
+              <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
+            }
+          >
+            Type
+          </DropdownBtn>
+          <DropdownBtn
+            items={transactionAmount}
+            icon={
+              <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
+            }
+          >
+            Price
+          </DropdownBtn>
 
-        <DropdownBtn
-          items={transactionType}
-          icon={
-            <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
-          }
-        >
-          Type
-        </DropdownBtn>
-        <DropdownBtn
-          items={transactionAmount}
-          icon={
-            <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
-          }
-        >
-          Price
-        </DropdownBtn>
-
-        {/* <DropdownBtn
+          {/* <DropdownBtn
           icon={
             <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
           }
         >
           Status
         </DropdownBtn> */}
-      </div>
-    </div>
+        </div>
+      }
+    />
   );
 }
 

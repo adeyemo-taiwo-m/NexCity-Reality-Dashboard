@@ -4,6 +4,7 @@ import { dealsSortOptions } from "../../assets/data";
 import Filter from "../../ui/Filter";
 import SearchInput from "../../ui/SearchInput";
 import useAgents from "./useAgents";
+import SearchBarSection from "../../ui/SearchBarSection";
 
 function AgentsSearchBar() {
   const statusRangeOptions = [
@@ -13,14 +14,16 @@ function AgentsSearchBar() {
   ];
   const { agents } = useAgents();
   return (
-    <div className="flex items-center justify-between w-full bg-[var(--color-white)] rounded-lg p-3 gap-4 shadow-sm">
-      <SearchInput agents={agents} field="agent by name or email" />
-
-      <div className="flex items-center gap-3">
-        <DropdownBtn items={dealsSortOptions}>Sort</DropdownBtn>
-        <Filter options={statusRangeOptions} field="status" />
-      </div>
-    </div>
+    <SearchBarSection
+      item1={<SearchInput agents={agents} field="agent by name or email" />}
+      item2={
+        <>
+          {" "}
+          <DropdownBtn items={dealsSortOptions}>Sort</DropdownBtn>
+          <Filter options={statusRangeOptions} field="status" />
+        </>
+      }
+    />
   );
 }
 
