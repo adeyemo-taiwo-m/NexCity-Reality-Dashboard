@@ -41,7 +41,7 @@ function ModalContent({ children, name }) {
         ref={ref}
         className="
           relative bg-white/90 backdrop-blur-md rounded-2xl shadow-xl
-          w-[90%] max-w-2/3 lap:w-3/7 p-6
+          w-[90%]  lap:w-3/7 p-6
           border border-white
           transition-all duration-300
         "
