@@ -21,10 +21,7 @@ function ViewAgentProfile({ setIsViewOpen, selectedAgent }) {
         {/* Agent Details */}
         <div className="flex flex-col items-center text-center mt-4">
           <img
-            src={
-              selectedAgent?.avatarUrl ||
-              "https://placehold.co/100x100/94A3B8/FFFFFF?text=A"
-            }
+            src={selectedAgent?.avatarUrl || "/default-png.jpg"}
             alt={selectedAgent?.name}
             className="w-28 h-28 rounded-full object-cover border-4 border-white shadow"
           />
@@ -54,7 +51,7 @@ function ViewAgentProfile({ setIsViewOpen, selectedAgent }) {
             </p>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 ">
             <Button variant="primary" onClick={() => setIsViewOpen(false)}>
               Close
             </Button>

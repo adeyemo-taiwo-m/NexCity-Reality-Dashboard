@@ -1,20 +1,32 @@
-import { HiOutlineEllipsisVertical } from "react-icons/hi2";
+import React, { useState } from "react";
+import {
+  HiOutlineEllipsisVertical,
+  HiOutlineEye,
+  HiOutlinePencil,
+  HiOutlineTrash,
+} from "react-icons/hi2";
 import { formatCurrency } from "../../utils/helpers";
 import useCustomers from "./useCustomers";
+import useDeleteCustomer from "./useDeleteCustomer";
+import EditCustomer from "./EditCustomer";
+import ViewCustomerProfile from "./ViewCustomerProfile";
+import CancelX from "../../ui/CancelX";
 import LoadingState from "../../ui/LoadingState";
 import EmptyState from "../../ui/EmptyState";
+import ActionModal from "../../ui/ActionModal";
 
 function CustomerCards() {
   const { customers, isPendingCustomers } = useCustomers();
-  // --- Loading State ---
-  if (isPendingCustomers) {
-    return <LoadingState entityName="customers" />;
-  }
+  const { deleteCustomer, isPending } = useDeleteCustomer();
 
-  // --- Empty State ---
-  if (!customers || customers.length === 0) {
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isViewOpen, setIsViewOpen] = useState(false);
+
+  if (isPendingCustomers) return <LoadingState entityName="customers" />;
+  if (!customers || customers.length === 0)
     return <EmptyState entityName="customers" />;
-  }
+
   return (
     <div className="block lap:hidden p-4">
       <div className="grid grid-cols-1 tab:grid-cols-2 lap:grid-cols-3 gap-4">
@@ -42,12 +54,32 @@ function CustomerCards() {
                 </div>
               </div>
 
-              <button
-                className="text-neutral-400 hover:text-[--color-dark]"
-                aria-label="More actions"
-              >
-                <HiOutlineEllipsisVertical className="w-5 h-5" />
-              </button>
+              <ActionModal
+                disabled={isPending}
+                items={[
+                  {
+                    label: "Edit",
+                    icon: HiOutlinePencil,
+                    onClick: () => {
+                      setSelectedCustomer(customer);
+                      setIsEditOpen(true);
+                    },
+                  },
+                  {
+                    label: "View Details",
+                    icon: HiOutlineEye,
+                    onClick: () => {
+                      setSelectedCustomer(customer);
+                      setIsViewOpen(true);
+                    },
+                  },
+                  {
+                    label: "Delete",
+                    icon: HiOutlineTrash,
+                    onClick: () => deleteCustomer(customer.id),
+                  },
+                ]}
+              />
             </div>
 
             {/* Body */}
@@ -86,13 +118,49 @@ function CustomerCards() {
                 {customer.status}
               </span>
 
-              <button className="text-sm font-medium text-normal px-2 py-1 rounded-md hover:bg-[#e6f4fa] transition-colors">
+              <button
+                className="text-sm font-medium text-normal px-2 py-1 rounded-md hover:bg-[#e6f4fa] transition-colors"
+                onClick={() => {
+                  setSelectedCustomer(customer);
+                  setIsViewOpen(true);
+                }}
+              >
                 View Details
               </button>
             </div>
           </div>
         ))}
       </div>
+
+      {/* ✅ Edit Modal */}
+      {isEditOpen && selectedCustomer && (
+        <div
+          className="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
+          onClick={() => setIsEditOpen(false)}
+        >
+          <div
+            className="relative bg-white/90 backdrop-blur-md rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-white"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="absolute right-10 top-10">
+              <CancelX onClick={() => setIsEditOpen(false)} />
+            </div>
+
+            <EditCustomer
+              customer={selectedCustomer}
+              onCloseModal={() => setIsEditOpen(false)}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* ✅ View Modal */}
+      {isViewOpen && selectedCustomer && (
+        <ViewCustomerProfile
+          setIsViewOpen={setIsViewOpen}
+          selectedCustomer={selectedCustomer}
+        />
+      )}
     </div>
   );
 }

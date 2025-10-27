@@ -5,11 +5,6 @@ import Modal from "../../ui/Modal";
 import AddAgentModal from "./AddAgentsModal";
 
 function Header() {
-  function handleAddAgent(newAgent) {
-    console.log("New agent added:", newAgent);
-    // You can later insert into Supabase here
-  }
-
   return (
     <header className="flex items-center justify-between w-full">
       <Heading>Agents</Heading>
@@ -20,7 +15,7 @@ function Header() {
         </Modal.ButtonOpenModal>
 
         <Modal.ModalContent name="add-agent">
-          <AddAgentModal onSubmit={handleAddAgent} />
+          <AddAgentModal />
         </Modal.ModalContent>
       </Modal>
     </header>

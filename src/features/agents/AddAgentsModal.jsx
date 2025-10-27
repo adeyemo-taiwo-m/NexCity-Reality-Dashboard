@@ -84,8 +84,8 @@ function AddAgentModal({ onCloseModal }) {
                 : "border-neutral-200 focus:ring-[var(--color-normal)]"
             }`}
           >
-            <Option value="Active" label="Active" />
-            <Option value="Inactive" label="Inactive" />
+            <Option value="active" label="Active" />
+            <Option value="inactive" label="Inactive" />
           </select>
           {errors.status && (
             <p className="text-red-500 text-sm mt-1">{errors.status.message}</p>

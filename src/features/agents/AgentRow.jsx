@@ -16,9 +16,8 @@ const AgentRow = ({
   propertiesListed,
   closedDeals,
   status,
-  avatarUrl = "https://placehold.co/40x40/94A3B8/FFFFFF?text=AT",
+  avatarUrl,
 }) => {
-  const fallbackImage = "https://placehold.co/40x40/94A3B8/FFFFFF?text=AT";
   const { deleteAgent, isPending } = useDeleteAgent();
 
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -45,10 +44,9 @@ const AgentRow = ({
         <td className="px-6 py-4">
           <div className="flex items-center gap-3">
             <img
-              src={avatarUrl}
+              src={avatarUrl || "/default-user.jpg"}
               alt={`${name}'s avatar`}
               className="h-10 w-10 rounded-full object-cover"
-              onError={(e) => (e.currentTarget.src = fallbackImage)}
             />
             <span
               className="text-sm font-medium cursor-pointer hover:underline"

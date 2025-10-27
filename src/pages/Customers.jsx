@@ -13,11 +13,6 @@ function Customers() {
       <Header />
       <CustomersSearchBar />
       <CustomersListTable />
-      <div>
-        <Button variant="tertiary" Icon={HiOutlineDownload}>
-          Export
-        </Button>
-      </div>
     </section>
   );
 }

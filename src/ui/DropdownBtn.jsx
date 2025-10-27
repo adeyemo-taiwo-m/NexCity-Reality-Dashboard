@@ -40,7 +40,7 @@ function DropdownBtn({ type, children, items = [] }) {
       {open && (
         <div
           className="
-            absolute right-0 mt-2 w-40 font-normal rounded-md border
+            absolute right-0 mt-2 w-45 font-normal rounded-md border
             border-gray-100 bg-white/95 backdrop-blur-sm
             shadow-md overflow-hidden z-20
           "
