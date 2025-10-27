@@ -11,7 +11,7 @@ function useAgents() {
     !field || field === "all" ? null : { field: "status", value: field };
 
   // Search Filter
-  const searchQuery = searchParams.get("name") || "";
+  const searchQuery = searchParams.get("search") || "";
   // Sort
   const sortByRaw = searchParams.get("sortBy") || "closedDeals-asc";
   const [sortField, direction] = sortByRaw && sortByRaw.split("-");

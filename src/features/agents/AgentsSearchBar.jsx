@@ -15,7 +15,7 @@ function AgentsSearchBar() {
   const { agents } = useAgents();
   return (
     <SearchBarSection
-      item1={<SearchInput agents={agents} field="agent by name or email" />}
+      item1={<SearchInput agents={agents} field="agent by name " />}
       item2={
         <>
           {" "}

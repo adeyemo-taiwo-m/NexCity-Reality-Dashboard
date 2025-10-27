@@ -1,6 +1,7 @@
 import supabase from "./supabase";
 
 export default async function getAgents({ filter, sortBy, searchQuery }) {
+  console.log(searchQuery);
   let query = supabase.from("agents").select("*");
 
   // Filter

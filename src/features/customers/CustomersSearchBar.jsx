@@ -19,7 +19,7 @@ function AgentsSearchBar() {
 
   return (
     <SearchBarSection
-      item1={<SearchInput field="agent by name or email" />}
+      item1={<SearchInput field="customer by name" />}
       item2={
         <div className="flex items-center gap-3">
           <DropdownBtn

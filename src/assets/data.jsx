@@ -443,19 +443,3 @@ export const customerStatusOptions = [
   { label: "Pending" },
   { label: "Closed" },
 ];
-
-export const transactionDate = [
-  { label: "Newest First" },
-  { label: "Oldest First" },
-  { label: "This Month" },
-];
-export const transactionAmount = [
-  { label: "High to Low" },
-  { label: "Low to High" },
-  { label: "Above ₦50,000,000" },
-];
-export const transactionType = [
-  { label: "Sale" },
-  { label: "Rent" },
-  { label: "Lease" },
-];
