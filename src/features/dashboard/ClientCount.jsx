@@ -1,8 +1,11 @@
 import React from "react";
 import { FaHome } from "react-icons/fa"; // optional icon for better visuals
 import Button from "../../ui/Button";
+import { useNavigate } from "react-router-dom";
 
-export default function ClientCount() {
+export default function ClientCount({ count }) {
+  const navigate = useNavigate();
+
   return (
     <aside
       className="flex  md:flex-row items-center justify-between w-full  mx-auto bg-[#054484] text-white rounded-xl px-5 py-3 shadow-md"
@@ -18,13 +21,15 @@ export default function ClientCount() {
 
         {/* Message */}
         <p className="leading-snug font-normal text-sm">
-          <span className="font-semibold">23 customers</span> just booked some
-          properties
+          <span className="font-semibold">{count} customers</span> just booked
+          some properties
         </p>
       </div>
 
       {/* Button */}
-      <Button variant="light">View more</Button>
+      <Button variant="light" onClick={() => navigate("/customers")}>
+        View more
+      </Button>
     </aside>
   );
 }

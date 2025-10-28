@@ -1,6 +1,7 @@
 import React from "react";
 import Heading from "../../ui/Heading";
 import { formatCurrency } from "../../utils/helpers";
+import PropertyStatusBadge from "../properties/PropertyStatusBadge";
 
 function PropertyDetails({ property }) {
   return (
@@ -20,15 +21,7 @@ function PropertyDetails({ property }) {
           <span className="font-bold text-neutral-800">
             {formatCurrency(property.price)}
           </span>
-          <span
-            className={`text-xs px-2 py-1 rounded ${
-              property.status === "Available"
-                ? "bg-yellow-100 text-yellow-700"
-                : "bg-red-100 text-red-600"
-            }`}
-          >
-            {property.status}
-          </span>
+          <PropertyStatusBadge status={property.status} />
         </div>
       </div>
     </div>
