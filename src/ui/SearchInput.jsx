@@ -4,20 +4,22 @@ import { useSearchParams } from "react-router-dom";
 function SearchInput({ field }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchValue, setSearchValue] = useState(
-    searchParams.get("name") || ""
+    searchParams.get("search") || ""
   );
 
-  // ⏱ Debounce (wait 300ms after typing stops)
   useEffect(() => {
+    const value = searchValue.trim();
+
+    // If input is cleared, remove query immediately
+    if (value === "") {
+      searchParams.delete("search");
+      setSearchParams(searchParams);
+      return;
+    }
+
+    // Otherwise debounce normal typing
     const timeout = setTimeout(() => {
-      const value = searchValue.trim();
-
-      if (value !== "") {
-        searchParams.set("search", value);
-      } else {
-        searchParams.delete("name");
-      }
-
+      searchParams.set("search", value);
       setSearchParams(searchParams);
     }, 300);
 

@@ -19,7 +19,7 @@ function StatSection() {
     <div className="grid lap:grid-cols-4 tab:grid-cols-2 grid-cols-1 gap-2 tab:gap-4 lap:gap-6">
       {statsData.map((stat) => (
         <div
-          key={stat.id}
+          key={stat?.id}
           className="bg-white text-normal rounded-lg p-4 flex items-center gap-4 shadow-sm"
         >
           <span className={`p-2 rounded-full ${colorClasses[stat.color]} `}>

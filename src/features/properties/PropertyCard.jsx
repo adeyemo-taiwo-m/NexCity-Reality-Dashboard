@@ -1,18 +1,52 @@
-import { HiCalendar } from "react-icons/hi";
+import {
+  HiCalendar,
+  HiOutlineEllipsisVertical,
+  HiOutlinePencil,
+  HiOutlineEye,
+  HiOutlineTrash,
+} from "react-icons/hi2";
 import { formatCurrency } from "../../utils/helpers";
+import ActionModal from "../../ui/ActionModal";
+import PropertyStatusBadge from "./PropertyStatusBadge";
 
-function PropertyCard({ property }) {
+function PropertyCard({ property, onActionSelect }) {
   const { title, location, price, status, listedBy, date, image } = property;
 
   return (
-    <div className="flex flex-col font-normal bg-[var(--color-white)] rounded-xl shadow-sm overflow-hidden w-full max-w-4xl mx-auto p-4 gap-4">
+    <div className="relative flex flex-col font-normal rounded-xl shadow-sm overflow-hidden w-full max-w-4xl mx-auto p-4 gap-4">
+      {/* Three-dot action button */}
+      <div className="absolute top-4 right-4">
+        <ActionModal
+          disabled={false}
+          items={[
+            {
+              label: "Edit",
+              icon: HiOutlinePencil,
+              onClick: () => onActionSelect("edit", property),
+            },
+            {
+              label: "View Details",
+              icon: HiOutlineEye,
+              onClick: () => onActionSelect("view", property),
+            },
+            {
+              label: "Delete",
+              icon: HiOutlineTrash,
+              onClick: () => onActionSelect("delete", property),
+            },
+          ]}
+        >
+          <HiOutlineEllipsisVertical className="w-5 h-5 text-neutral-500" />
+        </ActionModal>
+      </div>
+
       {/* Image */}
       <img
         src={image || "/house.png"}
-        alt={title}
+        alt={`${title} in ${location}`}
         className="w-full h-48 object-cover rounded-lg"
       />
-
+      {console.log(image)}
       {/* Content */}
       <div className="flex flex-col tab:flex-row justify-between w-full gap-4">
         {/* Left Section */}
@@ -31,22 +65,15 @@ function PropertyCard({ property }) {
             </span>
             <div className="flex items-center gap-1">
               <HiCalendar className="text-[var(--color-normal)] text-base" />
-              <span>{date}</span>
+              <span>{new Date(date).toLocaleDateString()}</span>
             </div>
           </div>
         </div>
 
         {/* Right Section */}
         <div className="flex tab:flex-col tab:items-end justify-between tab:justify-center gap-2 tab:gap-4">
-          <span
-            className={`text-sm font-medium px-4 py-1 rounded-full whitespace-nowrap self-start tab:self-auto ${
-              status === "Available"
-                ? "bg-[var(--color-green-light)] text-[var(--color-dark)]"
-                : "bg-[var(--color-red-light)] text-[var(--color-neutral-800)]"
-            }`}
-          >
-            {status}
-          </span>
+          <PropertyStatusBadge status={status} />
+
           <span className="text-[var(--color-normal)] font-semibold text-lg">
             {formatCurrency(price)}
           </span>

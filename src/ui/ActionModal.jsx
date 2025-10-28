@@ -16,7 +16,7 @@ function ActionModal({ items = [], disabled }) {
       {/* Dots button */}
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="p-2 rounded-md hover:bg-neutral-100 transition-colors"
+        className="p-2 rounded-md bg-white/80 m-2 cursor-pointer hover:bg-neutral-100 transition-colors"
       >
         <HiOutlineDotsVertical className="text-neutral-600 cursor-pointer text-lg" />
       </button>

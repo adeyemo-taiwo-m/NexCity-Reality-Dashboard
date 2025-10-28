@@ -1,10 +1,28 @@
 import React from "react";
-import { HiChevronDown, HiSearch } from "react-icons/hi";
-import DropdownBtn from "../../ui/DropdownBtn";
 import SearchInput from "../../ui/SearchInput";
-import { agentsNames, status } from "../../assets/data";
+import DropdownBtn from "../../ui/DropdownFilter";
+import usePropertiesMain from "./usePropertiesMain";
 
 function SearchBar() {
+  const { properties } = usePropertiesMain();
+  console.log(properties);
+  const status = [
+    { label: "All", value: "all" },
+    { label: "Available", value: "available" },
+    { label: "Sold", value: "sold" },
+  ];
+  const agentNames = [
+    { label: "All", value: "all" },
+    ...[
+      ...new Set(
+        properties?.map((property) => property.listedBy).filter((name) => name) // remove null, undefined, empty string
+      ),
+    ].map((name) => ({
+      label: name,
+      value: name,
+    })),
+  ];
+
   return (
     <div className="flex items-center justify-between w-full bg-[var(--color-white)] rounded-lg p-3 gap-4 shadow-sm">
       {/* Search Input */}
@@ -13,20 +31,10 @@ function SearchBar() {
       <div className="flex items-center gap-3">
         {/* Assigned Agent */}
 
-        <DropdownBtn
-          items={agentsNames}
-          icon={
-            <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
-          }
-        >
+        <DropdownBtn field={"agent"} items={agentNames}>
           Agent
         </DropdownBtn>
-        <DropdownBtn
-          items={status}
-          icon={
-            <HiChevronDown className="text-[var(--color-neutral-600)] text-lg" />
-          }
-        >
+        <DropdownBtn field={"status"} items={status}>
           Status
         </DropdownBtn>
 

@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import PropertySnapShotHeader from "./PropertySnapShotHeader.jsx";
 import useProperties from "../properties/useProperties.js";
 import LoadingState from "../../ui/LoadingState.jsx";
+import EmptyState from "../../ui/EmptyState.jsx";
 
 function PropertySnapShot() {
   const { properties, isPending } = useProperties();
