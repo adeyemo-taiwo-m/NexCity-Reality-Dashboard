@@ -31,6 +31,8 @@ const Button = ({
       " sm:mt-0 flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-100 transition-all duration-200 shadow-sm",
     light:
       "inline-flex h-12  items-center justify-center p-2 bg-light text-[#054484] font-medium text-sm rounded-lg shadow hover:bg-light-hover transition-all duration-200",
+    signUp:
+      "text-[var(--color-normal)]  focus:ring-0 text-base hover:text-[var(--color-normal-hover)] font-medium",
   };
 
   return (

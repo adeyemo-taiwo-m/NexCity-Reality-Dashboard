@@ -1,9 +1,14 @@
 import React from "react";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 
 function LogoutBtn() {
+  const navigate = useNavigate();
   return (
-    <div className="flex gap-2 items-center mx-2   text-gray-700 hover:bg-gray-100 p-2  rounded-md cursor-pointer">
+    <div
+      onClick={() => navigate("login")}
+      className="flex gap-2 items-center mx-2   text-gray-700 hover:bg-gray-100 p-2  rounded-md cursor-pointer"
+    >
       <span>{<HiArrowRightOnRectangle />}</span>
       Logout
     </div>

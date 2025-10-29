@@ -10,6 +10,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import { HiCheckCircle, HiXCircle } from "react-icons/hi";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 function App() {
   const queryClient = new QueryClient();
@@ -28,6 +30,8 @@ function App() {
               <Route path="transactions" element={<Transactions />} />
               <Route path="settings" element={<Settings />} />
             </Route>
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<SignUp />} />
           </Routes>
 
           <Toaster
