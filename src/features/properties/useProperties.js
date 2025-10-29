@@ -13,7 +13,7 @@ function useProperties() {
   const filter =
     !statusFilter || statusFilter === "all"
       ? null
-      : { field: "status", value: statusFilter };
+      : { field: "status", value: statusFilter, method: "eq" };
 
   // Optional sorting (default by price descending)
   const sortByRaw = searchParams.get("sortBy") || "price-desc";

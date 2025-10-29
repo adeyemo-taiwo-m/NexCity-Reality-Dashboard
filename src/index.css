@@ -197,3 +197,13 @@ html {
 .animate-fadeIn {
   animation: fadeIn 0.25s ease-out;
 }
+
+.styled-sales-chart {
+  grid-column: 1 / -1;
+}
+
+/* Hack to change grid line colors */
+.styled-sales-chart .recharts-cartesian-grid-horizontal line,
+.styled-sales-chart .recharts-cartesian-grid-vertical line {
+  stroke: var(--color-neutral-300);
+}

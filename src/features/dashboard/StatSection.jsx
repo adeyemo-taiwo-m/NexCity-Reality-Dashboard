@@ -25,7 +25,7 @@ function StatSection() {
     (property) => property.status === "sold"
   ).length;
 
-  const soldPercentage = (soldProperties / availableProperties) * 100;
+  const soldPercentage = (soldProperties / totalProperties) * 100;
   const statsData = [
     {
       id: "total-properties",

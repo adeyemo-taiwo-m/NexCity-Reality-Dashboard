@@ -16,11 +16,11 @@ function Dashboard() {
         {/* <StatCards statData={statsData} /> */}
         <StatSection />
         <div className="flex flex-col gap-6 lap:flex-row  ">
-          <div className="flex  flex-col gap-6  overflow-hidden">
+          <div className="flex  flex-col gap-6 w-full  overflow-hidden">
             <ClientCount count={customerCount} />
             <PropertySnapShot />
           </div>
-          <div className="  overflow-hidden">
+          <div className="   w-full">
             <RecentHouseMap />
           </div>
         </div>

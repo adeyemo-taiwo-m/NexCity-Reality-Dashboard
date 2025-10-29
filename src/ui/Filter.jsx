@@ -14,7 +14,7 @@ function Filter({ field, options }) {
           key={option.id}
           onClick={() => handleClick(option.value)}
           active={curActiveValue === option.value}
-          className={` cursor-pointer py-1  rounded-md text-sm tab:text-base px-2 font-normal transition ${
+          className={` cursor-pointer py-1  rounded-md text-[10px] tab:text-base px-2 font-normal transition ${
             curActiveValue === option.value
               ? "bg-normal text-white"
               : "text-neutral-600 hover:bg-light"

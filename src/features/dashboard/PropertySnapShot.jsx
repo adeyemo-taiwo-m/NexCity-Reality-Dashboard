@@ -21,7 +21,7 @@ function PropertySnapShot() {
   }
 
   return (
-    <div className="bg-white p-6 max-w-4xl rounded-xl shadow-sm overflow-hidden ">
+    <div className="bg-white p-6 max-w-4xl  rounded-xl shadow-sm overflow-hidden ">
       <PropertySnapShotHeader />
 
       <Swiper

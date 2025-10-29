@@ -1,6 +1,43 @@
 import supabase from "./supabase";
 
 // Get all properties
+// export default async function getProperties({
+//   filter,
+//   sortBy,
+//   searchQuery,
+//   typeFilterData,
+// } = {}) {
+//   let query = supabase.from("properties").select("*");
+
+//   // Filter
+//   if (filter !== null && filter?.field && filter?.value) {
+//     query = query[filter.method](filter.field, filter.value);
+//   }
+//   // agent Filter
+//   if (typeFilterData !== null && typeFilterData !== undefined)
+//     query = query.eq(typeFilterData.field, typeFilterData.value);
+//   // Sort By
+//   if (sortBy && sortBy?.sortField) {
+//     query = query.order(sortBy.sortField, {
+//       ascending: sortBy.direction === "asc",
+//     });
+//   }
+
+//   // Search Field
+//   if (searchQuery && searchQuery.trim() !== "") {
+//     query = query.ilike("title", `%${searchQuery.trim()}%`);
+//   }
+
+//   const { data, error } = await query;
+
+//   if (error) {
+//     console.error("Error fetching properties:", error);
+//     throw new Error("Failed to load properties");
+//   }
+
+//   return data;
+// }
+
 export default async function getProperties({
   filter,
   sortBy,
@@ -9,21 +46,27 @@ export default async function getProperties({
 } = {}) {
   let query = supabase.from("properties").select("*");
 
-  // Filter
-  if (filter !== null && filter?.field && filter?.value) {
-    query = query.eq(filter.field, filter.value);
+  // Filter with method support
+  if (filter && filter.field && filter.value && filter.method) {
+    const { field, value, method } = filter;
+    if (method === "eq") query = query.eq(field, value);
+    else if (method === "gte") query = query.gte(field, value);
+    else if (method === "lte") query = query.lte(field, value);
+    else if (method === "ilike") query = query.ilike(field, value);
+    // add more filters as needed
   }
-  // agent Filter
+
+  // Filter
   if (typeFilterData !== null && typeFilterData !== undefined)
     query = query.eq(typeFilterData.field, typeFilterData.value);
   // Sort By
-  if (sortBy && sortBy?.sortField) {
+  if (sortBy && sortBy.sortField) {
     query = query.order(sortBy.sortField, {
       ascending: sortBy.direction === "asc",
     });
   }
 
-  // Search Field
+  // Search Query
   if (searchQuery && searchQuery.trim() !== "") {
     query = query.ilike("title", `%${searchQuery.trim()}%`);
   }
