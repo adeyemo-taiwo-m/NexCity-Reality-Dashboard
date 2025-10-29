@@ -9,7 +9,7 @@ import { formatCurrency } from "../../utils/helpers";
 import ActionModal from "../../ui/ActionModal";
 import PropertyStatusBadge from "./PropertyStatusBadge";
 
-function PropertyCard({ property, onActionSelect }) {
+function PropertyCard({ property, onActionSelect, disabled }) {
   const { title, location, price, status, listedBy, date, image } = property;
 
   return (
@@ -17,7 +17,7 @@ function PropertyCard({ property, onActionSelect }) {
       {/* Three-dot action button */}
       <div className="absolute top-4 right-4">
         <ActionModal
-          disabled={false}
+          disabled={disabled}
           items={[
             {
               label: "Edit",
@@ -28,6 +28,11 @@ function PropertyCard({ property, onActionSelect }) {
               label: "View Details",
               icon: HiOutlineEye,
               onClick: () => onActionSelect("view", property),
+            },
+            {
+              label: "Mark as Sold",
+              icon: HiOutlineEye,
+              onClick: () => onActionSelect("sold", property),
             },
             {
               label: "Delete",

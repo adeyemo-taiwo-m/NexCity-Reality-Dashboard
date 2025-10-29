@@ -128,3 +128,19 @@ export async function editProperty(propertyId, updatedData) {
 
   return data;
 }
+
+export async function markPropertyAsSold(propertyId) {
+  if (!propertyId) throw new Error("Property ID is required");
+
+  const { data, error } = await supabase
+    .from("properties") // replace with your actual table name if different
+    .update({ status: "sold" })
+    .eq("id", propertyId)
+    .select();
+
+  if (error) {
+    console.error("Error updating property status:", error);
+    throw error;
+  }
+  return data;
+}

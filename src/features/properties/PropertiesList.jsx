@@ -8,10 +8,12 @@ import useProperties from "./useProperties";
 import useDeleteProperty from "./useDeleteProperty";
 import LoadingState from "../../ui/LoadingState";
 import EmptyState from "../../ui/EmptyState";
+import useMarkAsSold from "./useMarkAsSold";
 
 function PropertyList() {
-  const { properties, isPending } = useProperties();
-  const { deleteProperty } = useDeleteProperty();
+  const { properties, isPending: isPendingProperty } = useProperties();
+  const { deleteProperty, isPending: isDeleting } = useDeleteProperty();
+  const { sellProperty, isPending } = useMarkAsSold();
   const [page, setPage] = useState(1);
 
   // --- Modal States ---
@@ -20,7 +22,7 @@ function PropertyList() {
   const [isViewOpen, setIsViewOpen] = useState(false);
 
   // --- Loading State ---
-  if (isPending) return <LoadingState entityName="properties" />;
+  if (isPendingProperty) return <LoadingState entityName="properties" />;
 
   // --- Empty State ---
   if (!properties || properties.length === 0)
@@ -32,6 +34,7 @@ function PropertyList() {
     if (action === "edit") setIsEditOpen(true);
     else if (action === "view") setIsViewOpen(true);
     else if (action === "delete") deleteProperty(property.id);
+    else if (action === "sold") sellProperty(property.id);
   };
 
   return (
@@ -43,6 +46,7 @@ function PropertyList() {
             key={property.id}
             property={property}
             onActionSelect={handleActionSelect}
+            disabled={isPending || isPendingProperty || isDeleting}
           />
         ))}
       </div>
