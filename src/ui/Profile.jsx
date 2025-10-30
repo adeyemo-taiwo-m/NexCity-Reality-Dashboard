@@ -8,15 +8,15 @@ import NotificationBtn from "./NotificationBtn";
 function Profile() {
   // Utility classes for standard, clickable icons/buttons
   const iconButtonClass =
-    "relative p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition duration-150";
-  const iconSize = "w-6 h-6 text-gray-500";
+    "relative p-2 rounded-full bg-neutral-200 hover:bg-neutral-300 transition duration-150";
+  const iconSize = "w-6 h-6 text-neutral-500";
   // Simplified styles for the profile dropdown button
   const profileButtonClass =
     "flex items-center cursor-pointer gap-3 p-1 pl-3 relative bg-white rounded-full shadow-md hover:shadow-lg transition-shadow duration-200";
 
   return (
     <div
-      className="flex items-center justify-end w-full h-16 px-0 lg:px-4 bg-transparent"
+      className=" flex  items-center justify-end w-full h-16 px-0 lg:px-4 bg-transparent"
       role="banner"
     >
       <nav
@@ -65,7 +65,7 @@ function Profile() {
                 <div className="font-semibold text-sm text-neutral-800">
                   Adeyemo Taiwo M
                 </div>
-                <div className="text-xs text-neutral-500">Senior Agent</div>
+                <div className="text-xs text-neutral-600">Senior Agent</div>
               </div>
             </div>
 

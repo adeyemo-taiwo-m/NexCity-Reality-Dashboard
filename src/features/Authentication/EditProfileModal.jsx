@@ -11,10 +11,8 @@ function EditProfileModal({ profileData, onClose, onSave }) {
   const ref = useOutsideClickModal(onClose);
   const { updateUser, isPending } = useUpdateUser();
 
-  // 🖼️ Image preview
   const [previewImage, setPreviewImage] = useState(profileData.profileImage);
 
-  // 🧾 Form setup
   const {
     register,
     handleSubmit,
@@ -25,10 +23,13 @@ function EditProfileModal({ profileData, onClose, onSave }) {
       name: profileData.name,
       role: profileData.role,
       profileImage: profileData.profileImage,
+      facebook: profileData.facebook || "",
+      linkedin: profileData.linkedin || "",
+      pinterest: profileData.pinterest || "",
+      x: profileData.x || "",
     },
   });
 
-  // 🖼️ Handle new image selection
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -37,17 +38,27 @@ function EditProfileModal({ profileData, onClose, onSave }) {
     }
   };
 
-  // 💾 Submit form
   const onSubmit = async (data) => {
     const finalData = {
       fullName: data.name,
       assignedRole: data.role,
       profileImage: previewImage,
+      socialLinks: {
+        facebook: data.facebook,
+        linkedin: data.linkedin,
+        pinterest: data.pinterest,
+        x: data.x,
+      },
     };
 
     try {
       updateUser(finalData);
-      onSave({ name: data.name, role: data.role, profileImage: previewImage });
+      onSave({
+        name: data.name,
+        role: data.role,
+        profileImage: previewImage,
+        socialLinks: finalData.socialLinks,
+      });
       reset(finalData);
       onClose();
     } catch (err) {
@@ -100,6 +111,7 @@ function EditProfileModal({ profileData, onClose, onSave }) {
 
         {/* 🧾 Form Fields */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Basic Info */}
           <AgentInput
             name="name"
             type="text"
@@ -121,6 +133,75 @@ function EditProfileModal({ profileData, onClose, onSave }) {
             error={errors.role}
             disabled={isPending}
           />
+
+          {/* 🌐 Social Media Links */}
+          <div className="space-y-4">
+            <h3 className="font-medium text-gray-700">Social Media Links</h3>
+
+            <AgentInput
+              name="facebook"
+              type="url"
+              label="Facebook"
+              placeholder="https://facebook.com/yourprofile"
+              register={register}
+              validation={{
+                pattern: {
+                  value: /^(https?:\/\/)?(www\.)?facebook\.com\/?.*$/i,
+                  message: "Enter a valid Facebook URL",
+                },
+              }}
+              error={errors.facebook}
+              disabled={isPending}
+            />
+
+            <AgentInput
+              name="linkedin"
+              type="url"
+              label="LinkedIn"
+              placeholder="https://linkedin.com/in/yourprofile"
+              register={register}
+              validation={{
+                pattern: {
+                  value: /^(https?:\/\/)?(www\.)?linkedin\.com\/?.*$/i,
+                  message: "Enter a valid LinkedIn URL",
+                },
+              }}
+              error={errors.linkedin}
+              disabled={isPending}
+            />
+
+            <AgentInput
+              name="pinterest"
+              type="url"
+              label="Pinterest"
+              placeholder="https://pinterest.com/yourprofile"
+              register={register}
+              validation={{
+                pattern: {
+                  value: /^(https?:\/\/)?(www\.)?pinterest\.com\/?.*$/i,
+                  message: "Enter a valid Pinterest URL",
+                },
+              }}
+              error={errors.pinterest}
+              disabled={isPending}
+            />
+
+            <AgentInput
+              name="x"
+              type="url"
+              label="X (Twitter)"
+              placeholder="https://x.com/yourhandle"
+              register={register}
+              validation={{
+                pattern: {
+                  value: /^(https?:\/\/)?(www\.)?(twitter|x)\.com\/?.*$/i,
+                  message: "Enter a valid X (Twitter) URL",
+                },
+              }}
+              error={errors.x}
+              disabled={isPending}
+            />
+          </div>
 
           {/* 🟢 Buttons */}
           <div className="flex justify-between items-center pt-2">

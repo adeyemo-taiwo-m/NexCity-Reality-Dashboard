@@ -53,7 +53,6 @@ export async function signUp({ email, password, fullName }) {
 }
 
 // update user
-
 export async function updateCurrentUser({
   fullName,
   profileImage,
@@ -61,31 +60,39 @@ export async function updateCurrentUser({
   phone,
   email,
   newPassword,
+  socialLinks,
 }) {
   const updatePayload = {};
   const userMeta = {};
 
+  // Basic profile data
   if (fullName) userMeta.fullName = fullName;
   if (profileImage) userMeta.profileImage = profileImage;
   if (assignedRole) userMeta.assignedRole = assignedRole;
   if (phone) userMeta.phone = phone;
+
+  // Social media links (only add if provided)
+  if (socialLinks) {
+    userMeta.socialLinks = {
+      facebook: socialLinks.facebook || "",
+      linkedin: socialLinks.linkedin || "",
+      pinterest: socialLinks.pinterest || "",
+      x: socialLinks.x || "",
+    };
+  }
 
   // Add metadata if any
   if (Object.keys(userMeta).length > 0) {
     updatePayload.data = userMeta;
   }
 
-  // Add email if user wants to change it
-  if (email) {
-    updatePayload.email = email;
-  }
+  // Update email if provided
+  if (email) updatePayload.email = email;
 
-  // Add password if user wants to change it
-  if (newPassword) {
-    updatePayload.password = newPassword;
-  }
+  // Update password if provided
+  if (newPassword) updatePayload.password = newPassword;
 
-  // 🔧 Perform update
+  // Perform update
   const { data, error } = await supabase.auth.updateUser(updatePayload);
 
   if (error) {

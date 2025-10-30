@@ -19,7 +19,7 @@ function SettingsProfile() {
 
   const [showModal, setShowModal] = useState(false);
 
-  // 🟢 Populate the profile when userData is available
+  //  Populate the profile when userData is available
   useEffect(() => {
     if (userData) {
       setProfileData({
@@ -32,7 +32,7 @@ function SettingsProfile() {
     }
   }, [userData]);
 
-  // 🟢 Handle saving of updated data
+  //  Handle saving of updated data
   const handleSave = (updatedData) => {
     setProfileData((prev) => ({
       ...prev,
@@ -41,7 +41,7 @@ function SettingsProfile() {
   };
 
   return (
-    <section className="w-full bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100 relative">
+    <section className="w-full bg-white rounded-3xl shadow-md overflow-hidden border border-neutral-100 relative">
       {/* Banner Image */}
       <div className="relative h-40 tab:h-48 w-full">
         <img
@@ -78,10 +78,10 @@ function SettingsProfile() {
         "
       >
         <div className="flex flex-col items-center tab:items-start mt-4 tab:mt-0 space-y-2">
-          <h2 className="text-[1.2rem] font-medium text-gray-900">
+          <h2 className="text-[1.2rem] font-medium text-neutral-900">
             {isPending ? <LoaderMini /> : profileData.name}
           </h2>
-          <p className="text-base text-gray-500 font-normal">
+          <p className="text-base text-neutral-500 font-normal">
             {isPending ? <LoaderMini /> : profileData.role}
           </p>
 

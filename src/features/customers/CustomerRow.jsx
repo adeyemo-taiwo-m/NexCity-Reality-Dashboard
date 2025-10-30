@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  HiOutlineEllipsisVertical,
-  HiOutlineEye,
-  HiOutlinePencil,
-  HiOutlineTrash,
-} from "react-icons/hi2";
+import { HiOutlineEye, HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
 import CustomerStatusBadge from "./CustomersStatusBadge";
 import ActionModal from "../../ui/ActionModal";
 import useDeleteCustomer from "./useDeleteCustomer";
@@ -24,7 +19,6 @@ const CustomerRow = ({
   avatarUrl,
 }) => {
   const { deleteCustomer, isPending } = useDeleteCustomer();
-
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isViewOpen, setIsViewOpen] = useState(false);
 
@@ -43,7 +37,7 @@ const CustomerRow = ({
   return (
     <>
       <tr
-        className="border-b hover:bg-gray-50 transition-colors"
+        className="border-b hover:bg-[var(--color-light)] dark:hover:bg-[var(--color-dark)] transition-colors"
         style={{ borderColor: "var(--color-neutral-200)" }}
       >
         {/* Customer Info */}
@@ -65,20 +59,39 @@ const CustomerRow = ({
           </div>
         </td>
 
-        <td className="px-6 py-4 text-sm text-gray-600">{email}</td>
-        <td className="px-6 py-4 text-sm text-center text-gray-600">
+        <td
+          className="px-6 py-4 text-sm"
+          style={{ color: "var(--color-neutral-800)" }}
+        >
+          {email}
+        </td>
+        <td
+          className="px-6 py-4 text-sm text-center"
+          style={{ color: "var(--color-neutral-800)" }}
+        >
           {interestedProperty}
         </td>
-        <td className="px-6 py-4 text-sm text-center text-gray-600 capitalize">
+        <td
+          className="px-6 py-4 text-sm text-center capitalize"
+          style={{ color: "var(--color-neutral-800)" }}
+        >
           {dealType}
         </td>
-        <td className="px-6 py-4 text-sm text-center text-gray-600">
+        <td
+          className="px-6 py-4 text-sm text-center"
+          style={{ color: "var(--color-neutral-800)" }}
+        >
           {amount ? `₦${amount.toLocaleString()}` : "—"}
         </td>
         <td className="px-6 py-4 text-center">
           <CustomerStatusBadge status={status} />
         </td>
-        <td className="px-6 py-4 text-sm text-gray-600">{activity}</td>
+        <td
+          className="px-6 py-4 text-sm"
+          style={{ color: "var(--color-neutral-800)" }}
+        >
+          {activity}
+        </td>
 
         {/* Actions */}
         <td className="px-6 py-4 text-right">
@@ -105,14 +118,14 @@ const CustomerRow = ({
         </td>
       </tr>
 
-      {/* ✅ Edit Modal */}
+      {/* Edit Modal */}
       {isEditOpen && (
         <div
-          className="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
+          className="fixed inset-0 bg-white/30 dark:bg-black/30 backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
           onClick={() => setIsEditOpen(false)}
         >
           <div
-            className="relative bg-white/90 backdrop-blur-md rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-white"
+            className="relative bg-[var(--color-white)] dark:bg-[var(--color-black)] backdrop-blur-md rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-[var(--color-neutral-200)] dark:border-[var(--color-neutral-800)]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute right-10 top-10">
@@ -127,7 +140,7 @@ const CustomerRow = ({
         </div>
       )}
 
-      {/* ✅ View Modal */}
+      {/* View Modal */}
       {isViewOpen && (
         <ViewCustomerProfile
           setIsViewOpen={setIsViewOpen}

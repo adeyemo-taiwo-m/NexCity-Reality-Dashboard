@@ -33,7 +33,8 @@ function CustomerCards() {
         {customers.map((customer, i) => (
           <div
             key={i}
-            className="bg-gray-50 border border-neutral-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
+            className="bg-[var(--color-white)] border border-[var(--color-neutral-200)] 
+                       rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
           >
             {/* Header */}
             <div className="flex items-center justify-between">
@@ -47,10 +48,18 @@ function CustomerCards() {
                   className="w-12 h-12 rounded-full object-cover"
                 />
                 <div>
-                  <h3 className="font-semibold text-neutral-800 text-sm tab:text-base">
+                  <h3
+                    className="font-semibold text-sm tab:text-base"
+                    style={{ color: "var(--color-neutral-800)" }}
+                  >
                     {customer.name}
                   </h3>
-                  <p className="text-xs text-neutral-500">{customer.email}</p>
+                  <p
+                    className="text-xs"
+                    style={{ color: "var(--color-neutral-500)" }}
+                  >
+                    {customer.email}
+                  </p>
                 </div>
               </div>
 
@@ -83,23 +92,46 @@ function CustomerCards() {
             </div>
 
             {/* Body */}
-            <div className="mt-4 space-y-2 text-sm text-neutral-700">
+            <div
+              className="mt-4 space-y-2 text-sm"
+              style={{ color: "var(--color-neutral-700)" }}
+            >
               <p>
-                <span className="font-medium text-neutral-600">Property:</span>{" "}
+                <span
+                  className="font-medium"
+                  style={{ color: "var(--color-neutral-600)" }}
+                >
+                  Property:
+                </span>{" "}
                 {customer.interestedProperty}
               </p>
               <div className="flex justify-between">
                 <p>
-                  <span className="font-medium text-neutral-600">Deal:</span>{" "}
+                  <span
+                    className="font-medium"
+                    style={{ color: "var(--color-neutral-600)" }}
+                  >
+                    Deal:
+                  </span>{" "}
                   {customer.dealType}
                 </p>
                 <p>
-                  <span className="font-medium text-neutral-600">Amount:</span>{" "}
+                  <span
+                    className="font-medium"
+                    style={{ color: "var(--color-neutral-600)" }}
+                  >
+                    Amount:
+                  </span>{" "}
                   {formatCurrency(customer.amount)}
                 </p>
               </div>
               <p>
-                <span className="font-medium text-neutral-600">Activity:</span>{" "}
+                <span
+                  className="font-medium"
+                  style={{ color: "var(--color-neutral-600)" }}
+                >
+                  Activity:
+                </span>{" "}
                 {customer.activity}
               </p>
             </div>
@@ -112,18 +144,26 @@ function CustomerCards() {
                     ? "bg-green-50 text-green-600"
                     : customer.status === "Closed"
                     ? "bg-amber-50 text-amber-600"
-                    : "bg-neutral-100 text-neutral-500"
+                    : "bg-[var(--color-light)] text-[var(--color-neutral-600)]"
                 }`}
               >
                 {customer.status}
               </span>
 
               <button
-                className="text-sm font-medium text-normal px-2 py-1 rounded-md hover:bg-[#e6f4fa] transition-colors"
+                className="text-sm font-medium px-2 py-1 rounded-md transition-colors"
+                style={{
+                  color: "var(--color-normal)",
+                }}
                 onClick={() => {
                   setSelectedCustomer(customer);
                   setIsViewOpen(true);
                 }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background =
+                    "var(--color-light-hover)")
+                }
+                onMouseLeave={(e) => (e.currentTarget.style.background = "")}
               >
                 View Details
               </button>
@@ -139,7 +179,7 @@ function CustomerCards() {
           onClick={() => setIsEditOpen(false)}
         >
           <div
-            className="relative bg-white/90 backdrop-blur-md rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-white"
+            className="relative bg-[var(--color-white)] rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-[var(--color-neutral-200)]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute right-10 top-10">

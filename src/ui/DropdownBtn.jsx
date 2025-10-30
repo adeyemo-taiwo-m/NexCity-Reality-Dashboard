@@ -10,9 +10,9 @@ function DropdownBtn({ type, children, items = [] }) {
 
   const styles = {
     lightBg:
-      "flex items-center px-6 tab:px-8 py-2 gap-1 bg-neutral-100 text-neutral-600 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-normal)] cursor-pointer",
+      "flex items-center px-6 tab:px-8 py-2 gap-1 bg- text-neutral-600 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-normal)] cursor-pointer",
     darkBg:
-      "flex items-center px-4 py-2 gap-1 bg-normal text-white rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-normal)] cursor-pointer",
+      "flex items-center px-4 py-2 gap-1   hover:bg-light-hover  bg-normal text-white rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-normal)] cursor-pointer",
   };
 
   function handleClick(item, onClick) {

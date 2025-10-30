@@ -20,20 +20,13 @@ function TransactionCards() {
   const { transactions, isPending } = useTransactions();
   const { deleteTransaction, isPending: isDeleting } = useDeleteTransaction();
 
-  // --- Local modal states ---
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isViewOpen, setIsViewOpen] = useState(false);
 
-  // --- Loading State ---
-  if (isPending) {
-    return <LoadingState entityName="transactions" />;
-  }
-
-  // --- Empty State ---
-  if (!transactions || transactions.length === 0) {
+  if (isPending) return <LoadingState entityName="transactions" />;
+  if (!transactions || transactions.length === 0)
     return <EmptyState entityName="transactions" />;
-  }
 
   return (
     <div className="block lap:hidden p-4">
@@ -41,7 +34,11 @@ function TransactionCards() {
         {transactions.map((txn, i) => (
           <div
             key={txn.id || i}
-            className="bg-gray-50 border border-neutral-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
+            className="bg-[var(--color-white)]
+                       border border-[var(--color-neutral-200)] 
+                       rounded-xl p-4 shadow-sm hover:shadow-md 
+                       hover:bg-[var(--color-light)] 
+                       transition-all duration-200"
           >
             {/* Header */}
             <div className="flex items-center justify-between">
@@ -52,10 +49,16 @@ function TransactionCards() {
                   className="w-10 h-10 rounded-md object-cover"
                 />
                 <div>
-                  <h3 className="font-semibold text-neutral-800 text-sm tab:text-base">
+                  <h3
+                    className="font-semibold text-sm tab:text-base"
+                    style={{ color: "var(--color-neutral-800)" }}
+                  >
                     {txn.property}
                   </h3>
-                  <p className="text-xs text-neutral-500 capitalize">
+                  <p
+                    className="text-xs capitalize"
+                    style={{ color: "var(--color-neutral-500)" }}
+                  >
                     {txn.type}
                   </p>
                 </div>
@@ -87,31 +90,53 @@ function TransactionCards() {
                   },
                 ]}
               >
-                <HiOutlineEllipsisVertical className="w-5 h-5 text-neutral-500" />
+                <HiOutlineEllipsisVertical
+                  className="w-5 h-5"
+                  style={{ color: "var(--color-neutral-500)" }}
+                />
               </ActionModal>
             </div>
 
             {/* Body */}
-            <div className="mt-4 space-y-2 text-sm text-neutral-700">
+            <div
+              className="mt-4 space-y-2 text-sm"
+              style={{ color: "var(--color-neutral-700)" }}
+            >
               <p>
-                <span className="font-medium text-neutral-600">Customer:</span>{" "}
+                <span
+                  className="font-medium"
+                  style={{ color: "var(--color-neutral-600)" }}
+                >
+                  Customer:
+                </span>{" "}
                 {txn.customer}
               </p>
+
               <div className="flex justify-between items-center">
                 <p>
-                  <span className="font-medium text-neutral-600">Amount:</span>{" "}
+                  <span
+                    className="font-medium"
+                    style={{ color: "var(--color-neutral-600)" }}
+                  >
+                    Amount:
+                  </span>{" "}
                   {formatCurrency(txn.amount)}
                 </p>
 
-                {/* ✅ Status Badge */}
                 <TransactionsStatusBadge
                   status={
                     txn.status.charAt(0).toUpperCase() + txn.status.slice(1)
                   }
                 />
               </div>
+
               <p>
-                <span className="font-medium text-neutral-600">Date:</span>{" "}
+                <span
+                  className="font-medium"
+                  style={{ color: "var(--color-neutral-600)" }}
+                >
+                  Date:
+                </span>{" "}
                 {txn.date}
               </p>
             </div>
@@ -119,11 +144,17 @@ function TransactionCards() {
             {/* Footer */}
             <div className="mt-4 flex justify-end">
               <button
+                className="text-sm font-medium px-2 py-1 rounded-md transition-colors"
+                style={{ color: "var(--color-normal)" }}
                 onClick={() => {
                   setSelectedTransaction(txn);
                   setIsViewOpen(true);
                 }}
-                className="text-sm font-medium text-normal px-2 py-1 rounded-md hover:bg-[#e6f4fa] transition-colors"
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background =
+                    "var(--color-light-hover)")
+                }
+                onMouseLeave={(e) => (e.currentTarget.style.background = "")}
               >
                 View Details
               </button>
@@ -135,11 +166,14 @@ function TransactionCards() {
       {/* ✅ Edit Modal */}
       {isEditOpen && selectedTransaction && (
         <div
-          className="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
+          className="fixed inset-0 bg-white/30 dark:bg-black/30 backdrop-blur-md 
+                     flex items-center justify-center animate-fadeIn z-50"
           onClick={() => setIsEditOpen(false)}
         >
           <div
-            className="relative bg-white/90 backdrop-blur-md rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-white"
+            className="relative bg-[var(--color-white)] dark:bg-[var(--color-black)] 
+                       rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 
+                       border border-[var(--color-neutral-200)] dark:border-[var(--color-neutral-800)]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute right-10 top-10">

@@ -42,7 +42,7 @@ export default function SignupForm() {
               message: "Full name must be at least 3 characters",
             },
           })}
-          className={`w-full px-4 py-2 border ${
+          className={`w-full px-4 text-white py-2 border ${
             errors.fullName
               ? "border-red-400 focus:ring-red-500"
               : "border-[var(--color-neutral-200)] focus:ring-[var(--color-normal)]"

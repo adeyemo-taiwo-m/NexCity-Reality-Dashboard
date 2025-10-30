@@ -4,13 +4,17 @@ import useLogoutUser from "../features/Authentication/useLogoutUser";
 
 function LogoutBtn() {
   const { logout, isPending } = useLogoutUser();
+
   return (
     <button
       onClick={logout}
       disabled={isPending}
-      className="flex gap-2 items-center mx-2   text-gray-700 hover:bg-gray-100 p-2  rounded-md cursor-pointer"
+      className="flex gap-2 items-center mx-2 
+        text-[var(--color-neutral-700)] 
+        hover:bg-[var(--color-light)] 
+        p-2 rounded-md cursor-pointer transition-colors duration-200 disabled:opacity-70"
     >
-      <span>{<HiArrowRightOnRectangle />}</span>
+      <HiArrowRightOnRectangle className="w-5 h-5" />
       Logout
     </button>
   );

@@ -4,7 +4,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className="flex justify-between items-center bg-[#e5f6fb] p-3 rounded-b-2xl text-[--color-normal]">
+    <div className="flex justify-between items-center  p-3 rounded-b-2xl text-[--color-normal]">
       {/* Prev Button */}
       <button
         className="flex items-center gap-1 text-[--color-normal] hover:text-[--color-dark] disabled:opacity-40"

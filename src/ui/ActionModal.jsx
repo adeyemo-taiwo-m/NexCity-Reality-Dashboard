@@ -12,11 +12,11 @@ function ActionModal({ items = [], disabled }) {
   }
 
   return (
-    <div className="relative inline-block text-left" ref={modalRef}>
+    <div className="relative  inline-block text-left" ref={modalRef}>
       {/* Dots button */}
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="p-2 rounded-md bg-white/80 m-2 cursor-pointer hover:bg-neutral-100 transition-colors"
+        className="p-2 rounded-md  m-2 cursor-pointer hover:bg-light transition-colors"
       >
         <HiOutlineDotsVertical className="text-neutral-600 cursor-pointer text-lg" />
       </button>
@@ -25,7 +25,7 @@ function ActionModal({ items = [], disabled }) {
       {open && (
         <div
           className="
-            absolute right-0 mt-2 w-40 bg-white border border-neutral-100 
+            absolute right-0 mt-2 w-40 bg-white border border-neutral-400 
             rounded-lg shadow-md z-20 overflow-hidden
           "
         >
@@ -37,7 +37,7 @@ function ActionModal({ items = [], disabled }) {
                 onClick={() => handleClick(item)}
                 className="
                   flex cursor-pointer items-center gap-2 w-full text-left px-4 py-2 text-sm 
-                  text-neutral-700 hover:bg-neutral-100 transition-colors
+                  text-neutral-700 hover:bg-light transition-colors
                 "
               >
                 {item.icon && (

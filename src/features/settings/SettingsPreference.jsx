@@ -10,11 +10,7 @@ function SettingsPreference() {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <SettingsP>Dark Mode</SettingsP>
-        <ToggleSwitch
-          checked={darkMode}
-          onChange={setDarkMode}
-          color="bg-gold"
-        />
+        <ToggleSwitch checked={darkMode} onChange={setDarkMode} />
       </div>
 
       <div className="flex justify-between items-center">

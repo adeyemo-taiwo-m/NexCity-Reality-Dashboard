@@ -5,7 +5,6 @@ import ActionModal from "../../ui/ActionModal";
 import useDeleteAgent from "./useDeleteAgent";
 import EditAgent from "./EditAgent";
 import CancelX from "../../ui/CancelX";
-import Button from "../../ui/Button";
 import ViewAgentProfile from "./ViewAgentProfile";
 
 const AgentRow = ({
@@ -19,7 +18,6 @@ const AgentRow = ({
   avatarUrl,
 }) => {
   const { deleteAgent, isPending } = useDeleteAgent();
-
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isViewOpen, setIsViewOpen] = useState(false);
 
@@ -37,7 +35,7 @@ const AgentRow = ({
   return (
     <>
       <tr
-        className="border-b hover:bg-gray-50 transition-colors"
+        className="border-b hover:bg-dark transition-colors font-sans"
         style={{ borderColor: "var(--color-neutral-200)" }}
       >
         {/* Name & Avatar */}
@@ -50,21 +48,56 @@ const AgentRow = ({
             />
             <span
               className="text-sm font-medium cursor-pointer hover:underline"
-              style={{ color: "var(--color-normal)" }}
+              style={{
+                color: "var(--color-normal)",
+                fontFamily: "var(--font-sans)",
+              }}
             >
               {name}
             </span>
           </div>
         </td>
 
-        <td className="px-6 py-4 text-sm text-gray-600">{email}</td>
-        <td className="px-6 py-4 text-sm text-gray-600">{phone}</td>
-        <td className="px-6 py-4 text-sm text-center text-gray-600">
+        <td
+          className="px-6 py-4 text-sm"
+          style={{
+            color: "var(--color-neutral-700)",
+            fontFamily: "var(--font-sans)",
+          }}
+        >
+          {email}
+        </td>
+
+        <td
+          className="px-6 py-4 text-sm"
+          style={{
+            color: "var(--color-neutral-700)",
+            fontFamily: "var(--font-sans)",
+          }}
+        >
+          {phone}
+        </td>
+
+        <td
+          className="px-6 py-4 text-sm text-center"
+          style={{
+            color: "var(--color-neutral-700)",
+            fontFamily: "var(--font-sans)",
+          }}
+        >
           {propertiesListed}
         </td>
-        <td className="px-6 py-4 text-sm text-center text-gray-600">
+
+        <td
+          className="px-6 py-4 text-sm text-center"
+          style={{
+            color: "var(--color-neutral-700)",
+            fontFamily: "var(--font-sans)",
+          }}
+        >
           {closedDeals}
         </td>
+
         <td className="px-6 py-4">
           <AgentStatusBadge status={status} />
         </td>
@@ -94,7 +127,7 @@ const AgentRow = ({
         </td>
       </tr>
 
-      {/* ✅ Edit Modal */}
+      {/* Edit Modal */}
       {isEditOpen && (
         <div
           className="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
@@ -102,7 +135,7 @@ const AgentRow = ({
         >
           <div
             className="relative bg-white/90 backdrop-blur-md rounded-2xl shadow-xl
-              w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-white"
+              w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-white font-sans"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute right-10 top-10">
@@ -117,7 +150,7 @@ const AgentRow = ({
         </div>
       )}
 
-      {/* ✅ View Details Modal */}
+      {/* View Details Modal */}
       {isViewOpen && (
         <ViewAgentProfile setIsViewOpen={setIsViewOpen} selectedAgent={agent} />
       )}

@@ -1,49 +1,48 @@
 @import "tailwindcss";
+
 @theme {
-  /* Breakpoint */
+  /* Light mode (default) - unchanged */
   --breakpoint-*: initial;
   --breakpoint-tab: 40rem;
   --breakpoint-lap: 64rem;
   --breakpoint-desk: 80rem;
 
-  /* Color */
+  /* Light Mode Colors */
 
-  /* Dark */
-  --color-dark: #04396e;
-  --color-dark-hover: #032e58;
-  --color-dark-active: #022242;
-  /* Normal */
+  --color-dark: #0f1e33; /* Light mode normal dark blue */
+  --color-dark-hover: #0b182a; /* Slightly darker on hover */
+  --color-dark-active: #080f1f; /* Even darker for active state */
+
   --color-normal: #054c93;
   --color-normal-hover: #054484;
   --color-normal-active: #043d76;
-  /* Light */
+
   --color-light: #e5f6fb;
   --color-light-hover: #d7e2ee;
   --color-light-active: #b2c8de;
-  /* White */
+
   --color-white: #ffffff;
   --color-white-hover: #f3f6fa;
-  /* --color-white-active: #d7e2ee; */
 
-  /*  */
-  /* Green */
+  --color-dark: #b0d6fd; /* Light blue for normal state */
+  --color-dark-hover: #8cc8fa; /* Slightly deeper on hover */
+  --color-dark-active: #66b4f5; /* Even deeper for active/pressed state */
+
+  --color-black: #0f1e33;
+  --color-black-hover: #0b182a;
+
   --color-green-light: #e6f6f4;
   --color-green-light-hover: #d9f2ef;
   --color-green-light-active: #b0e4dd;
 
-  /* Yellow */
   --color-yellow-light: #fff9e6;
   --color-yellow-light-hover: #fff6da;
   --color-yellow-light-active: #ffecb2;
 
-  /* Red */
   --color-red-light: #ffdadc;
-  /* God */
   --color-gold: #ffe393;
-  /* Background */
   --color-content-bg: #f8f8f8;
 
-  /* Neutral */
   --color-neutral-100: #f6f6f6;
   --color-neutral-200: #eaeaea;
   --color-neutral-300: #d2d3d3;
@@ -53,6 +52,50 @@
   --color-neutral-700: #57595a;
   --color-neutral-800: #363939;
   --color-neutral-900: #1f2223;
+}
+/* Dark */
+
+.dark {
+  --color-normal: #b0d6fd; /* Mid-tone blue */
+  --color-normal-hover: #5a95d6;
+  --color-normal-active: #4782cc;
+
+  --color-light: #2c5a8a; /* Deep blue-gray for light backgrounds */
+  --color-light-hover: #244a75;
+  --color-light-active: #1c3a60;
+
+  --color-white: #0f1e33; /* Deep navy background */
+  --color-white-hover: #0b182a;
+
+  --color-dark: #04396e;
+  --color-dark-hover: #032e58;
+  --color-dark-active: #022242;
+
+  /* Accent Colors - Rich & Saturated */
+  --color-green-light: #0a3d34; /* Deep teal */
+  --color-green-light-hover: #0d4a3f;
+  --color-green-light-active: #116654;
+
+  --color-yellow-light: #4a3a0a; /* Rich amber */
+  --color-yellow-light-hover: #5c4a10;
+  --color-yellow-light-active: #6f5b16;
+
+  --color-red-light: #5c1a1f; /* Deep crimson */
+  --color-gold: #d4a017; /* Rich gold (brighter for pop) */
+
+  /* Backgrounds */
+  --color-content-bg: #0a1526; /* Deep space blue */
+
+  /* Neutral Scale - Warm & Soft */
+  --color-neutral-900: #f6f6f6;
+  --color-neutral-800: #eaeaea;
+  --color-neutral-700: #d2d3d3;
+  --color-neutral-600: #b1b2b2;
+  --color-neutral-500: #8e9090;
+  --color-neutral-400: #797a7b;
+  --color-neutral-300: #57595a;
+  --color-neutral-200: #363939;
+  --color-neutral-100: #1f2223;
 }
 
 /* Global font family */
@@ -206,4 +249,13 @@ html {
 .styled-sales-chart .recharts-cartesian-grid-horizontal line,
 .styled-sales-chart .recharts-cartesian-grid-vertical line {
   stroke: var(--color-neutral-300);
+}
+select option {
+  color: var(--color-neutral-800); /* light mode text */
+  background-color: var(--color-white); /* light mode background */
+}
+
+.dark select option {
+  color: var(--color-white); /* dark mode text */
+  background-color: var(--color-black); /* dark mode background */
 }

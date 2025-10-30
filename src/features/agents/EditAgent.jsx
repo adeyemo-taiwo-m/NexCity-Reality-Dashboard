@@ -109,10 +109,10 @@ function EditAgent({ agent, onCloseModal }) {
 
       {/* Status */}
       <div>
-        <label className="text-sm font-medium text-gray-600">Status</label>
+        <label className="text-sm font-medium text-neutral-600">Status</label>
         <select
           {...register("status")}
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+          className="w-full rounded-md border border-[var(--color-neutral-300)] px-3 py-2 text-sm text-[var(--color-neutral-900)] focus:border-[var(--color-normal)] focus:ring-[var(--color-normal)] bg-[var(--color-white)] dark:bg-[var(--color-black)] dark:text-[var(--color-white)]"
         >
           <option value="Active">Active</option>
           <option value="Inactive">Inactive</option>

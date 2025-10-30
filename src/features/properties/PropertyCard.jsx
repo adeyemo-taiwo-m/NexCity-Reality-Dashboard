@@ -13,7 +13,7 @@ function PropertyCard({ property, onActionSelect, disabled }) {
   const { title, location, price, status, listedBy, date, image } = property;
 
   return (
-    <div className="relative flex flex-col font-normal rounded-xl shadow-sm overflow-hidden w-full max-w-4xl mx-auto p-4 gap-4">
+    <div className="relative bg-white flex  flex-col font-normal rounded-xl  shadow-sm overflow-hidden w-full max-w-4xl mx-auto p-4 gap-4">
       {/* Three-dot action button */}
       <div className="absolute top-4 right-4">
         <ActionModal
@@ -51,7 +51,6 @@ function PropertyCard({ property, onActionSelect, disabled }) {
         alt={`${title} in ${location}`}
         className="w-full h-48 object-cover rounded-lg"
       />
-      {console.log(image)}
       {/* Content */}
       <div className="flex flex-col tab:flex-row justify-between w-full gap-4">
         {/* Left Section */}

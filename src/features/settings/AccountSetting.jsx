@@ -1,18 +1,18 @@
 import React from "react";
 import { HiOutlineLockClosed } from "react-icons/hi2";
 import { useForm } from "react-hook-form";
-import InputField from "../../ui/InputField";
+import AgentInput from "../../ui/AgentInput";
 import Button from "../../ui/Button";
-import toast from "react-hot-toast";
-import supabase from "../../services/supabase";
+import useUpdateUser from "../Authentication/useUpdateUser";
 
-function AccountSetting() {
+export default function AccountSetting() {
+  const { updateUser, isPending } = useUpdateUser();
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
     watch,
+    formState: { errors },
   } = useForm({
     defaultValues: {
       currentPassword: "",
@@ -21,85 +21,70 @@ function AccountSetting() {
     },
   });
 
-  const onSubmit = async (data) => {
-    if (data.newPassword !== data.confirmPassword) {
-      toast.error("New passwords do not match!");
-      return;
-    }
-
-    try {
-      // ✅ 1. Get current user’s email
-      const { data: sessionData } = await supabase.auth.getSession();
-      const userEmail = sessionData?.session?.user?.email;
-      if (!userEmail) throw new Error("User session not found");
-
-      // ✅ 2. Reauthenticate the user
-      const { error: reauthError } = await supabase.auth.signInWithPassword({
-        email: userEmail,
-        password: data.currentPassword,
-      });
-
-      if (reauthError) {
-        toast.error("Current password is incorrect.");
-        return;
+  const onSubmit = ({ newPassword }) => {
+    console.log("Form Data Submitted:", newPassword);
+    updateUser(
+      { newPassword },
+      {
+        onSuccess: () => {
+          reset();
+        },
       }
-
-      // ✅ 3. Update password
-      const { error: updateError } = await supabase.auth.updateUser({
-        password: data.newPassword,
-      });
-
-      if (updateError) throw updateError;
-
-      toast.success("Password updated successfully!");
-      reset();
-    } catch (error) {
-      toast.error(error.message || "An unexpected error occurred");
-    }
+    );
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <InputField
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full mx-auto space-y-5 p-6  rounded-lg shadow-sm bg-white"
+    >
+      <AgentInput
+        name="currentPassword"
+        label="Current Password"
         type="password"
-        placeholder="Current Password"
-        {...register("currentPassword", {
+        placeholder="Enter your current password"
+        register={register}
+        validation={{
           required: "Current password is required",
-        })}
+        }}
         error={errors.currentPassword}
       />
 
-      <InputField
+      <AgentInput
+        name="newPassword"
+        label="New Password"
         type="password"
-        placeholder="New Password"
-        {...register("newPassword", {
+        placeholder="Enter your new password"
+        register={register}
+        validation={{
           required: "New password is required",
           minLength: {
             value: 6,
             message: "Password must be at least 6 characters",
           },
-        })}
+        }}
         error={errors.newPassword}
       />
 
-      <InputField
+      <AgentInput
+        name="confirmPassword"
+        label="Confirm Password"
         type="password"
-        placeholder="Confirm New Password"
-        {...register("confirmPassword", {
+        placeholder="Confirm your new password"
+        register={register}
+        validation={{
           required: "Please confirm your new password",
           validate: (value) =>
             value === watch("newPassword") || "Passwords do not match",
-        })}
+        }}
         error={errors.confirmPassword}
       />
 
       <div className="flex justify-end">
-        <Button Icon={HiOutlineLockClosed} type="submit">
+        <Button Icon={HiOutlineLockClosed} loading={isPending} type="submit">
           Update Password
         </Button>
       </div>
     </form>
   );
 }
-
-export default AccountSetting;

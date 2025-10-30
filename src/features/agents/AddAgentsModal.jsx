@@ -78,7 +78,7 @@ function AddAgentModal({ onCloseModal }) {
           <select
             disabled={isPending}
             {...register("status", { required: "Status is required" })}
-            className={`w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all ${
+            className={`w-full px-4 py-2 rounded-lg border text-neutral-800 focus:outline-none focus:ring-2 transition-all ${
               errors.status
                 ? "border-red-500 focus:ring-red-400"
                 : "border-neutral-200 focus:ring-[var(--color-normal)]"
@@ -94,13 +94,7 @@ function AddAgentModal({ onCloseModal }) {
 
         {/* Buttons */}
         <div className="flex justify-end gap-3 pt-2">
-          <button
-            type="button"
-            onClick={onCloseModal}
-            className="px-5 py-2 rounded-lg text-sm font-medium border border-neutral-300 hover:bg-neutral-100 transition-all"
-          >
-            Cancel
-          </button>
+          <Button variant="light">Cancel</Button>
           <Button type="submit">Add Agent</Button>
         </div>
       </form>

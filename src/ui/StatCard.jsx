@@ -14,7 +14,7 @@ function StatCard({ statData }) {
         {statData.icon}
       </span>
       <div>
-        <p className="text-sm mb-1 font-normal text-neutral-500">
+        <p className="text-sm mb-1 font-normal text-neutral-600">
           {statData.label}
         </p>
         <Heading type="h2">{statData.value}</Heading>

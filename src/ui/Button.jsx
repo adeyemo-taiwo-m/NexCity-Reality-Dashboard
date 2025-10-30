@@ -1,9 +1,9 @@
 import React from "react";
-import { HiOutlinePlus } from "react-icons/hi2";
 
 const Button = ({
   children,
   onClick,
+  type = "button",
   Icon,
   variant = "primary",
   fullWidth,
@@ -12,33 +12,60 @@ const Button = ({
   ...props
 }) => {
   const base = `
-    inline-flex items-center  justify-center gap-2 font-medium rounded-lg
+    inline-flex items-center justify-center gap-2 font-medium rounded-lg
     px-4 py-2 text-sm transition-all duration-200 cursor-pointer
     focus:outline-none focus:ring-4 disabled:opacity-50 disabled:cursor-not-allowed
     ${fullWidth ? "w-full" : ""}
   `;
 
   const styles = {
-    primary:
-      "h-12 px-4 inline-flex items-center justify-center gap-2 bg-[#054484] text-white rounded-md transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#054484] focus:ring-offset-2",
-    secondary:
-      "bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 focus:ring-gray-200/50 shadow-sm",
-    tertiary:
-      "h-12 px-4 inline-flex items-center justify-center gap-2 bg-gold text-neutral-700 rounded-md transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#054484] focus:ring-offset-2",
-    danger:
-      "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500/40 shadow-sm hover:shadow-md",
-    ghost:
-      " sm:mt-0 flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-100 transition-all duration-200 shadow-sm",
-    light:
-      "inline-flex h-12  items-center justify-center p-2 bg-light text-[#054484] font-medium text-sm rounded-lg shadow hover:bg-light-hover transition-all duration-200",
-    signUp:
-      "text-[var(--color-normal)]  focus:ring-0 text-base hover:text-[var(--color-normal-hover)] font-medium",
+    primary: `
+      h-12 px-4 inline-flex items-center justify-center gap-2 
+      bg-[var(--color-normal)] text-white rounded-md 
+      transition-opacity hover:bg-[var(--color-normal-hover)] active:bg-[var(--color-normal-active)]
+      focus:outline-none focus:ring-2 focus:ring-[var(--color-normal)] focus:ring-offset-2
+    `,
+
+    secondary: `
+      bg-[var(--color-white)] text-[var(--color-neutral-700)] 
+      border border-[var(--color-neutral-300)] 
+      hover:bg-[var(--color-white-hover)] focus:ring-[var(--color-neutral-200)]/50 shadow-sm
+    `,
+
+    tertiary: `
+      h-12 px-4 inline-flex items-center justify-center gap-2 
+      bg-[var(--color-gold)] text-[var(--color-neutral-700)] rounded-md 
+      transition-opacity hover:opacity-90 active:opacity-80 
+      focus:outline-none focus:ring-2 focus:ring-[var(--color-normal)] focus:ring-offset-2
+    `,
+
+    danger: `
+      bg-[var(--color-red-light)] text-[var(--color-neutral-900)] 
+      hover:bg-red-500/90 focus:ring-red-500/40 shadow-sm hover:shadow-md
+    `,
+
+    ghost: `
+      sm:mt-0 flex items-center gap-2 px-4 py-2 rounded-xl 
+      border border-[var(--color-neutral-200)] text-[var(--color-neutral-700)]
+      hover:bg-[var(--color-light-hover)] transition-all duration-200 shadow-sm
+    `,
+
+    light: `
+      inline-flex h-12 items-center justify-center p-2 
+      bg-light text-normal font-medium text-sm 
+      rounded-lg shadow hover:bg-[var(--color-light-hover)] transition-all duration-200
+    `,
+
+    signUp: `
+      text-[var(--color-normal)] focus:ring-0 text-base 
+      hover:text-[var(--color-normal-hover)] font-medium
+    `,
   };
 
   return (
     <button
+      type={type}
       onClick={onClick}
-      type="button"
       disabled={loading}
       className={`${base} ${styles[variant]} ${className}`}
       {...props}

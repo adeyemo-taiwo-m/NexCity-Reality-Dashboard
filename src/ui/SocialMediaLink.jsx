@@ -18,7 +18,7 @@ function SocialMediaLink({ iconName }) {
     },
     twitter: {
       icon: <FaXTwitter className="w-5 h-5" />,
-      colorClass: "text-gray-800 hover:text-black transition-colors",
+      colorClass: "text-neutral-800 hover:text-black transition-colors",
     },
   };
 

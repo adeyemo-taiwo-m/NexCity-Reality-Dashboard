@@ -1,9 +1,9 @@
-function ToggleSwitch({ checked, onChange, color = "bg-color-normal" }) {
+function ToggleSwitch({ checked, onChange, color = "bg-normal" }) {
   return (
     <button
       type="button"
       onClick={() => onChange(!checked)}
-      className={`w-12 h-6 flex items-center rounded-full p-1 transition-all duration-300 
+      className={`w-12 h-6 flex cursor-pointer items-center rounded-full p-1 transition-all duration-300 
         ${checked ? `${color}` : "bg-light-active"}`}
     >
       <div

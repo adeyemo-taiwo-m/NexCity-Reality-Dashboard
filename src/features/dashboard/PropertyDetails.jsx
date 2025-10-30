@@ -7,7 +7,7 @@ function PropertyDetails({ property }) {
   return (
     <div
       key={property.id}
-      className="bg-blue-50 rounded-lg overflow-hidden shadow-sm"
+      className="bg-white-hover rounded-lg overflow-hidden shadow-sm"
     >
       <img
         src={property.image || "/house.png"}
@@ -16,7 +16,7 @@ function PropertyDetails({ property }) {
       />
       <div className="p-3 flex flex-col gap-2">
         <Heading type="h3">{property.title}</Heading>
-        <p className="text-xs text-neutral-500 truncate">{property.location}</p>
+        <p className="text-sm text-neutral-500 truncate">{property.location}</p>
         <div className="flex justify-between items-center">
           <span className="font-bold text-neutral-800">
             {formatCurrency(property.price)}

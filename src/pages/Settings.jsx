@@ -49,11 +49,7 @@ function Settings() {
         </SettingsSection> */}
 
         {/* App Preferences */}
-        <SettingsSection
-          icon={<HiOutlineCog6Tooth />}
-          title="App Preferences"
-          color="text-orange-600"
-        >
+        <SettingsSection icon={<HiOutlineCog6Tooth />} title="App Preferences">
           <SettingsPreference />
         </SettingsSection>
       </div>

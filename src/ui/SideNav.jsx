@@ -8,7 +8,7 @@ function SideNav({ isOpen = false, onClose = () => {} }) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex">
+        <div className="fixed  inset-0 z-50 flex">
           {/* backdrop */}
           <div
             className="fixed inset-0 bg-black/40"
@@ -18,7 +18,7 @@ function SideNav({ isOpen = false, onClose = () => {} }) {
 
           {/* Animated sidebar */}
           <motion.aside
-            className="relative w-64 bg-white h-full shadow-xl border-r border-gray-200"
+            className="relative w-64 bg-white h-full shadow-xl border-r border-neutral-300"
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
