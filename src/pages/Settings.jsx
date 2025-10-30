@@ -40,13 +40,13 @@ function Settings() {
         </SettingsSection>
 
         {/* Notifications */}
-        <SettingsSection
+        {/* <SettingsSection
           icon={<HiOutlineCog6Tooth />}
           title="Notifications"
           color="text-green-600"
         >
           <SettingsNotification />
-        </SettingsSection>
+        </SettingsSection> */}
 
         {/* App Preferences */}
         <SettingsSection

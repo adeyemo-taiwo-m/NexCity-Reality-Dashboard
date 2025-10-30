@@ -51,3 +51,46 @@ export async function signUp({ email, password, fullName }) {
 
   return data;
 }
+
+// update user
+
+export async function updateCurrentUser({
+  fullName,
+  profileImage,
+  assignedRole,
+  phone,
+  email,
+  newPassword,
+}) {
+  const updatePayload = {};
+  const userMeta = {};
+
+  if (fullName) userMeta.fullName = fullName;
+  if (profileImage) userMeta.profileImage = profileImage;
+  if (assignedRole) userMeta.assignedRole = assignedRole;
+  if (phone) userMeta.phone = phone;
+
+  // Add metadata if any
+  if (Object.keys(userMeta).length > 0) {
+    updatePayload.data = userMeta;
+  }
+
+  // Add email if user wants to change it
+  if (email) {
+    updatePayload.email = email;
+  }
+
+  // Add password if user wants to change it
+  if (newPassword) {
+    updatePayload.password = newPassword;
+  }
+
+  // 🔧 Perform update
+  const { data, error } = await supabase.auth.updateUser(updatePayload);
+
+  if (error) {
+    throw new Error("There was an error updating user: " + error.message);
+  }
+
+  return data;
+}

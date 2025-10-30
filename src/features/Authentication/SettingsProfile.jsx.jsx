@@ -1,16 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HiOutlinePencil } from "react-icons/hi2";
 import Button from "../../ui/Button";
 import SocialMediaLink from "../../ui/SocialMediaLink";
-import { profileData } from "../../assets/data";
-import EditProfileModal from "../settings/EditProfileModal";
+import EditProfileModal from "./EditProfileModal";
+import useUser from "./useUser";
+import LoaderMini from "../../ui/LoaderMini";
 
 function SettingsProfile() {
-  const [showModal, setShowModal] = useState(false);
-  const [profile, setProfile] = useState(profileData);
+  const { userData, isPending } = useUser();
 
+  const [profileData, setProfileData] = useState({
+    name: "",
+    role: "",
+    profileImage: "default-user.jpg",
+    bannerImage: "house.png",
+    socials: ["facebook", "linkedIn", "pinterest", "twitter"],
+  });
+
+  const [showModal, setShowModal] = useState(false);
+
+  // 🟢 Populate the profile when userData is available
+  useEffect(() => {
+    if (userData) {
+      setProfileData({
+        name: userData?.fullName || "",
+        role: userData?.assignedRole || "Input your role",
+        profileImage: userData?.profileImg || "default-user.jpg",
+        bannerImage: "house.png",
+        socials: ["facebook", "linkedIn", "pinterest", "twitter"],
+      });
+    }
+  }, [userData]);
+
+  // 🟢 Handle saving of updated data
   const handleSave = (updatedData) => {
-    setProfile(updatedData);
+    setProfileData((prev) => ({
+      ...prev,
+      ...updatedData,
+    }));
   };
 
   return (
@@ -18,7 +45,7 @@ function SettingsProfile() {
       {/* Banner Image */}
       <div className="relative h-40 tab:h-48 w-full">
         <img
-          src={profile.bannerImage}
+          src={profileData.bannerImage}
           alt="Agent banner"
           className="w-full h-full object-cover"
         />
@@ -33,8 +60,8 @@ function SettingsProfile() {
         "
       >
         <img
-          src={profile.profileImage}
-          alt={`${profile.name} profile`}
+          src={profileData.profileImage}
+          alt={`${profileData.name} profile`}
           className="w-32 h-32 tab:w-48 tab:h-48 rounded-full border-4 border-white shadow-md object-cover"
         />
       </div>
@@ -52,13 +79,15 @@ function SettingsProfile() {
       >
         <div className="flex flex-col items-center tab:items-start mt-4 tab:mt-0 space-y-2">
           <h2 className="text-[1.2rem] font-medium text-gray-900">
-            {profile.name}
+            {isPending ? <LoaderMini /> : profileData.name}
           </h2>
-          <p className="text-base text-gray-500 font-normal">{profile.role}</p>
+          <p className="text-base text-gray-500 font-normal">
+            {isPending ? <LoaderMini /> : profileData.role}
+          </p>
 
           {/* Social Links */}
           <div className="flex space-x-3 mt-3">
-            {profile.socials.map((iconName) => (
+            {profileData.socials.map((iconName) => (
               <SocialMediaLink key={iconName} iconName={iconName} />
             ))}
           </div>
@@ -76,9 +105,10 @@ function SettingsProfile() {
         </div>
       </div>
 
+      {/* 🟢 Modal */}
       {showModal && (
         <EditProfileModal
-          profileData={profile}
+          profileData={profileData}
           onClose={() => setShowModal(false)}
           onSave={handleSave}
         />

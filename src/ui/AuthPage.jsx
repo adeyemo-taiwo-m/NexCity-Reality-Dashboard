@@ -23,7 +23,7 @@ export default function AuthPage({ children, greetMessage }) {
           alt="Modern house"
           className="h-full w-screen object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent" />
       </motion.div>
 
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-12 md:px-12">

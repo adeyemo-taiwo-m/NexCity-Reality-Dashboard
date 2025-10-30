@@ -401,8 +401,8 @@ export const properties = [
 export const profileData = {
   name: "Adeyemo Taiwo M",
   role: "Senior Agent",
-  bannerImage: "house.png",
   profileImage: "profile.png",
+  bannerImage: "house.png",
   socials: ["facebook", "linkedIn", "pinterest", "twitter"],
 };
 

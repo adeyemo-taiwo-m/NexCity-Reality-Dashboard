@@ -26,6 +26,7 @@ export default function useUser() {
 
   return {
     user,
+    userData: user?.user_metadata,
     isAuthenticated: Boolean(user),
     isPending,
   };

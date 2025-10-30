@@ -21,11 +21,6 @@ function SettingsPreference() {
         <SettingsP>Currency</SettingsP>
         <SelectInput options={["₦ NGN", "$ USD", "£ GBP"]} />
       </div>
-
-      <div className="flex justify-between items-center">
-        <SettingsP>Date Format</SettingsP>
-        <SelectInput options={["Oct 18, 2025", "18/10/2025"]} />
-      </div>
     </div>
   );
 }
