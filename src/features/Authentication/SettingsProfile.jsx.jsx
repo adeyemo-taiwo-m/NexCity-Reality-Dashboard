@@ -3,7 +3,7 @@ import { HiOutlinePencil } from "react-icons/hi2";
 import Button from "../../ui/Button";
 import SocialMediaLink from "../../ui/SocialMediaLink";
 import { profileData } from "../../assets/data";
-import EditProfileModal from "./EditProfileModal";
+import EditProfileModal from "../settings/EditProfileModal";
 
 function SettingsProfile() {
   const [showModal, setShowModal] = useState(false);

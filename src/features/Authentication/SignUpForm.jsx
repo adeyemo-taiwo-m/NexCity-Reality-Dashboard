@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Button from "../ui/Button";
-import LoaderMini from "../ui/LoaderMini";
-import InputErrorP from "../ui/InputErrorP";
+import Button from "../../ui/Button";
+import LoaderMini from "../../ui/LoaderMini";
+import InputErrorP from "../../ui/InputErrorP";
 import useSignUp from "./useSignUp";
 import { useNavigate } from "react-router-dom";
 

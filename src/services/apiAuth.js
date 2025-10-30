@@ -1,6 +1,8 @@
 import supabase from "./supabase";
 
 export async function getUser() {
+  const { data: sessionInStorage } = await supabase.auth.getSession();
+  if (!sessionInStorage.session) return null;
   const { data, error } = await supabase.auth.getUser();
 
   if (error) {
@@ -11,6 +13,7 @@ export async function getUser() {
   return data.user;
 }
 
+// Login
 export async function loginUser(userData) {
   console.log(userData);
   let { data, error } = await supabase.auth.signInWithPassword({
@@ -25,6 +28,16 @@ export async function loginUser(userData) {
   return data;
 }
 
+// Log out
+export async function logoutUser() {
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    console.error(error.message);
+    throw new Error("There is an error while signing up");
+  }
+}
+
+// sign in
 export async function signUp({ email, password, fullName }) {
   let { data, error } = await supabase.auth.signUp({
     email,

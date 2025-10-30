@@ -5,7 +5,7 @@ import {
 } from "react-icons/hi2";
 import Header from "../features/settings/Header";
 import SettingsSection from "../features/settings/SettingsSection";
-import SettingsProfile from "../features/settings/SettingsProfile.jsx";
+import SettingsProfile from "../features/Authentication/SettingsProfile.jsx.jsx";
 import SettingsNotification from "../features/settings/SettingsNotification.jsx";
 import SettingsPreference from "../features/settings/SettingsPreference.jsx";
 import AccountSetting from "../features/settings/AccountSetting.jsx";

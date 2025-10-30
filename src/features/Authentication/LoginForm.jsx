@@ -1,9 +1,9 @@
 import React from "react";
 import { Form, useForm } from "react-hook-form";
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
 import useLoginUser from "./useLoginUser";
-import LoaderMini from "../ui/LoaderMini";
-import InputErrorP from "../ui/InputErrorP";
+import LoaderMini from "../../ui/LoaderMini";
+import InputErrorP from "../../ui/InputErrorP";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
@@ -19,6 +19,7 @@ export default function LoginForm() {
   const onSubmit = async (data) => {
     console.log("Form Data:", data);
     login(data);
+    navigate("/");
   };
 
   return (

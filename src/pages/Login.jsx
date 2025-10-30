@@ -1,5 +1,5 @@
 import React from "react";
-import LoginForm from "../Authentication/LoginForm";
+import LoginForm from "../features/Authentication/LoginForm";
 import AuthPage from "../ui/AuthPage";
 
 function Login() {

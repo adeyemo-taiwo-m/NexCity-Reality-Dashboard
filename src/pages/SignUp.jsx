@@ -1,5 +1,5 @@
 import React from "react";
-import SignupForm from "../Authentication/SignUpForm";
+import SignupForm from "../features/Authentication/SignUpForm";
 import AuthPage from "../ui/AuthPage";
 
 function SignUp() {
