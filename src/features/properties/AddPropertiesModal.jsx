@@ -79,7 +79,7 @@ function AddPropertiesModal({ onCloseModal }) {
           <select
             disabled={isPending}
             {...register("status", { required: "Status is required" })}
-            className={`w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all ${
+            className={`w-full text-neutral-700 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all ${
               errors.status
                 ? "border-red-500 focus:ring-red-400"
                 : "border-neutral-200 focus:ring-[var(--color-normal)]"
@@ -127,7 +127,7 @@ function AddPropertiesModal({ onCloseModal }) {
             accept="image/*"
             {...register("image", { required: "Image file is required" })}
             disabled={isPending}
-            className={`w-full px-4 py-2 rounded-lg border file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[var(--color-normal)] file:text-white focus:outline-none transition-all ${
+            className={`w-full px-4 text-neutral-700 py-2 rounded-lg border file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[var(--color-normal)] file:text-white focus:outline-none transition-all ${
               errors.image
                 ? "border-red-500 focus:ring-red-400"
                 : "border-neutral-200 focus:ring-[var(--color-normal)]"

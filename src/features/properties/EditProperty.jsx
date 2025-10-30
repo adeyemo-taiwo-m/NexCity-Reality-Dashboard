@@ -76,10 +76,10 @@ function EditProperty({ property, onCloseModal }) {
 
       {/* Status */}
       <div>
-        <label className="text-sm font-medium text-gray-600">Status</label>
+        <label className="text-sm font-medium text-neutral-600">Status</label>
         <select
           {...register("status")}
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-normal focus:ring-normal"
+          className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-normal focus:ring-normal"
         >
           <option value="Available">Available</option>
           <option value="Sold">Sold</option>
@@ -101,14 +101,14 @@ function EditProperty({ property, onCloseModal }) {
       {/* Image URL */}
       {/* Image Upload */}
       <div>
-        <label className="text-sm font-medium text-gray-600">
+        <label className="text-sm font-medium text-neutral-600">
           Property Image
         </label>
         <input
           type="file"
           accept="image/*"
           {...register("image")}
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+          className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
         />
         {errors.image && (
           <p className="text-red-500 text-xs mt-1">{errors.image.message}</p>

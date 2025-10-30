@@ -25,28 +25,30 @@ function ViewAgentProfile({ setIsViewOpen, selectedAgent }) {
             alt={selectedAgent?.name}
             className="w-28 h-28 rounded-full object-cover border-4 border-white shadow"
           />
-          <h2 className="mt-4 text-lg font-semibold text-gray-800">
+          <h2 className="mt-4 text-lg font-semibold text-neutral-800">
             {selectedAgent?.name}
           </h2>
-          <p className="text-gray-500 text-sm mb-3">{selectedAgent?.email}</p>
+          <p className="text-neutral-500 text-sm mb-3">
+            {selectedAgent?.email}
+          </p>
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-gray-600 mt-4">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-neutral-600 mt-4">
             <p>
-              <span className="font-medium text-gray-800">Phone:</span>{" "}
+              <span className="font-medium text-neutral-800">Phone:</span>{" "}
               {selectedAgent?.phone}
             </p>
             <p>
-              <span className="font-medium text-gray-800">Status:</span>{" "}
+              <span className="font-medium text-neutral-800">Status:</span>{" "}
               <AgentStatusBadge status={selectedAgent?.status} />
             </p>
             <p>
-              <span className="font-medium text-gray-800">
+              <span className="font-medium text-neutral-800">
                 Properties Listed:
               </span>{" "}
               {selectedAgent?.listed}
             </p>
             <p>
-              <span className="font-medium text-gray-800">Clients:</span>{" "}
+              <span className="font-medium text-neutral-800">Clients:</span>{" "}
               {selectedAgent?.clients}
             </p>
           </div>

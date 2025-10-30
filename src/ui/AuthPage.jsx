@@ -49,7 +49,10 @@ export default function AuthPage({ children, greetMessage }) {
             </motion.div>
 
             <div className="mt-6 space-y-2 text-center">
-              <Heading type="h2" className="text-2xl font-bold text-gray-900">
+              <Heading
+                type="h2"
+                className="text-2xl font-bold text-neutral-900"
+              >
                 Welcome back
               </Heading>
               <p className="text-[var(--color-neutral-600)]">

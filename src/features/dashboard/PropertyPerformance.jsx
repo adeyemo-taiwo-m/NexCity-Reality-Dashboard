@@ -106,9 +106,9 @@ export const PropertyPerformanceOverviewSection = () => {
 
       <div className="h-64 flex items-center justify-center text-sm rounded-md">
         {isLoading ? (
-          <p className="text-center text-gray-500">Loading data...</p>
+          <p className="text-center text-neutral-500">Loading data...</p>
         ) : recentProperties.length === 0 ? (
-          <p className="text-center text-gray-500">
+          <p className="text-center text-neutral-500">
             No properties listed in the last 30 days
           </p>
         ) : (

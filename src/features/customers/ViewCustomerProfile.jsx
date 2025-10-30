@@ -29,36 +29,36 @@ function ViewCustomerProfile({ setIsViewOpen, selectedCustomer }) {
             alt={selectedCustomer?.name}
             className="w-28 h-28 rounded-full object-cover border-4 border-white shadow"
           />
-          <h2 className="mt-4 text-lg font-semibold text-gray-800">
+          <h2 className="mt-4 text-lg font-semibold text-neutral-800">
             {selectedCustomer?.name}
           </h2>
-          <p className="text-gray-500 text-sm mb-3">
+          <p className="text-neutral-500 text-sm mb-3">
             {selectedCustomer?.email}
           </p>
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-gray-600 mt-4">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-neutral-600 mt-4">
             <p>
-              <span className="font-medium text-gray-800">
+              <span className="font-medium text-neutral-800">
                 Interested Property:
               </span>{" "}
               {selectedCustomer?.interestedProperty || "—"}
             </p>
             <p>
-              <span className="font-medium text-gray-800">Deal Type:</span>{" "}
+              <span className="font-medium text-neutral-800">Deal Type:</span>{" "}
               {selectedCustomer?.dealType || "—"}
             </p>
             <p>
-              <span className="font-medium text-gray-800">Amount:</span>{" "}
+              <span className="font-medium text-neutral-800">Amount:</span>{" "}
               {selectedCustomer?.amount
                 ? formatCurrency(selectedCustomer.amount)
                 : "—"}
             </p>
             <p>
-              <span className="font-medium text-gray-800">Status:</span>{" "}
+              <span className="font-medium text-neutral-800">Status:</span>{" "}
               <CustomerStatusBadge status={selectedCustomer?.status} />
             </p>
             <p className="col-span-2">
-              <span className="font-medium text-gray-800">
+              <span className="font-medium text-neutral-800">
                 Recent Activity:
               </span>{" "}
               {selectedCustomer?.activity || "—"}

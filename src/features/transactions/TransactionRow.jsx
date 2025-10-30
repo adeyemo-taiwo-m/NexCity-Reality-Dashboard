@@ -38,7 +38,7 @@ const TransactionRow = ({
   return (
     <>
       <tr
-        className="border-b hover:bg-[var(--color-light)] dark:hover:bg-[var(--color-dark)] transition-colors"
+        className="border-b bg-white hover:bg-[var(--color-light)] dark:hover:bg-[var(--color-dark)] transition-colors"
         style={{ borderColor: "var(--color-neutral-200)" }}
       >
         {/* Property Info */}

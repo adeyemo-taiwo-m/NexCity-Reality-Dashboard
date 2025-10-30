@@ -26,30 +26,30 @@ function ViewPropertyProfile({ setIsViewOpen, selectedProperty }) {
             alt={selectedProperty?.title}
             className="w-full bg-cover h-36 rounded-lg object-cover border-4 border-white shadow"
           />
-          <h2 className="mt-4 text-lg font-semibold text-gray-800">
+          <h2 className="mt-4 text-lg font-semibold text-neutral-800">
             {selectedProperty?.title}
           </h2>
-          <p className="text-gray-500 text-sm mb-3">
+          <p className="text-neutral-500 text-sm mb-3">
             {selectedProperty?.location}
           </p>
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-gray-600 mt-4">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-neutral-600 mt-4">
             <p>
-              <span className="font-medium text-gray-800">Listed By:</span>{" "}
+              <span className="font-medium text-neutral-800">Listed By:</span>{" "}
               {selectedProperty?.listedBy || "—"}
             </p>
             <p>
-              <span className="font-medium text-gray-800">Price:</span>{" "}
+              <span className="font-medium text-neutral-800">Price:</span>{" "}
               {selectedProperty?.price
                 ? formatCurrency(selectedProperty.price)
                 : "—"}
             </p>
             <p>
-              <span className="font-medium text-gray-800">Status:</span>{" "}
+              <span className="font-medium text-neutral-800">Status:</span>{" "}
               <PropertyStatusBadge status={selectedProperty?.status} />
             </p>
             <p>
-              <span className="font-medium text-gray-800">Listed Date:</span>{" "}
+              <span className="font-medium text-neutral-800">Listed Date:</span>{" "}
               {selectedProperty?.date
                 ? new Date(selectedProperty.date).toLocaleDateString()
                 : "—"}

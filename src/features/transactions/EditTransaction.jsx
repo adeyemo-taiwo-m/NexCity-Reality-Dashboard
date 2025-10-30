@@ -46,12 +46,12 @@ function EditTransaction({ transaction, onCloseModal }) {
       />
 
       <div>
-        <label className="text-sm font-medium text-gray-600">
+        <label className="text-sm font-medium text-neutral-600">
           Transaction Type
         </label>
         <select
           {...register("type", { required: "Type is required" })}
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+          className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
           disabled={isPending}
         >
           <option value="buy">Buy</option>
@@ -86,10 +86,10 @@ function EditTransaction({ transaction, onCloseModal }) {
       />
 
       <div>
-        <label className="text-sm font-medium text-gray-600">Status</label>
+        <label className="text-sm font-medium text-neutral-600">Status</label>
         <select
           {...register("status", { required: "Status is required" })}
-          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+          className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
           disabled={isPending}
         >
           <option value="pending">Pending</option>
@@ -110,14 +110,14 @@ function EditTransaction({ transaction, onCloseModal }) {
 
       {/* Property Image File Input */}
       <div>
-        <label className="block text-sm font-medium text-gray-600 mb-1">
+        <label className="block text-sm font-medium text-neutral-600 mb-1">
           Property Image
         </label>
         <input
           type="file"
           {...register("propertyImage")}
           accept="image/*"
-          className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           disabled={isPending}
         />
       </div>

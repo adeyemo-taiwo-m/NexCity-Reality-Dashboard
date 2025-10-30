@@ -28,33 +28,33 @@ function ViewTransactionProfile({ setIsViewOpen, selectedTransaction }) {
             alt={selectedTransaction?.property || "Property"}
             className="w-28 h-28 rounded-lg object-cover border-4 border-white shadow"
           />
-          <h2 className="mt-4 text-lg font-semibold text-gray-800">
+          <h2 className="mt-4 text-lg font-semibold text-neutral-800">
             {selectedTransaction?.property || "—"}
           </h2>
-          <p className="text-gray-500 text-sm mb-3 capitalize">
+          <p className="text-neutral-500 text-sm mb-3 capitalize">
             {selectedTransaction?.type || "—"}
           </p>
 
           {/* Transaction Details Grid */}
-          <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-gray-600 mt-4 w-full">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-neutral-600 mt-4 w-full">
             <p>
-              <span className="font-medium text-gray-800">Customer:</span>{" "}
+              <span className="font-medium text-neutral-800">Customer:</span>{" "}
               {selectedTransaction?.customer || "—"}
             </p>
             <p>
-              <span className="font-medium text-gray-800">Amount:</span>{" "}
+              <span className="font-medium text-neutral-800">Amount:</span>{" "}
               {selectedTransaction?.amount
                 ? formatCurrency(selectedTransaction.amount)
                 : "—"}
             </p>
             <p>
-              <span className="font-medium text-gray-800">Status:</span>{" "}
+              <span className="font-medium text-neutral-800">Status:</span>{" "}
               <TransactionsStatusBadge
                 status={selectedTransaction?.status || "pending"}
               />
             </p>
             <p>
-              <span className="font-medium text-gray-800">Date:</span>{" "}
+              <span className="font-medium text-neutral-800">Date:</span>{" "}
               {selectedTransaction?.date || "—"}
             </p>
           </div>

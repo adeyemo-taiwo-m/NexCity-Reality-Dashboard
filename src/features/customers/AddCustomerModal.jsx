@@ -76,7 +76,7 @@ function AddCustomerModal({ onCloseModal }) {
           <select
             disabled={isPending}
             {...register("dealType", { required: "Deal type is required" })}
-            className={`w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all ${
+            className={`w-full px-4 text-neutral-700 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all ${
               errors.dealType
                 ? "border-red-500 focus:ring-red-400"
                 : "border-neutral-200 focus:ring-[var(--color-normal)]"
@@ -114,7 +114,7 @@ function AddCustomerModal({ onCloseModal }) {
           <select
             disabled={isPending}
             {...register("status", { required: "Status is required" })}
-            className={`w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all ${
+            className={`w-full px-4 text-neutral-700 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all ${
               errors.status
                 ? "border-red-500 focus:ring-red-400"
                 : "border-neutral-200 focus:ring-[var(--color-normal)]"

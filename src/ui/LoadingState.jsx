@@ -16,7 +16,7 @@ function LoadingState() {
           ease: "easeInOut",
         }}
       />
-      <p className="text-gray-500 text-sm tracking-wide">Loading...</p>
+      <p className="text-neutral-500 text-sm tracking-wide">Loading...</p>
     </div>
   );
 }

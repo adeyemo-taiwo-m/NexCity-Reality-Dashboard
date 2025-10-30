@@ -16,7 +16,7 @@ function NavLinkItem({ icon, children, to }) {
         >
           <span
             className={`text-lg transition-colors duration-150 ${
-              isActive ? "text-normal" : "text-gray-500"
+              isActive ? "text-normal" : "text-neutral-500"
             }`}
           >
             {icon}

@@ -101,7 +101,7 @@ export default function RecentHouseMap() {
   if (isLoading) {
     return (
       <article className="flex flex-col flex-1 h-full items-start p-4 bg-white rounded-lg shadow-sm overflow-hidden">
-        <div className="flex h-full w-full items-center justify-center text-gray-500">
+        <div className="flex h-full w-full items-center justify-center text-neutral-500">
           Loading map…
         </div>
       </article>
@@ -111,7 +111,7 @@ export default function RecentHouseMap() {
   if (!validProperties.length) {
     return (
       <article className="flex flex-col flex-1 h-full items-start p-4 bg-white rounded-lg shadow-sm overflow-hidden">
-        <div className="flex h-full w-full items-center justify-center text-gray-500">
+        <div className="flex h-full w-full items-center justify-center text-neutral-500">
           No properties with coordinates yet.
         </div>
       </article>
@@ -145,7 +145,7 @@ export default function RecentHouseMap() {
               <Popup>
                 <div className="max-w-xs p-1">
                   <h4 className="font-semibold text-base">{prop.title}</h4>
-                  <p className="text-sm text-gray-600">{prop.location}</p>
+                  <p className="text-sm text-neutral-600">{prop.location}</p>
                   <p className="mt-1 text-lg font-bold text-[#054c93]">
                     ₦{prop.price?.toLocaleString() ?? "—"}
                   </p>

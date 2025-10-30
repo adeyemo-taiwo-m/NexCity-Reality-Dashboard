@@ -32,7 +32,7 @@ function SearchInput({ field }) {
       placeholder={`Search ${field}...`}
       value={searchValue}
       onChange={(e) => setSearchValue(e.target.value)}
-      className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-normal transition-all duration-200"
+      className="w-full px-4 py-2 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-normal transition-all duration-200"
     />
   );
 }

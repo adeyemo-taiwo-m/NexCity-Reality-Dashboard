@@ -44,7 +44,7 @@ function AddTransactionModal({ onCloseModal }) {
           <select
             {...register("type", { required: "Transaction type is required" })}
             disabled={isPending}
-            className={`w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all ${
+            className={`w-full px-4 text-neutral-700 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all ${
               errors.type
                 ? "border-red-500 focus:ring-red-400"
                 : "border-neutral-200 focus:ring-[var(--color-normal)]"
@@ -92,7 +92,7 @@ function AddTransactionModal({ onCloseModal }) {
           <select
             {...register("status", { required: "Status is required" })}
             disabled={isPending}
-            className={`w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all ${
+            className={`w-full px-4 py-2 text-neutral-700 rounded-lg border focus:outline-none focus:ring-2 transition-all ${
               errors.status
                 ? "border-red-500 focus:ring-red-400"
                 : "border-neutral-200 focus:ring-[var(--color-normal)]"
@@ -120,14 +120,14 @@ function AddTransactionModal({ onCloseModal }) {
 
         {/* Property Image File Input */}
         <div>
-          <label className="block text-sm font-medium text-gray-600 mb-1">
+          <label className="block text-sm font-medium text-neutral-600 mb-1">
             Property Image
           </label>
           <input
             type="file"
             {...register("propertyImage")}
             accept="image/*"
-            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full  text-neutral-700 border border-neutral-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             disabled={isPending}
           />
           {errors.propertyImage && (
@@ -139,13 +139,9 @@ function AddTransactionModal({ onCloseModal }) {
 
         {/* Buttons */}
         <div className="flex justify-end gap-3 pt-2">
-          <button
-            type="button"
-            onClick={onCloseModal}
-            className="px-5 py-2 rounded-lg text-sm font-medium border border-neutral-300 hover:bg-neutral-100 transition-all"
-          >
+          <Button type="button" onClick={onCloseModal} variant="light">
             Cancel
-          </button>
+          </Button>
           <Button type="submit" disabled={isPending}>
             Add Transaction
           </Button>

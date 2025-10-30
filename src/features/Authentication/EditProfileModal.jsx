@@ -81,7 +81,7 @@ function EditProfileModal({ profileData, onClose, onSave }) {
           <HiX />
         </button>
 
-        <h2 className="text-xl mt-4 font-semibold text-gray-800 mb-4 text-center">
+        <h2 className="text-xl mt-4 font-semibold text-neutral-800 mb-4 text-center">
           Edit Profile
         </h2>
 
@@ -91,7 +91,7 @@ function EditProfileModal({ profileData, onClose, onSave }) {
             <img
               src={previewImage}
               alt="Profile"
-              className="w-full h-full rounded-full object-cover border-4 border-gray-100 shadow-sm"
+              className="w-full h-full rounded-full object-cover border-4 border-neutral-100 shadow-sm"
             />
             <label
               htmlFor="profileImage"
@@ -136,7 +136,7 @@ function EditProfileModal({ profileData, onClose, onSave }) {
 
           {/* 🌐 Social Media Links */}
           <div className="space-y-4">
-            <h3 className="font-medium text-gray-700">Social Media Links</h3>
+            <h3 className="font-medium text-neutral-700">Social Media Links</h3>
 
             <AgentInput
               name="facebook"
