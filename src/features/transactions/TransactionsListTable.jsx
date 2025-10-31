@@ -109,7 +109,7 @@ function TransactionsListTable() {
       <div className="mt-4">
         <Button
           onClick={() => handleExport(transactions)}
-          variant="tertiary"
+          variant="light"
           Icon={HiOutlineDownload}
         >
           Export
