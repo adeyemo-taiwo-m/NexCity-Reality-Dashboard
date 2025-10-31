@@ -163,17 +163,17 @@ function TransactionCards() {
         ))}
       </div>
 
-      {/* ✅ Edit Modal */}
+      {/* ✅Edit Modal */}
       {isEditOpen && selectedTransaction && (
         <div
-          className="fixed inset-0 bg-white/30 dark:bg-black/30 backdrop-blur-md 
+          className="fixed inset-0 bg-white/30  backdrop-blur-md 
                      flex items-center justify-center animate-fadeIn z-50"
           onClick={() => setIsEditOpen(false)}
         >
           <div
-            className="relative bg-[var(--color-white)] dark:bg-[var(--color-black)] 
+            className="relative bg-[var(--color-white)] 
                        rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 
-                       border border-[var(--color-neutral-200)] dark:border-[var(--color-neutral-800)]"
+                       border border-[var(--color-neutral-200)] "
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute right-10 top-10">

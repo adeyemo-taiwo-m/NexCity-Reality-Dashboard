@@ -38,7 +38,7 @@ const CustomerRow = ({
   return (
     <>
       <tr
-        className="border-b hover:bg-[var(--color-light)] dark:hover:bg-[var(--color-dark)] transition-colors"
+        className="border-b hover:bg-[var(--color-light)]  transition-colors"
         style={{ borderColor: "var(--color-neutral-200)" }}
       >
         {/* Customer Info */}

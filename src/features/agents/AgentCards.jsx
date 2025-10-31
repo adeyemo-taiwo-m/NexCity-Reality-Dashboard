@@ -39,13 +39,13 @@ function AgentCards() {
       {/* ✅ Edit Modal */}
       {isEditOpen && selectedAgent && (
         <div
-          className="fixed inset-0 bg-white/30 dark:bg-black/50 backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
+          className="fixed inset-0 bg-white/30  backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
           onClick={() => setIsEditOpen(false)}
         >
           <div
-            className="relative bg-[var(--color-white)] dark:bg-[var(--color-dark)] 
+            className="relative bg-[var(--color-white)]  
                        rounded-2xl shadow-xl w-[80%] lap:w-3/7 p-6 
-                       border border-[var(--color-neutral-100)] dark:border-[var(--color-dark-active)] 
+                       border border-[var(--color-neutral-100)] 
                        transition-all duration-300"
             onClick={(e) => e.stopPropagation()}
           >

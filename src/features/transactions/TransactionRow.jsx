@@ -38,7 +38,7 @@ const TransactionRow = ({
   return (
     <>
       <tr
-        className="border-b bg-white hover:bg-[var(--color-light)] dark:hover:bg-[var(--color-dark)] transition-colors"
+        className="border-b bg-white hover:bg-[var(--color-light)] hover:bg-[var(--color-dark)] transition-colors"
         style={{ borderColor: "var(--color-neutral-200)" }}
       >
         {/* Property Info */}
@@ -128,7 +128,7 @@ const TransactionRow = ({
           onClick={() => setIsEditOpen(false)}
         >
           <div
-            className="relative bg-[var(--color-white)]  backdrop-blur-md rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-[var(--color-neutral-200)] "
+            className="relative bg-white backdrop-blur-md rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-[var(--color-neutral-200)] "
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute right-10 top-10">

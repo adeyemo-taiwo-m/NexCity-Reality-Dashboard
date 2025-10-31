@@ -33,7 +33,7 @@ function EditTransaction({ transaction, onCloseModal }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-2">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6  mt-2">
       <Heading type="h2">Edit Transaction</Heading>
 
       <AgentInput
@@ -53,7 +53,7 @@ function EditTransaction({ transaction, onCloseModal }) {
         </label>
         <select
           {...register("type", { required: "Type is required" })}
-          className="w-full text-neutral-600 rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+          className="w-full text-neutral-600 rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-normal focus:ring-normal"
           disabled={isPending}
         >
           <option value="buy">Buy</option>
