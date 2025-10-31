@@ -7,7 +7,8 @@ import useEditTransaction from "./useEditTransaction";
 import LoaderMini from "../../ui/LoaderMini";
 
 function EditTransaction({ transaction, onCloseModal }) {
-  const { editTransaction, isPending } = useEditTransaction();
+  const { editTransaction, isPendingTransaction: isPending } =
+    useEditTransaction();
 
   const {
     register,
