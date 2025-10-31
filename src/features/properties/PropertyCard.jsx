@@ -5,7 +5,7 @@ import {
   HiOutlineEye,
   HiOutlineTrash,
 } from "react-icons/hi2";
-import { formatCurrency } from "../../utils/helpers";
+import { formatCurrency, formatShortDate } from "../../utils/helpers";
 import ActionModal from "../../ui/ActionModal";
 import PropertyStatusBadge from "./PropertyStatusBadge";
 
@@ -69,7 +69,7 @@ function PropertyCard({ property, onActionSelect, disabled }) {
             </span>
             <div className="flex items-center gap-1">
               <HiCalendar className="text-[var(--color-normal)] text-base" />
-              <span>{new Date(date).toLocaleDateString()}</span>
+              <span>{formatShortDate(date)}</span>
             </div>
           </div>
         </div>

@@ -66,7 +66,7 @@ export default function SignupForm() {
               message: "Enter a valid email address",
             },
           })}
-          className={`w-full px-4 py-2 border ${
+          className={`w-full text-[var(--color-neutral-700)]  px-4 py-2 border ${
             errors.email
               ? "border-red-400 focus:ring-red-500"
               : "border-[var(--color-neutral-200)] focus:ring-[var(--color-normal)]"
@@ -90,7 +90,7 @@ export default function SignupForm() {
               message: "Password must be at least 6 characters",
             },
           })}
-          className={`w-full px-4 py-2 border ${
+          className={`w-full text-[var(--color-neutral-700)] px-4 py-2 border ${
             errors.password
               ? "border-red-400 focus:ring-red-500"
               : "border-[var(--color-neutral-200)] focus:ring-[var(--color-normal)]"
@@ -101,7 +101,7 @@ export default function SignupForm() {
 
       {/* Confirm Password */}
       <div>
-        <label className="block text-sm text-left font-medium text-[var(--color-neutral-700)] mb-1">
+        <label className="block  text-sm text-left font-medium text-[var(--color-neutral-700)] mb-1">
           Confirm Password
         </label>
         <input
@@ -111,7 +111,7 @@ export default function SignupForm() {
             required: "Please confirm your password",
             validate: (value) => value === password || "Passwords do not match",
           })}
-          className={`w-full px-4 py-2 border ${
+          className={`w-full text-[var(--color-neutral-700)] px-4 py-2 border ${
             errors.confirmPassword
               ? "border-red-400 focus:ring-red-500"
               : "border-[var(--color-neutral-200)] focus:ring-[var(--color-normal)]"

@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import AgentInput from "../../ui/AgentInput";
 import Button from "../../ui/Button";
 import Heading from "../../ui/Heading";
-import useEditProperty from "./useEditProperty"; // Custom hook similar to useEditCustomer
+import useEditProperty from "./useEditProperty";
+import LoaderMini from "../../ui/LoaderMini";
 
 function EditProperty({ property, onCloseModal }) {
   const { editProperty, isPendingProperty } = useEditProperty();
@@ -19,6 +20,7 @@ function EditProperty({ property, onCloseModal }) {
       price: property?.price || 0,
       status: property?.status || "Available",
       listedBy: property?.listedBy || "",
+      date: property?.date || "", // ✅ Added date default value
       image: property?.image || "",
     },
   });
@@ -78,13 +80,17 @@ function EditProperty({ property, onCloseModal }) {
       <div>
         <label className="text-sm font-medium text-neutral-600">Status</label>
         <select
-          {...register("status")}
-          className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-normal focus:ring-normal"
+          {...register("status", { required: "Status is required" })}
+          className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-[var(--color-normal)] focus:ring-[var(--color-normal)]"
+          disabled={isPendingProperty}
         >
           <option value="Available">Available</option>
           <option value="Sold">Sold</option>
           <option value="Pending">Pending</option>
         </select>
+        {errors.status && (
+          <p className="text-red-500 text-xs mt-1">{errors.status.message}</p>
+        )}
       </div>
 
       {/* Listed By */}
@@ -98,7 +104,17 @@ function EditProperty({ property, onCloseModal }) {
         error={errors.listedBy}
       />
 
-      {/* Image URL */}
+      {/* ✅ Date Listed */}
+      <AgentInput
+        name="date"
+        type="text"
+        label="Date Listed"
+        placeholder="e.g. 24 Feb"
+        register={register}
+        validation={{ required: "Date is required" }}
+        error={errors.date}
+      />
+
       {/* Image Upload */}
       <div>
         <label className="text-sm font-medium text-neutral-600">
@@ -108,7 +124,8 @@ function EditProperty({ property, onCloseModal }) {
           type="file"
           accept="image/*"
           {...register("image")}
-          className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+          className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-[var(--color-normal)] focus:ring-[var(--color-normal)]"
+          disabled={isPendingProperty}
         />
         {errors.image && (
           <p className="text-red-500 text-xs mt-1">{errors.image.message}</p>
@@ -126,7 +143,7 @@ function EditProperty({ property, onCloseModal }) {
           Cancel
         </Button>
         <Button type="submit" disabled={isPendingProperty}>
-          {isPendingProperty ? "Saving..." : "Save Changes"}
+          {isPendingProperty ? <LoaderMini /> : "Save Changes"}
         </Button>
       </div>
     </form>

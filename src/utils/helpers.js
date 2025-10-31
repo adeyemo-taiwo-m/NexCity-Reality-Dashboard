@@ -42,3 +42,15 @@ export function getInitials(name) {
     .map((word) => word[0].toUpperCase()) // take the first letter and capitalize it
     .join(""); // combine all initials into a single string
 }
+
+export function formatShortDate(dateString) {
+  const year = new Date().getFullYear(); // add current year if not included
+  const date = new Date(`${dateString} ${year}`);
+
+  // Format into a more readable version
+  return date.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
