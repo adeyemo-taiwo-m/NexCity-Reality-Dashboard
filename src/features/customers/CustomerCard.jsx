@@ -14,6 +14,7 @@ import CancelX from "../../ui/CancelX";
 import LoadingState from "../../ui/LoadingState";
 import EmptyState from "../../ui/EmptyState";
 import ActionModal from "../../ui/ActionModal";
+import CustomerStatusBadge from "./CustomersStatusBadge";
 
 function CustomerCards() {
   const { customers, isPendingCustomers } = useCustomers();
@@ -30,146 +31,142 @@ function CustomerCards() {
   return (
     <div className="block lap:hidden p-4">
       <div className="grid grid-cols-1 tab:grid-cols-2 lap:grid-cols-3 gap-4">
-        {customers.map((customer, i) => (
-          <div
-            key={i}
-            className="bg-[var(--color-white)] border border-[var(--color-neutral-200)] 
-                       rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <img
-                  src={
-                    customer.avatarUrl ||
-                    "https://placehold.co/50x50/94A3B8/FFFFFF?text=C"
-                  }
-                  alt={customer.name}
-                  className="w-12 h-12 rounded-full object-cover"
+        {customers.map((customer, i) => {
+          const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(
+            customer.name
+          )}`;
+
+          return (
+            <div
+              key={i}
+              className="bg-[var(--color-white)] border border-[var(--color-neutral-200)] 
+                         rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={avatarUrl}
+                    alt={customer.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <h3
+                      className="font-semibold text-sm tab:text-base"
+                      style={{ color: "var(--color-neutral-800)" }}
+                    >
+                      {customer.name}
+                    </h3>
+                    <p
+                      className="text-xs"
+                      style={{ color: "var(--color-neutral-500)" }}
+                    >
+                      {customer.email}
+                    </p>
+                  </div>
+                </div>
+
+                <ActionModal
+                  disabled={isPending}
+                  triggerIcon={HiOutlineEllipsisVertical}
+                  items={[
+                    {
+                      label: "Edit",
+                      icon: HiOutlinePencil,
+                      onClick: () => {
+                        setSelectedCustomer(customer);
+                        setIsEditOpen(true);
+                      },
+                    },
+                    {
+                      label: "View Details",
+                      icon: HiOutlineEye,
+                      onClick: () => {
+                        setSelectedCustomer(customer);
+                        setIsViewOpen(true);
+                      },
+                    },
+                    {
+                      label: "Delete",
+                      icon: HiOutlineTrash,
+                      onClick: () => deleteCustomer(customer.id),
+                    },
+                  ]}
                 />
-                <div>
-                  <h3
-                    className="font-semibold text-sm tab:text-base"
-                    style={{ color: "var(--color-neutral-800)" }}
+              </div>
+
+              {/* Body */}
+              <div
+                className="mt-4 space-y-2 text-sm"
+                style={{ color: "var(--color-neutral-700)" }}
+              >
+                <p>
+                  <span
+                    className="font-medium"
+                    style={{ color: "var(--color-neutral-600)" }}
                   >
-                    {customer.name}
-                  </h3>
-                  <p
-                    className="text-xs"
-                    style={{ color: "var(--color-neutral-500)" }}
-                  >
-                    {customer.email}
+                    Property:
+                  </span>{" "}
+                  {customer.interestedProperty || "—"}
+                </p>
+
+                <div className="flex justify-between">
+                  <p>
+                    <span
+                      className="font-medium"
+                      style={{ color: "var(--color-neutral-600)" }}
+                    >
+                      Deal:
+                    </span>{" "}
+                    {customer.dealType || "—"}
+                  </p>
+                  <p>
+                    <span
+                      className="font-medium"
+                      style={{ color: "var(--color-neutral-600)" }}
+                    >
+                      Amount:
+                    </span>{" "}
+                    {customer.amount ? formatCurrency(customer.amount) : "—"}
                   </p>
                 </div>
-              </div>
 
-              <ActionModal
-                disabled={isPending}
-                items={[
-                  {
-                    label: "Edit",
-                    icon: HiOutlinePencil,
-                    onClick: () => {
-                      setSelectedCustomer(customer);
-                      setIsEditOpen(true);
-                    },
-                  },
-                  {
-                    label: "View Details",
-                    icon: HiOutlineEye,
-                    onClick: () => {
-                      setSelectedCustomer(customer);
-                      setIsViewOpen(true);
-                    },
-                  },
-                  {
-                    label: "Delete",
-                    icon: HiOutlineTrash,
-                    onClick: () => deleteCustomer(customer.id),
-                  },
-                ]}
-              />
-            </div>
-
-            {/* Body */}
-            <div
-              className="mt-4 space-y-2 text-sm"
-              style={{ color: "var(--color-neutral-700)" }}
-            >
-              <p>
-                <span
-                  className="font-medium"
-                  style={{ color: "var(--color-neutral-600)" }}
-                >
-                  Property:
-                </span>{" "}
-                {customer.interestedProperty}
-              </p>
-              <div className="flex justify-between">
                 <p>
                   <span
                     className="font-medium"
                     style={{ color: "var(--color-neutral-600)" }}
                   >
-                    Deal:
+                    Activity:
                   </span>{" "}
-                  {customer.dealType}
-                </p>
-                <p>
-                  <span
-                    className="font-medium"
-                    style={{ color: "var(--color-neutral-600)" }}
-                  >
-                    Amount:
-                  </span>{" "}
-                  {formatCurrency(customer.amount)}
+                  {customer.activity || "—"}
                 </p>
               </div>
-              <p>
-                <span
-                  className="font-medium"
-                  style={{ color: "var(--color-neutral-600)" }}
+
+              {/* Footer */}
+              <div className="mt-4 flex items-center justify-between">
+                <CustomerStatusBadge status={customer.status} />
+
+                <button
+                  className="text-sm font-medium px-2 py-1 rounded-md transition-colors"
+                  style={{
+                    color: "var(--color-normal)",
+                  }}
+                  onClick={() => {
+                    setSelectedCustomer(customer);
+                    setIsViewOpen(true);
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.background =
+                      "var(--color-light-hover)")
+                  }
+                  onMouseLeave={(e) => (e.currentTarget.style.background = "")}
                 >
-                  Activity:
-                </span>{" "}
-                {customer.activity}
-              </p>
+                  View Details
+                </button>
+              </div>
             </div>
-
-            {/* Footer */}
-            <div className="mt-4 flex items-center justify-between">
-              <span
-                className={`text-xs font-medium px-2 py-1 rounded-md ${
-                  customer.status === "Active"
-                    ? "bg-green-50 text-green-600"
-                    : customer.status === "Closed"
-                    ? "bg-amber-50 text-amber-600"
-                    : "bg-[var(--color-light)] text-[var(--color-neutral-600)]"
-                }`}
-              >
-                {customer.status}
-              </span>
-
-              <button
-                className="text-sm font-medium px-2 py-1 rounded-md transition-colors"
-                style={{
-                  color: "var(--color-normal)",
-                }}
-                onClick={() => {
-                  setSelectedCustomer(customer);
-                  setIsViewOpen(true);
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.background =
-                    "var(--color-light-hover)")
-                }
-                onMouseLeave={(e) => (e.currentTarget.style.background = "")}
-              >
-                View Details
-              </button>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* ✅ Edit Modal */}
@@ -179,7 +176,8 @@ function CustomerCards() {
           onClick={() => setIsEditOpen(false)}
         >
           <div
-            className="relative bg-[var(--color-white)] rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-[var(--color-neutral-200)]"
+            className="relative bg-[var(--color-white)]  backdrop-blur-md rounded-2xl shadow-xl
+                       w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-[var(--color-neutral-200)]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute right-10 top-10">

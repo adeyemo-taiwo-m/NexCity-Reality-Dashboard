@@ -16,7 +16,6 @@ const CustomerRow = ({
   amount,
   status,
   activity,
-  avatarUrl,
 }) => {
   const { deleteCustomer, isPending } = useDeleteCustomer();
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -31,8 +30,10 @@ const CustomerRow = ({
     amount,
     status,
     activity,
-    avatarUrl,
   };
+  const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(
+    name
+  )}`;
 
   return (
     <>
@@ -44,11 +45,9 @@ const CustomerRow = ({
         <td className="px-6 py-4">
           <div className="flex items-center gap-3">
             <img
-              src={
-                avatarUrl || "https://placehold.co/40x40/94A3B8/FFFFFF?text=CU"
-              }
+              src={avatarUrl}
               alt={`${name}'s avatar`}
-              className="h-10 w-10 rounded-full object-cover"
+              className="h-10 w-10 b rounded-full object-cover"
             />
             <span
               className="text-sm font-medium cursor-pointer hover:underline"
@@ -121,11 +120,11 @@ const CustomerRow = ({
       {/* Edit Modal */}
       {isEditOpen && (
         <div
-          className="fixed inset-0 bg-white/30 dark:bg-black/30 backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
+          className="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
           onClick={() => setIsEditOpen(false)}
         >
           <div
-            className="relative bg-[var(--color-white)] dark:bg-[var(--color-black)] backdrop-blur-md rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-[var(--color-neutral-200)] dark:border-[var(--color-neutral-800)]"
+            className="relative bg-[var(--color-white)]  backdrop-blur-md rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-[var(--color-neutral-200)] "
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute right-10 top-10">
@@ -145,6 +144,7 @@ const CustomerRow = ({
         <ViewCustomerProfile
           setIsViewOpen={setIsViewOpen}
           selectedCustomer={customer}
+          avatarUrl={avatarUrl}
         />
       )}
     </>

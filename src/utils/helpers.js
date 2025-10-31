@@ -32,3 +32,13 @@ export const parsePropertyDate = (dateString) => {
     return new Date(); // fallback
   }
 };
+
+export function getInitials(name) {
+  if (!name || typeof name !== "string") return "";
+
+  return name
+    .trim() // remove any leading/trailing spaces
+    .split(/\s+/) // split into words by one or more spaces
+    .map((word) => word[0].toUpperCase()) // take the first letter and capitalize it
+    .join(""); // combine all initials into a single string
+}

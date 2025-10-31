@@ -143,7 +143,7 @@ function AddTransactionModal({ onCloseModal }) {
             Cancel
           </Button>
           <Button type="submit" disabled={isPending}>
-            Add Transaction
+            {isPending ? <LoaderMini /> : "Add Transaction"}
           </Button>
         </div>
       </form>

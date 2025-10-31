@@ -4,6 +4,7 @@ import AgentStatusBadge from "./AgentStatusBagde";
 import Button from "../../ui/Button";
 
 function ViewAgentProfile({ setIsViewOpen, selectedAgent }) {
+  console.log(selectedAgent);
   return (
     <div
       className="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
@@ -21,7 +22,7 @@ function ViewAgentProfile({ setIsViewOpen, selectedAgent }) {
         {/* Agent Details */}
         <div className="flex flex-col items-center text-center mt-4">
           <img
-            src={selectedAgent?.avatarUrl || "/default-png.jpg"}
+            src={selectedAgent?.image || "/default-png.jpg"}
             alt={selectedAgent?.name}
             className="w-28 h-28 rounded-full object-cover border-4 border-white shadow"
           />

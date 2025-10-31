@@ -1,5 +1,4 @@
-import React from "react";
-import { HiX } from "react-icons/hi";
+import React, { useState } from "react";
 import Option from "../../ui/Option";
 import Button from "../../ui/Button";
 import AgentInput from "../../ui/AgentInput";
@@ -9,24 +8,34 @@ import useUpdateAgents from "./useUpdateAgents";
 
 function AddAgentModal({ onCloseModal }) {
   const { updateAgents, isPending } = useUpdateAgents();
+  const [avatarFile, setAvatarFile] = useState(null);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  function onSubmit(rowData) {
-    updateAgents(rowData);
+  async function onSubmit(rowData) {
+    const formData = {
+      ...rowData,
+      propertiesListed: Number(rowData.propertiesListed) || 0,
+      closedDeals: Number(rowData.closedDeals) || 0,
+    };
+
+    // Attach file if uploaded
+    if (avatarFile) formData.avatarFile = avatarFile;
+
+    await updateAgents(formData);
     onCloseModal();
   }
 
   return (
     <div className="flex flex-col gap-3">
-      {/* Title */}
       <Heading type="h2">Add New Agent</Heading>
 
-      {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-2">
+        {/* Full Name */}
         <AgentInput
           name="name"
           type="text"
@@ -38,6 +47,7 @@ function AddAgentModal({ onCloseModal }) {
           disabled={isPending}
         />
 
+        {/* Email */}
         <AgentInput
           disabled={isPending}
           name="email"
@@ -55,6 +65,7 @@ function AddAgentModal({ onCloseModal }) {
           error={errors.email}
         />
 
+        {/* Phone */}
         <AgentInput
           disabled={isPending}
           name="phone"
@@ -72,6 +83,50 @@ function AddAgentModal({ onCloseModal }) {
           error={errors.phone}
         />
 
+        {/* Properties Listed */}
+        <AgentInput
+          name="propertiesListed"
+          type="number"
+          label="Properties Listed"
+          placeholder="Enter number of properties"
+          register={register}
+          validation={{
+            required: "This field is required",
+            min: { value: 0, message: "Cannot be negative" },
+          }}
+          error={errors.propertiesListed}
+          disabled={isPending}
+        />
+
+        {/* Closed Deals */}
+        <AgentInput
+          name="closedDeals"
+          type="number"
+          label="Closed Deals"
+          placeholder="Enter number of closed deals"
+          register={register}
+          validation={{
+            required: "This field is required",
+            min: { value: 0, message: "Cannot be negative" },
+          }}
+          error={errors.closedDeals}
+          disabled={isPending}
+        />
+
+        {/* Avatar Upload */}
+        <div>
+          <label className="block text-sm text-neutral-700 mb-1">
+            Agent Avatar
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setAvatarFile(e.target.files[0])}
+            disabled={isPending}
+            className="w-full text-sm border rounded-lg px-3 py-2 border-neutral-200 focus:outline-none focus:ring-2 focus:ring-[var(--color-normal)]"
+          />
+        </div>
+
         {/* Status */}
         <div>
           <label className="block text-sm text-neutral-700 mb-1">Status</label>
@@ -84,8 +139,8 @@ function AddAgentModal({ onCloseModal }) {
                 : "border-neutral-200 focus:ring-[var(--color-normal)]"
             }`}
           >
-            <Option value="active" label="Active" />
-            <Option value="inactive" label="Inactive" />
+            <Option value="Active" label="Active" />
+            <Option value="Inactive" label="Inactive" />
           </select>
           {errors.status && (
             <p className="text-red-500 text-sm mt-1">{errors.status.message}</p>
@@ -94,8 +149,17 @@ function AddAgentModal({ onCloseModal }) {
 
         {/* Buttons */}
         <div className="flex justify-end gap-3 pt-2">
-          <Button variant="light">Cancel</Button>
-          <Button type="submit">Add Agent</Button>
+          <Button
+            variant="light"
+            type="button"
+            onClick={onCloseModal}
+            disabled={isPending}
+          >
+            Cancel
+          </Button>
+          <Button type="submit" disabled={isPending}>
+            {isPending ? "Adding..." : "Add Agent"}
+          </Button>
         </div>
       </form>
     </div>

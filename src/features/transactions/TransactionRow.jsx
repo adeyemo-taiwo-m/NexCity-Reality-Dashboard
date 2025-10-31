@@ -128,7 +128,7 @@ const TransactionRow = ({
           onClick={() => setIsEditOpen(false)}
         >
           <div
-            className="relative bg-[var(--color-white)] dark:bg-[var(--color-black)] backdrop-blur-md rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-[var(--color-neutral-200)] dark:border-[var(--color-neutral-800)]"
+            className="relative bg-white backdrop-blur-md rounded-2xl shadow-xl w-[90%] max-w-2/3 lap:w-3/7 p-6 border border-[var(--color-neutral-200)] "
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute right-10 top-10">

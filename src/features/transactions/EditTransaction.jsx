@@ -4,6 +4,7 @@ import AgentInput from "../../ui/AgentInput";
 import Button from "../../ui/Button";
 import Heading from "../../ui/Heading";
 import useEditTransaction from "./useEditTransaction";
+import LoaderMini from "../../ui/LoaderMini";
 
 function EditTransaction({ transaction, onCloseModal }) {
   const { editTransaction, isPending } = useEditTransaction();
@@ -51,7 +52,7 @@ function EditTransaction({ transaction, onCloseModal }) {
         </label>
         <select
           {...register("type", { required: "Type is required" })}
-          className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+          className="w-full text-neutral-600 rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
           disabled={isPending}
         >
           <option value="buy">Buy</option>
@@ -117,7 +118,7 @@ function EditTransaction({ transaction, onCloseModal }) {
           type="file"
           {...register("propertyImage")}
           accept="image/*"
-          className="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-normal"
           disabled={isPending}
         />
       </div>
@@ -132,7 +133,7 @@ function EditTransaction({ transaction, onCloseModal }) {
           Cancel
         </Button>
         <Button type="submit" disabled={isPending}>
-          {isPending ? "Saving..." : "Save Changes"}
+          {isPending ? <LoaderMini /> : "Save Changes"}
         </Button>
       </div>
     </form>

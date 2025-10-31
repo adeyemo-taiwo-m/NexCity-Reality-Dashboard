@@ -30,6 +30,7 @@ export default async function getCustomers({ filter, sortBy, searchQuery }) {
 
 // Add a new customer
 export async function updateCustomer(rowData) {
+  console.log(rowData);
   const { data, error } = await supabase
     .from("customersDetails")
     .insert([rowData])

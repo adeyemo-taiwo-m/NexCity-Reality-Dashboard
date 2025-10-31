@@ -73,7 +73,7 @@ export async function updateCurrentUser({
       const filePath = `avatars/${imageName}`; // folder in bucket (optional but clean)
 
       const { data: imageData, error: imageError } = await supabase.storage
-        .from("user") // 👈 make sure your bucket name matches exactly
+        .from("user") //  make sure your bucket name matches exactly
         .upload(filePath, imageFile, {
           cacheControl: "3600",
           upsert: false,

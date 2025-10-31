@@ -5,6 +5,7 @@ import AgentInput from "../../ui/AgentInput";
 import Option from "../../ui/Option";
 import Button from "../../ui/Button";
 import useUpdateCustomer from "./useUpdateCustomers";
+import LoaderMini from "../../ui/LoaderMini";
 
 function AddCustomerModal({ onCloseModal }) {
   const { updateCustomer, isPending } = useUpdateCustomer();
@@ -150,7 +151,7 @@ function AddCustomerModal({ onCloseModal }) {
             Cancel
           </button>
           <Button type="submit" disabled={isPending}>
-            Add Customer
+            {isPending ? <LoaderMini /> : "Add Customer"}
           </Button>
         </div>
       </form>

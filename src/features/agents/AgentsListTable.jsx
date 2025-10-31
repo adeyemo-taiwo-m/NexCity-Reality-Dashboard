@@ -9,7 +9,7 @@ import EmptyState from "../../ui/EmptyState";
 function AgentListTable() {
   const [page, setPage] = useState(1);
   const { agents, isPending } = useAgents();
-
+  console.log(agents);
   // --- Loading State ---
   if (isPending) {
     return <LoadingState entityName="properties" />;
@@ -77,6 +77,7 @@ function AgentListTable() {
                 propertiesListed={agent.listed}
                 closedDeals={agent.closedDeals}
                 status={agent.status}
+                image={agent.image}
               />
             ))}
           </tbody>

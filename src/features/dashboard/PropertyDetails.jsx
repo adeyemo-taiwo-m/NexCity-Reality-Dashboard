@@ -7,12 +7,12 @@ function PropertyDetails({ property }) {
   return (
     <div
       key={property.id}
-      className="bg-white-hover rounded-lg overflow-hidden shadow-sm"
+      className="bg-white-hover min-h-50 rounded-lg overflow-hidden shadow-sm"
     >
       <img
         src={property.image || "/house.png"}
         alt={property.title}
-        className="w-full  object-cover"
+        className="w-full h-96  object-cover"
       />
       <div className="p-3 flex flex-col gap-2">
         <Heading type="h3">{property.title}</Heading>

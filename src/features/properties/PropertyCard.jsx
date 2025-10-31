@@ -41,7 +41,7 @@ function PropertyCard({ property, onActionSelect, disabled }) {
             },
           ]}
         >
-          <HiOutlineEllipsisVertical className="w-5 h-5 text-neutral-500" />
+          <HiOutlineEllipsisVertical className="w-5 h-5  text-neutral-500" />
         </ActionModal>
       </div>
 

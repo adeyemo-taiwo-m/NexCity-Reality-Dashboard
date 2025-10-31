@@ -15,7 +15,7 @@ const AgentRow = ({
   propertiesListed,
   closedDeals,
   status,
-  avatarUrl,
+  image,
 }) => {
   const { deleteAgent, isPending } = useDeleteAgent();
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -29,9 +29,8 @@ const AgentRow = ({
     status,
     propertiesListed,
     closedDeals,
-    avatarUrl,
+    image,
   };
-
   return (
     <>
       <tr
@@ -42,7 +41,7 @@ const AgentRow = ({
         <td className="px-6 py-4">
           <div className="flex items-center gap-3">
             <img
-              src={avatarUrl || "/default-user.jpg"}
+              src={image || "/default-user.jpg"}
               alt={`${name}'s avatar`}
               className="h-10 w-10 rounded-full object-cover"
             />

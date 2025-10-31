@@ -4,7 +4,7 @@ import CustomerStatusBadge from "./CustomersStatusBadge";
 import Button from "../../ui/Button";
 import { formatCurrency } from "../../utils/helpers";
 
-function ViewCustomerProfile({ setIsViewOpen, selectedCustomer }) {
+function ViewCustomerProfile({ setIsViewOpen, selectedCustomer, avatarUrl }) {
   return (
     <div
       className="fixed inset-0 bg-white/30 backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
@@ -22,10 +22,7 @@ function ViewCustomerProfile({ setIsViewOpen, selectedCustomer }) {
         {/* Customer Details */}
         <div className="flex flex-col items-center text-center mt-4">
           <img
-            src={
-              selectedCustomer?.avatarUrl ||
-              "https://placehold.co/100x100/94A3B8/FFFFFF?text=CU"
-            }
+            src={avatarUrl || "/default-user.jpg"}
             alt={selectedCustomer?.name}
             className="w-28 h-28 rounded-full object-cover border-4 border-white shadow"
           />

@@ -5,7 +5,6 @@ import usePropertiesMain from "./usePropertiesMain";
 
 function SearchBar() {
   const { properties } = usePropertiesMain();
-  console.log(properties);
   const status = [
     { label: "All", value: "all" },
     { label: "Available", value: "available" },

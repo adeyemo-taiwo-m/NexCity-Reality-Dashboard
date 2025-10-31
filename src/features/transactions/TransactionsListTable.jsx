@@ -54,12 +54,12 @@ function TransactionsListTable() {
 
   return (
     <>
-      <div className="bg-[var(--color-white)] dark:bg-[var(--color-black)] shadow-md rounded-2xl overflow-hidden">
+      <div className="bg-[var(--color-white)]  shadow-md rounded-2xl overflow-hidden">
         {/* ---- TABLE VIEW (Laptop & Desktop) ---- */}
         <div className="hidden lap:block overflow-x-auto">
-          <table className="min-w-full   dark:divide-[var(--color-neutral-700)]">
-            <thead className="bg-[var(--color-light)] text-neutral-700 dark:bg-[var(--color-dark)]">
-              <tr className="text-xs text-neutral-700 font-semibold uppercase tracking-wide  dark:text-[var(--color-neutral-300)]">
+          <table className="min-w-full   ">
+            <thead className="bg-[var(--color-light)] text-neutral-700 ">
+              <tr className="text-xs text-neutral-700 font-semibold uppercase tracking-wide  ">
                 <th className="px-6 py-3 text-neutral-700 text-left whitespace-nowrap">
                   Property
                 </th>
@@ -84,7 +84,7 @@ function TransactionsListTable() {
               </tr>
             </thead>
 
-            <tbody className="divide-y divide-[var(--color-neutral-200)] dark:divide-[var(--color-neutral-700)]">
+            <tbody className="divide-y divide-[var(--color-neutral-200)] ">
               {transactions.map((txn, i) => (
                 <TransactionRow key={i} {...txn} />
               ))}
@@ -96,7 +96,7 @@ function TransactionsListTable() {
         <TransactionCards />
 
         {/* ---- Pagination ---- */}
-        <div className="border-t border-[var(--color-neutral-200)] dark:border-[var(--color-neutral-700)] px-6 py-4">
+        <div className="border-t border-[var(--color-neutral-200)]  px-6 py-4">
           <Pagination
             currentPage={page}
             totalPages={3}
