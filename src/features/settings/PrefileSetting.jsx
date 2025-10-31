@@ -11,7 +11,6 @@ import useUpdateUser from "../Authentication/useUpdateUser";
 function ProfileSetting() {
   const { userData, isPending } = useUser();
   const { updateUser, isPending: isUpdatingUser } = useUpdateUser();
-  console.log(userData);
   const {
     register,
     handleSubmit,

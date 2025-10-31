@@ -11,7 +11,11 @@ function EditProfileModal({ profileData, onClose, onSave }) {
   const ref = useOutsideClickModal(onClose);
   const { updateUser, isPending } = useUpdateUser();
 
-  const [previewImage, setPreviewImage] = useState(profileData.profileImage);
+  //  Keep both file (for upload) and preview (for UI)
+  const [previewImage, setPreviewImage] = useState({
+    file: null,
+    previewUrl: profileData.profileImage,
+  });
 
   const {
     register,
@@ -22,19 +26,21 @@ function EditProfileModal({ profileData, onClose, onSave }) {
     defaultValues: {
       name: profileData.name,
       role: profileData.role,
-      profileImage: profileData.profileImage,
-      facebook: profileData.facebook || "",
-      linkedin: profileData.linkedin || "",
-      pinterest: profileData.pinterest || "",
-      x: profileData.x || "",
+      facebook: profileData?.socialLinks?.facebook || "",
+      linkedin: profileData?.socialLinks?.linkedIn || "",
+      pinterest: profileData?.socialLinks?.pinterest || "",
+      x: profileData?.socialLinks?.x || "",
     },
   });
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setPreviewImage(imageUrl);
+    const files = e.target.files;
+    if (files && files[0]) {
+      const file = files[0];
+      setPreviewImage({
+        file,
+        previewUrl: URL.createObjectURL(file),
+      });
     }
   };
 
@@ -42,23 +48,25 @@ function EditProfileModal({ profileData, onClose, onSave }) {
     const finalData = {
       fullName: data.name,
       assignedRole: data.role,
-      profileImage: data.profileImage,
+      profileImage: previewImage, // contains { file, previewUrl }
       socialLinks: {
         facebook: data.facebook,
-        linkedin: data.linkedin,
+        linkedIn: data.linkedin,
         pinterest: data.pinterest,
         x: data.x,
       },
     };
 
     try {
-      updateUser(finalData);
+      await updateUser(finalData);
+
       onSave({
         name: data.name,
         role: data.role,
-        profileImage: previewImage,
+        profileImage: previewImage.previewUrl || profileData.profileImage,
         socialLinks: finalData.socialLinks,
       });
+
       reset(finalData);
       onClose();
     } catch (err) {
@@ -72,7 +80,7 @@ function EditProfileModal({ profileData, onClose, onSave }) {
         ref={ref}
         className="bg-white rounded-2xl w-[90%] max-w-md p-6 relative shadow-lg"
       >
-        {/*  Close button */}
+        {/*  Close Button */}
         <button
           onClick={!isPending ? onClose : undefined}
           className="absolute cursor-pointer top-4 right-4 h-8 w-8 flex justify-center items-center rounded-md bg-light hover:bg-light-hover text-normal hover:text-normal-hover"
@@ -85,11 +93,11 @@ function EditProfileModal({ profileData, onClose, onSave }) {
           Edit Profile
         </h2>
 
-        {/* 🖼️ Profile Image Upload */}
+        {/*  Image Preview + Upload */}
         <div className="flex flex-col items-center mb-6">
           <div className="relative w-28 h-28">
             <img
-              src={previewImage}
+              src={previewImage?.previewUrl || profileData.profileImage}
               alt="Profile"
               className="w-full h-full rounded-full object-cover border-4 border-neutral-100 shadow-sm"
             />
@@ -109,9 +117,8 @@ function EditProfileModal({ profileData, onClose, onSave }) {
           </div>
         </div>
 
-        {/* 🧾 Form Fields */}
+        {/*  Form Fields */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Basic Info */}
           <AgentInput
             name="name"
             type="text"
@@ -134,7 +141,6 @@ function EditProfileModal({ profileData, onClose, onSave }) {
             disabled={isPending}
           />
 
-          {/* 🌐 Social Media Links */}
           <div className="space-y-4">
             <h3 className="font-medium text-neutral-700">Social Media Links</h3>
 
@@ -203,7 +209,6 @@ function EditProfileModal({ profileData, onClose, onSave }) {
             />
           </div>
 
-          {/* 🟢 Buttons */}
           <div className="flex justify-between items-center pt-2">
             <Button
               variant="ghost"

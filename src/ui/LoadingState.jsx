@@ -8,7 +8,7 @@ function LoadingState() {
   return (
     <div className="flex flex-col justify-center items-center h-64 gap-4">
       <motion.img
-        src={`/logo${isDarkMode ? "dark" : "white"}.svg`}
+        src={`/logo-${isDarkMode ? "dark" : "white"}.svg`}
         alt="Loading"
         className="w-32 h-32"
         animate={{ scale: [1, 1.2, 1] }}

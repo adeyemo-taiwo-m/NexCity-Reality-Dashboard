@@ -12,7 +12,7 @@ function SettingsProfile() {
   const [profileData, setProfileData] = useState({
     name: "",
     role: "",
-    profileImage: "default-user.jpg",
+    profileImage: userData?.profileImage,
     bannerImage: "house.png",
     socials: ["facebook", "linkedin", "pinterest", "x"],
   });
@@ -25,7 +25,7 @@ function SettingsProfile() {
       setProfileData({
         name: userData?.fullName || "",
         role: userData?.assignedRole || "Input your role",
-        profileImage: userData?.profileImg || "default-user.jpg",
+        profileImage: userData?.profileImage || "default-user.jpg",
         bannerImage: "house.png",
         socials: ["facebook", "linkedin", "pinterest", "x"],
         socialLinks: userData?.socialLinks,
@@ -61,7 +61,7 @@ function SettingsProfile() {
         "
       >
         <img
-          src={profileData.profileImage}
+          src={profileData?.profileImage}
           alt={`${profileData.name} profile`}
           className="w-32 h-32 tab:w-48 tab:h-48 rounded-full border-4 border-white shadow-md object-cover"
         />

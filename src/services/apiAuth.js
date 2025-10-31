@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import supabase, { supabaseUrl } from "./supabase";
 
 export async function getUser() {
   const { data: sessionInStorage } = await supabase.auth.getSession();
@@ -52,7 +52,6 @@ export async function signUp({ email, password, fullName }) {
   return data;
 }
 
-// update user
 export async function updateCurrentUser({
   fullName,
   profileImage,
@@ -64,40 +63,60 @@ export async function updateCurrentUser({
 }) {
   const updatePayload = {};
   const userMeta = {};
-  console.log(profileImage);
-  // Basic profile data
-  if (fullName) userMeta.fullName = fullName;
-  if (profileImage) userMeta.profileImage = profileImage;
-  if (assignedRole) userMeta.assignedRole = assignedRole;
-  if (phone) userMeta.phone = phone;
+  let imagePath = "";
 
-  // Social media links (only add if provided)
-  if (socialLinks) {
-    userMeta.socialLinks = {
-      facebook: socialLinks.facebook || "",
-      linkedin: socialLinks.linkedin || "",
-      pinterest: socialLinks.pinterest || "",
-      x: socialLinks.x || "",
-    };
+  try {
+    // 1. Upload image if it exists and is a File
+    if (profileImage && profileImage.file instanceof File) {
+      const imageFile = profileImage.file;
+      const imageName = `${Date.now()}-${imageFile.name}`; // simpler & safer unique name
+      const filePath = `avatars/${imageName}`; // folder in bucket (optional but clean)
+
+      const { data: imageData, error: imageError } = await supabase.storage
+        .from("user") // 👈 make sure your bucket name matches exactly
+        .upload(filePath, imageFile, {
+          cacheControl: "3600",
+          upsert: false,
+        });
+
+      if (imageError) throw imageError;
+
+      // Construct full public URL
+      imagePath = `${supabaseUrl}/storage/v1/object/public/user/${imageData.path}`;
+      console.log("Uploaded image URL:", imagePath);
+    } else {
+      console.log("ℹNo image file to upload or invalid file type");
+    }
+
+    // 2. Prepare metadata
+    if (fullName) userMeta.fullName = fullName;
+    if (imagePath) userMeta.profileImage = imagePath;
+    if (assignedRole) userMeta.assignedRole = assignedRole;
+    if (phone) userMeta.phone = phone;
+
+    if (socialLinks) {
+      userMeta.socialLinks = {
+        facebook: socialLinks.facebook || "",
+        linkedIn: socialLinks.linkedIn || "",
+        pinterest: socialLinks.pinterest || "",
+        x: socialLinks.x || "",
+      };
+    }
+
+    if (Object.keys(userMeta).length > 0) updatePayload.data = userMeta;
+    if (email) updatePayload.email = email;
+    if (newPassword) updatePayload.password = newPassword;
+
+    // 3. Update user info in Supabase Auth
+    const { data, error: updateError } = await supabase.auth.updateUser(
+      updatePayload
+    );
+    if (updateError) throw new Error(updateError);
+
+    console.log("User updated successfully:", data);
+    return data;
+  } catch (err) {
+    console.error("Error updating user:", err);
+    throw new Error("There was an error updating user: " + err.message);
   }
-
-  // Add metadata if any
-  if (Object.keys(userMeta).length > 0) {
-    updatePayload.data = userMeta;
-  }
-
-  // Update email if provided
-  if (email) updatePayload.email = email;
-
-  // Update password if provided
-  if (newPassword) updatePayload.password = newPassword;
-
-  // Perform update
-  const { data, error } = await supabase.auth.updateUser(updatePayload);
-
-  if (error) {
-    throw new Error("There was an error updating user: " + error.message);
-  }
-
-  return data;
 }

@@ -6,7 +6,6 @@ import LoaderMini from "./LoaderMini";
 
 function ProfileButton({ profileButtonClass }) {
   const { userData, isPending } = useUser();
-  console.log(userData);
   const { fullName, assignedRole, profileImage } = userData ? userData : [];
   const navigate = useNavigate();
   return (
