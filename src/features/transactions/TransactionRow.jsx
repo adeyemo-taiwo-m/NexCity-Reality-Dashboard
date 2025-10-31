@@ -124,7 +124,7 @@ const TransactionRow = ({
       {/* Edit Modal */}
       {isEditOpen && (
         <div
-          className="fixed inset-0 bg-white/30 dark:bg-black/30 backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
+          className="fixed inset-0 bg-white/30  backdrop-blur-md flex items-center justify-center animate-fadeIn z-50"
           onClick={() => setIsEditOpen(false)}
         >
           <div
