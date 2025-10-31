@@ -4,7 +4,7 @@ import { HiX } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
 import CancelX from "./CancelX";
 
-function SideNav({ isOpen = false, onClose = () => {} }) {
+function SideNav({ isOpen, onClose }) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -26,7 +26,7 @@ function SideNav({ isOpen = false, onClose = () => {} }) {
           >
             <div className="p-4 flex items-center justify-between">
               <div className="font-semibold">Menu</div>
-              <CancelX onClose={onClose} />
+              <CancelX onClick={onClose} />
             </div>
             <MainSIdeNav />
           </motion.aside>

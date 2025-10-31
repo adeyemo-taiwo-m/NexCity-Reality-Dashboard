@@ -17,7 +17,10 @@ const AppLayout = () => {
       <div className="flex flex-1 h-full overflow-hidden">
         {/* SideNav receives open state; it will be hidden on small screens unless open */}
 
-        <SideNav isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <SideNav
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen((open) => !open)}
+        />
         <SideNavLap />
 
         <MainContent>
