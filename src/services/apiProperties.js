@@ -149,6 +149,23 @@ export async function editProperty(propertyId, updatedData) {
   }
 }
 
+export async function deleteProperty(propertyId) {
+  if (!propertyId) throw new Error("Property ID is required");
+
+  const { data, error } = await supabase
+    .from("properties") // your table name
+    .delete()
+    .eq("id", propertyId)
+    .select();
+
+  if (error) {
+    console.error("Error deleting property:", error);
+    throw error;
+  }
+
+  return data;
+}
+
 export async function markPropertyAsSold(propertyId) {
   if (!propertyId) throw new Error("Property ID is required");
 
