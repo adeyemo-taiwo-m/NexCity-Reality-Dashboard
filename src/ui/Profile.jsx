@@ -1,12 +1,15 @@
 import React from "react";
-import { HiOutlineUser, HiOutlineMoon } from "react-icons/hi2";
+import { HiOutlineUser, HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
 import NotificationBtn from "./NotificationBtn";
 import ProfileButton from "./ProfileButton";
+import useDarkMode from "../hooks/useDarkMode";
+import { useNavigate } from "react-router-dom";
 
 // Only the profile image is kept as an import, assuming it's dynamic
 
 function Profile() {
-  // Utility classes for standard, clickable icons/buttons
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const navigate = useNavigate();
   const iconButtonClass =
     "relative p-2 rounded-full bg-neutral-200 hover:bg-neutral-300 transition duration-150";
   const iconSize = "w-6 h-6 text-neutral-500";
@@ -25,12 +28,18 @@ function Profile() {
       >
         {/* Notifications Button */}
         <div className="flex items-center gap-2">
-          <NotificationBtn />
+          <NotificationBtn onClick={() => navigate("/login")} />
           <NotificationBtn
-            icon={<HiOutlineMoon className={`${iconSize} text-normal`} />}
+            onClick={toggleDarkMode}
+            icon={
+              isDarkMode ? (
+                <HiOutlineSun className={`${iconSize} text-normal`} />
+              ) : (
+                <HiOutlineMoon className={`${iconSize} text-normal`} />
+              )
+            }
           />
 
-          {/* Small profile icon on sm+ screens */}
           <button
             className={`${iconButtonClass} hidden lg:inline-flex`}
             aria-label="Agent Profile Shortcut"

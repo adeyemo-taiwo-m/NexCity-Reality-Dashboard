@@ -14,7 +14,7 @@ function SettingsProfile() {
     role: "",
     profileImage: "default-user.jpg",
     bannerImage: "house.png",
-    socials: ["facebook", "linkedIn", "pinterest", "twitter"],
+    socials: ["facebook", "linkedin", "pinterest", "x"],
   });
 
   const [showModal, setShowModal] = useState(false);
@@ -27,7 +27,8 @@ function SettingsProfile() {
         role: userData?.assignedRole || "Input your role",
         profileImage: userData?.profileImg || "default-user.jpg",
         bannerImage: "house.png",
-        socials: ["facebook", "linkedIn", "pinterest", "twitter"],
+        socials: ["facebook", "linkedin", "pinterest", "x"],
+        socialLinks: userData?.socialLinks,
       });
     }
   }, [userData]);
@@ -88,7 +89,11 @@ function SettingsProfile() {
           {/* Social Links */}
           <div className="flex space-x-3 mt-3">
             {profileData.socials.map((iconName) => (
-              <SocialMediaLink key={iconName} iconName={iconName} />
+              <SocialMediaLink
+                to={profileData?.socialLinks?.[iconName]}
+                key={iconName}
+                iconName={iconName}
+              />
             ))}
           </div>
         </div>

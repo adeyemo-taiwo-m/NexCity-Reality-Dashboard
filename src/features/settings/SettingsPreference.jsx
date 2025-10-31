@@ -1,16 +1,16 @@
-import { useState } from "react";
 import SelectInput from "../../ui/SelectInput";
 import ToggleSwitch from "../../ui/ToggleSwitch";
 import SettingsP from "../../ui/SettingsP";
+import useDarkMode from "../../hooks/useDarkMode";
 
 function SettingsPreference() {
-  const [darkMode, setDarkMode] = useState(false);
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <SettingsP>Dark Mode</SettingsP>
-        <ToggleSwitch checked={darkMode} onChange={setDarkMode} />
+        <ToggleSwitch checked={isDarkMode} onChange={toggleDarkMode} />
       </div>
 
       <div className="flex justify-between items-center">

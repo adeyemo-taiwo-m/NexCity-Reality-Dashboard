@@ -42,7 +42,7 @@ function EditProfileModal({ profileData, onClose, onSave }) {
     const finalData = {
       fullName: data.name,
       assignedRole: data.role,
-      profileImage: previewImage,
+      profileImage: data.profileImage,
       socialLinks: {
         facebook: data.facebook,
         linkedin: data.linkedin,

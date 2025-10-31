@@ -13,58 +13,61 @@ import { HiCheckCircle, HiXCircle } from "react-icons/hi";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import { DarkModeProvider } from "./features/contexts/DarkModeContext";
 
 function App() {
   const queryClient = new QueryClient();
 
   return (
     <div className="flex justify-center items-center w-screen h-screen">
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <BrowserRouter>
-          <Routes>
-            <Route
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route path="/" element={<Dashboard />} />
-              <Route path="properties" element={<Properties />} />
-              <Route path="agents" element={<Agents />} />
-              <Route path="customers" element={<Customers />} />
-              <Route path="transactions" element={<Transactions />} />
-              <Route path="settings" element={<Settings />} />
-            </Route>
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<SignUp />} />
-          </Routes>
+      <DarkModeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <BrowserRouter>
+            <Routes>
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route path="/" element={<Dashboard />} />
+                <Route path="properties" element={<Properties />} />
+                <Route path="agents" element={<Agents />} />
+                <Route path="customers" element={<Customers />} />
+                <Route path="transactions" element={<Transactions />} />
+                <Route path="settings" element={<Settings />} />
+              </Route>
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<SignUp />} />
+            </Routes>
 
-          <Toaster
-            position="top-center"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: "#ffffff",
-                color: "var(--color-neutral-600)",
-                border: "1px solid #f1f1f1",
-                padding: "10px 14px",
-                borderRadius: "10px",
-                fontSize: "1rem",
-                fontWeight: 500,
-                boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-              },
-              success: {
-                icon: <HiCheckCircle size={20} color="#22c55e" />,
-              },
-              error: {
-                icon: <HiXCircle size={20} color="#ef4444" />,
-              },
-            }}
-          />
-        </BrowserRouter>
-      </QueryClientProvider>
+            <Toaster
+              position="top-center"
+              toastOptions={{
+                duration: 4000,
+                style: {
+                  background: "#ffffff",
+                  color: "var(--color-neutral-500)",
+                  border: "1px solid #f1f1f1",
+                  padding: "10px 14px",
+                  borderRadius: "10px",
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+                },
+                success: {
+                  icon: <HiCheckCircle size={20} color="#22c55e" />,
+                },
+                error: {
+                  icon: <HiXCircle size={20} color="#ef4444" />,
+                },
+              }}
+            />
+          </BrowserRouter>
+        </QueryClientProvider>
+      </DarkModeProvider>
     </div>
   );
 }

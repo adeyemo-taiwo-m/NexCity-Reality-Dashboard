@@ -39,7 +39,7 @@ export default function LoginForm() {
               message: "Enter a valid email address",
             },
           })}
-          className={`w-full px-4 text-neutral-50 py-2 border border-neutral-400 ${
+          className={`w-full px-4 text-neutral-700 py-2 border border-neutral-400 ${
             errors.email
               ? "border-red-400 focus:ring-red-500"
               : "border-[var(--color-neutral-200)] focus:ring-[var(--color-normal)]"
@@ -63,7 +63,7 @@ export default function LoginForm() {
               message: "Password must be at least 6 characters",
             },
           })}
-          className={`w-full px-4 py-2 text-neutral-50 border-neutral-400  border ${
+          className={`w-full px-4 py-2 text-neutral-700 border-neutral-400  border ${
             errors.password
               ? "border-red-400 focus:ring-red-500"
               : "border-[var(--color-neutral-200)] focus:ring-[var(--color-normal)]"

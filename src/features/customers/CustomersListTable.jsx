@@ -110,7 +110,7 @@ function CustomersListTable() {
       <div>
         <Button
           onClick={() => handleExport(customers)}
-          variant="tertiary"
+          variant="light"
           Icon={HiOutlineDownload}
         >
           Export

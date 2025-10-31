@@ -18,7 +18,7 @@ function SideNav({ isOpen = false, onClose = () => {} }) {
 
           {/* Animated sidebar */}
           <motion.aside
-            className="relative w-64 bg-white h-full shadow-xl border-r border-neutral-300"
+            className="relative w-64 bg-white h-full shadow-xl border-r border-neutral-200"
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}

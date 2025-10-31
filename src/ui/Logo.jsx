@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import useDarkMode from "../hooks/useDarkMode";
 
 function Logo() {
-  const [isDarkMode] = useState(false);
+  const { isDarkMode } = useDarkMode();
 
   return (
     <img

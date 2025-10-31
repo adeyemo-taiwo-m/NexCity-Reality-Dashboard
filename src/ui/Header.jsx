@@ -10,7 +10,7 @@ function Header({ onToggleSidebar }) {
         h-16
         bg-white/80 
         backdrop-blur-md backdrop-saturate-150
-        border-b border-neutral-400
+        border-b border-neutral-200
         flex items-center justify-between
         p-6 py-8  lap:p-8 lap:py-10
         flex-shrink-0

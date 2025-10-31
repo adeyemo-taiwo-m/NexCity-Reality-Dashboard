@@ -64,7 +64,7 @@ export async function updateCurrentUser({
 }) {
   const updatePayload = {};
   const userMeta = {};
-
+  console.log(profileImage);
   // Basic profile data
   if (fullName) userMeta.fullName = fullName;
   if (profileImage) userMeta.profileImage = profileImage;
