@@ -135,7 +135,7 @@ function EditCustomer({ customer, onCloseModal }) {
       <div className="flex justify-end gap-2 pt-3">
         <Button
           type="button"
-          variant="secondary"
+          variant="light"
           onClick={onCloseModal}
           disabled={isPendingCustomer}
         >

@@ -143,13 +143,9 @@ function AddCustomerModal({ onCloseModal }) {
 
         {/* Buttons */}
         <div className="flex justify-end gap-3 pt-2">
-          <button
-            type="button"
-            onClick={onCloseModal}
-            className="px-5 py-2 rounded-lg text-sm font-medium border border-neutral-300 hover:bg-neutral-100 transition-all"
-          >
+          <Button type="button" variant="light" onClick={onCloseModal}>
             Cancel
-          </button>
+          </Button>
           <Button type="submit" disabled={isPending}>
             {isPending ? <LoaderMini /> : "Add Customer"}
           </Button>

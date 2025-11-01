@@ -125,7 +125,7 @@ function EditTransaction({ transaction, onCloseModal }) {
       </div>
 
       <div className="flex justify-end gap-2 pt-3">
-        <Button type="button" variant="secondary" onClick={onCloseModal}>
+        <Button type="button" variant="light" onClick={onCloseModal}>
           Cancel
         </Button>
         <Button type="submit" disabled={isPending}>
