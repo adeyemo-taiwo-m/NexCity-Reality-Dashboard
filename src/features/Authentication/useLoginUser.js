@@ -20,7 +20,9 @@ export default function useLoginUser() {
     },
     onError: (err) => {
       console.error("Login failed:", err.message);
-      toast.error("Oops, there is an error loggin you in");
+      toast.error(
+        "Oops, either the email or password is incorrect, please try again"
+      );
     },
   });
 

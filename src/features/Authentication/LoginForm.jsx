@@ -1,9 +1,10 @@
-import React from "react";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Button from "../../ui/Button";
 import useLoginUser from "./useLoginUser";
 import LoaderMini from "../../ui/LoaderMini";
 import InputErrorP from "../../ui/InputErrorP";
+
+import PasswordInput from "../../ui/PasswordInput";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
@@ -23,7 +24,7 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       {/* Email Field */}
       <div>
         <label className="block text-sm text-left font-medium text-[var(--color-neutral-700)] mb-1">
@@ -49,28 +50,7 @@ export default function LoginForm() {
       </div>
 
       {/* Password Field */}
-      <div>
-        <label className="block text-sm text-left  font-medium text-[var(--color-neutral-700)] mb-1">
-          Password
-        </label>
-        <input
-          type="password"
-          placeholder="••••••••"
-          {...register("password", {
-            required: "Password is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
-          })}
-          className={`w-full px-4 py-2 text-neutral-700 border-neutral-400  border ${
-            errors.password
-              ? "border-red-400 focus:ring-red-500"
-              : "border-[var(--color-neutral-200)] focus:ring-[var(--color-normal)]"
-          } rounded-xl focus:ring-2 focus:outline-none`}
-        />
-        {errors.password && <InputErrorP error={errors.message} />}
-      </div>
+      <PasswordInput errors={errors} register={register} />
 
       {/* Sign In Button */}
       <Button
