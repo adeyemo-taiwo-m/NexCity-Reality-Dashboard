@@ -14,6 +14,9 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { DarkModeProvider } from "./features/contexts/DarkModeContext";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "./ui/ErrorFallback.jsx";
+import ConfirmModal from "./ui/ConfirmModal.jsx";
 
 function App() {
   const queryClient = new QueryClient();
@@ -23,25 +26,33 @@ function App() {
       <DarkModeProvider>
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
+
           <BrowserRouter>
-            <Routes>
-              <Route
-                element={
-                  <ProtectedRoute>
-                    <AppLayout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route path="/" element={<Dashboard />} />
-                <Route path="properties" element={<Properties />} />
-                <Route path="agents" element={<Agents />} />
-                <Route path="customers" element={<Customers />} />
-                <Route path="transactions" element={<Transactions />} />
-                <Route path="settings" element={<Settings />} />
-              </Route>
-              <Route path="login" element={<Login />} />
-              <Route path="signup" element={<SignUp />} />
-            </Routes>
+            <ErrorBoundary
+              FallbackComponent={ErrorFallback}
+              onReset={() => window.location.reload()}
+            >
+              <Routes>
+                <Route
+                  element={
+                    <ProtectedRoute>
+                      <AppLayout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="properties" element={<Properties />} />
+                  <Route path="agents" element={<Agents />} />
+                  <Route path="customers" element={<Customers />} />
+                  <Route path="transactions" element={<Transactions />} />
+                  <Route path="settings" element={<Settings />} />
+                </Route>
+
+                <Route path="login" element={<Login />} />
+                <Route path="signup" element={<SignUp />} />
+                <Route path="confirm-delete-:id" element={<ConfirmModal />} />
+              </Routes>
+            </ErrorBoundary>
 
             <Toaster
               position="top-center"

@@ -3,9 +3,11 @@ import Button from "./Button";
 
 function ErrorFallback() {
   return (
-    <div>
-      <p>Sorry, Something went wrong. Please try again.</p>
-      <Button>Try again</Button>
+    <div className="min-w-screen h-screen flex justify-center items-center">
+      <div className="text-center space-y-4">
+        <p>Sorry, something went wrong. Please try again.</p>
+        <Button onClick={() => window.location.reload()}>Reload App</Button>
+      </div>
     </div>
   );
 }
