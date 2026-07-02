@@ -1,31 +1,49 @@
-import supabase, { supabaseUrl } from "./supabase";
+import supabase from "./supabase";
 
+// Get all transactions with relational joins to fetch property titles, images, and customer names
 export default async function getTransactions({
   filter,
   sortBy,
   searchQuery,
   typeFilterData,
 } = {}) {
-  console.log(searchQuery);
-  let query = supabase.from("transactionDetails").select("*");
+  let query = supabase
+    .from("transactionDetails")
+    .select("*, customersDetails(name), properties(title, image)");
 
-  // Filter
-  if (filter !== null && filter !== undefined)
-    query = query.eq(filter.field, filter.value);
-
-  if (typeFilterData !== null && typeFilterData !== undefined)
-    query = query.eq(typeFilterData.field, typeFilterData.value);
-
-  // Sort By
-  if (sortBy)
-    query = query.order(sortBy.sortField, {
-      ascending: sortBy.direction === "asc",
-    });
-
-  // Search (if applicable — adjust field name as needed)
-  if (searchQuery && searchQuery.trim() !== "") {
-    query = query.ilike("customer", `%${searchQuery.trim()}%`);
+  // Filter by payment_status if UI filters by status
+  if (filter !== null && filter !== undefined) {
+    let field = filter.field;
+    let value = filter.value;
+    if (field === "status") {
+      field = "payment_status";
+      value = value === "Completed" ? "paid" : (value === "Cancelled" ? "failed" : "pending");
+    }
+    query = query.eq(field, value);
   }
+
+  if (typeFilterData !== null && typeFilterData !== undefined) {
+    let field = typeFilterData.field;
+    let value = typeFilterData.value;
+    if (field === "status") {
+      field = "payment_status";
+      value = value === "Completed" ? "paid" : (value === "Cancelled" ? "failed" : "pending");
+    }
+    query = query.eq(field, value);
+  }
+
+  // Sort By (if sorting by database columns)
+  if (sortBy && sortBy.sortField) {
+    let sortField = sortBy.sortField;
+    if (sortField !== "customer" && sortField !== "property") {
+      if (sortField === "status") sortField = "payment_status";
+      if (sortField === "date") sortField = "created_at";
+      query = query.order(sortField, {
+        ascending: sortBy.direction === "asc",
+      });
+    }
+  }
+
   const { data, error } = await query;
 
   if (error) {
@@ -33,52 +51,105 @@ export default async function getTransactions({
     throw new Error("Failed to load transactions");
   }
 
-  return data;
+  // Map to flat object structure required by the UI table components
+  let mappedData = data.map((txn) => {
+    let uiStatus = "Pending";
+    if (txn.payment_status === "paid") uiStatus = "Completed";
+    else if (txn.payment_status === "pending") uiStatus = "Pending";
+    else if (txn.payment_status === "failed") uiStatus = "Cancelled";
+
+    return {
+      id: txn.id,
+      property: txn.properties?.title || "—",
+      propertyImage: txn.properties?.image || "",
+      type: txn.amount > 10000000 ? "Sale" : "Rent", // Fallback logic based on amount
+      customer: txn.customersDetails?.name || "—",
+      amount: txn.amount ? Number(txn.amount) : 0,
+      status: uiStatus,
+      date: txn.created_at
+        ? new Date(txn.created_at).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })
+        : "—",
+    };
+  });
+
+  // Search Filter in-memory for customer name (relational field)
+  if (searchQuery && searchQuery.trim() !== "") {
+    const q = searchQuery.toLowerCase().trim();
+    mappedData = mappedData.filter(
+      (txn) =>
+        txn.customer.toLowerCase().includes(q) ||
+        txn.property.toLowerCase().includes(q)
+    );
+  }
+
+  // Sort in-memory for relational fields (customer or property)
+  if (sortBy && sortBy.sortField) {
+    const sortField = sortBy.sortField;
+    if (sortField === "customer" || sortField === "property") {
+      mappedData.sort((a, b) => {
+        const valA = String(a[sortField]).toLowerCase();
+        const valB = String(b[sortField]).toLowerCase();
+        if (valA < valB) return sortBy.direction === "asc" ? -1 : 1;
+        if (valA > valB) return sortBy.direction === "asc" ? 1 : -1;
+        return 0;
+      });
+    }
+  }
+
+  return mappedData;
 }
 
+// Add a new transaction
 export async function addTransaction(rowData) {
   try {
-    let imagePath = "";
-
-    // 1. Check if an image file was provided
-    if (rowData.propertyImage && rowData.propertyImage[0] instanceof File) {
-      const imageFile = rowData.propertyImage[0];
-      const imageName = `${Date.now()}-${imageFile.name}`;
-      const filePath = `transactions/${imageName}`; // optional folder name
-
-      // Upload image to Supabase Storage
-      const { data: imageData, error: imageError } = await supabase.storage
-        .from("user") // ⚠️ Replace 'user' with your actual bucket name
-        .upload(filePath, imageFile, {
-          cacheControl: "3600",
-          upsert: false,
-        });
-
-      if (imageError) throw imageError;
-
-      // Construct public URL for uploaded image
-      imagePath = `${supabaseUrl}/storage/v1/object/public/user/${imageData.path}`;
-      console.log(" Image uploaded successfully:", imagePath);
+    // 1. Resolve Customer ID by name
+    let customerId = null;
+    if (rowData.customer) {
+      const { data: customerData } = await supabase
+        .from("customersDetails")
+        .select("id")
+        .eq("name", rowData.customer)
+        .limit(1);
+      if (customerData && customerData.length > 0) customerId = customerData[0].id;
     }
 
-    //  2. Prepare transaction data (attach image URL)
-    const newData = {
-      ...rowData,
-      propertyImage: imagePath || "", // keep empty string if no image
+    // 2. Resolve Property ID by title
+    let propertyId = null;
+    if (rowData.property) {
+      const { data: propertyData } = await supabase
+        .from("properties")
+        .select("id")
+        .eq("title", rowData.property)
+        .limit(1);
+      if (propertyData && propertyData.length > 0) propertyId = propertyData[0].id;
+    }
+
+    // 3. Construct database payload
+    const dbPayload = {
+      customer_id: customerId,
+      property_id: propertyId,
+      amount: Number(rowData.amount),
+      payment_status: rowData.status && rowData.status.toLowerCase() === "completed" ? "paid" : (rowData.status && rowData.status.toLowerCase() === "cancelled" ? "failed" : "pending"),
     };
 
-    // 3. Insert new transaction into database
+    if (rowData.date) {
+      dbPayload.created_at = new Date(rowData.date).toISOString();
+    }
+
     const { data, error } = await supabase
       .from("transactionDetails")
-      .insert([newData])
+      .insert([dbPayload])
       .select();
 
     if (error) {
-      console.error(" Error adding transaction:", error);
+      console.error("Error adding transaction:", error);
       throw new Error("Failed to add transaction");
     }
 
-    console.log(" Transaction added successfully:", data);
     return data;
   } catch (err) {
     console.error("addTransaction error:", err.message);
@@ -86,59 +157,62 @@ export async function addTransaction(rowData) {
   }
 }
 
+// Update an existing transaction
 export async function editTransaction(transactionId, updatedData) {
   try {
-    let imagePath = updatedData.propertyImage || ""; // keep existing one if no new file
-
-    // 1. Check if a new image file was selected
-    if (
-      updatedData.propertyImage &&
-      updatedData.propertyImage[0] instanceof File
-    ) {
-      const imageFile = updatedData.propertyImage[0];
-      const imageName = `${Date.now()}-${imageFile.name}`;
-      const filePath = `transactions/${imageName}`; // folder in bucket
-
-      //  Upload new image to Supabase Storage
-      const { data: imageData, error: imageError } = await supabase.storage
-        .from("user") // ⚠️ Replace "user" with your actual bucket name
-        .upload(filePath, imageFile, {
-          cacheControl: "3600",
-          upsert: false,
-        });
-
-      if (imageError) throw imageError;
-
-      //  Construct public URL for uploaded image
-      imagePath = `${supabaseUrl}/storage/v1/object/public/user/${imageData.path}`;
-      console.log(" New image uploaded:", imagePath);
+    // 1. Resolve Customer ID by name
+    let customerId = null;
+    if (updatedData.customer) {
+      const { data: customerData } = await supabase
+        .from("customersDetails")
+        .select("id")
+        .eq("name", updatedData.customer)
+        .limit(1);
+      if (customerData && customerData.length > 0) customerId = customerData[0].id;
     }
 
-    //  2. Update transaction record in DB
-    const newData = {
-      ...updatedData,
-      propertyImage: imagePath || "",
+    // 2. Resolve Property ID by title
+    let propertyId = null;
+    if (updatedData.property) {
+      const { data: propertyData } = await supabase
+        .from("properties")
+        .select("id")
+        .eq("title", updatedData.property)
+        .limit(1);
+      if (propertyData && propertyData.length > 0) propertyId = propertyData[0].id;
+    }
+
+    // 3. Construct database payload
+    const dbPayload = {
+      customer_id: customerId,
+      property_id: propertyId,
+      amount: Number(updatedData.amount),
+      payment_status: updatedData.status && updatedData.status.toLowerCase() === "completed" ? "paid" : (updatedData.status && updatedData.status.toLowerCase() === "cancelled" ? "failed" : "pending"),
     };
+
+    if (updatedData.date) {
+      dbPayload.created_at = new Date(updatedData.date).toISOString();
+    }
 
     const { data, error } = await supabase
       .from("transactionDetails")
-      .update(newData)
+      .update(dbPayload)
       .eq("id", transactionId)
       .select();
 
     if (error) {
-      console.error(" Error updating transaction:", error);
+      console.error("Error updating transaction:", error);
       throw new Error("Failed to update transaction");
     }
 
-    console.log(" Transaction updated successfully:", data);
     return data;
   } catch (err) {
-    console.error(" editTransaction error:", err.message);
+    console.error("editTransaction error:", err.message);
     throw new Error("Failed to update transaction: " + err.message);
   }
 }
 
+// Delete a transaction
 export async function deleteTransaction(transactionId) {
   const { data, error } = await supabase
     .from("transactionDetails")

@@ -8,10 +8,12 @@ export default async function getAgents({ filter, sortBy, searchQuery }) {
   if (filter !== null) query = query.eq(filter.field, filter.value);
 
   // Sort By
-  if (sortBy)
-    query = query.order(sortBy.sortField, {
+  if (sortBy) {
+    const sortField = sortBy.sortField === "closedDeals" ? "closed_deals" : sortBy.sortField;
+    query = query.order(sortField, {
       ascending: sortBy.direction === "asc",
     });
+  }
 
   // SearchField
   if (searchQuery && searchQuery.trim() !== "") {
@@ -25,7 +27,10 @@ export default async function getAgents({ filter, sortBy, searchQuery }) {
     throw new Error("Failed to load agents");
   }
 
-  return data;
+  return data.map((agent) => ({
+    ...agent,
+    closedDeals: agent.closed_deals,
+  }));
 }
 
 // Add a row
@@ -66,7 +71,7 @@ export async function updateAgents(rowData) {
           phone: rowData.phone,
           status: rowData.status,
           listed: rowData.propertiesListed || 0,
-          closedDeals: rowData.closedDeals || 0,
+          closed_deals: rowData.closedDeals || 0,
           image: imageUrl || null, //  store uploaded image URL
         },
       ])
@@ -135,7 +140,7 @@ export async function editAgent(agentId, updatedData) {
         email: updatedData.email,
         phone: updatedData.phone,
         listed: updatedData.propertiesListed || 0,
-        closedDeals: updatedData.closedDeals || 0,
+        closed_deals: updatedData.closedDeals || 0,
         status: updatedData.status,
         image: imageUrl,
       })
