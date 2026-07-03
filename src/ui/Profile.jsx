@@ -4,6 +4,7 @@ import NotificationBtn from "./NotificationBtn";
 import ProfileButton from "./ProfileButton";
 import useDarkMode from "../hooks/useDarkMode";
 import { useNavigate } from "react-router-dom";
+import NotificationBell from "../features/notifications/NotificationBell";
 
 // Only the profile image is kept as an import, assuming it's dynamic
 
@@ -28,6 +29,7 @@ function Profile() {
       >
         {/* Notifications Button */}
         <div className="flex items-center gap-2">
+          <NotificationBell />
           <NotificationBtn onClick={() => navigate("/login")} />
           <NotificationBtn
             onClick={toggleDarkMode}
