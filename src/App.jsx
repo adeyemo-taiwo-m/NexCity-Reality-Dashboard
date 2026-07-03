@@ -17,12 +17,15 @@ import { DarkModeProvider } from "./features/contexts/DarkModeContext";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./ui/ErrorFallback.jsx";
 import ConfirmModal from "./ui/ConfirmModal.jsx";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 function App() {
   const queryClient = new QueryClient();
 
   return (
-    <div className="flex justify-center items-center w-screen h-screen">
+    <Provider store={store}>
+      <div className="flex justify-center items-center w-screen h-screen">
       <DarkModeProvider>
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
@@ -80,6 +83,7 @@ function App() {
         </QueryClientProvider>
       </DarkModeProvider>
     </div>
+    </Provider>
   );
 }
 
