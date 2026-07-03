@@ -9,23 +9,26 @@ import StatCard from "../../ui/StatCard";
 import LoaderMini from "../../ui/LoaderMini";
 import { formatCurrency } from "../../utils/helpers";
 
+import { useSelector } from "react-redux";
+
 function StatSection() {
   const { properties, isPending } = useProperties();
+  const { propertiesDelta } = useSelector((state) => state.stats);
 
-  const totalProperties = properties?.length > 0 ? properties?.length : 0;
+  const totalProperties = (properties?.length > 0 ? properties?.length : 0) + propertiesDelta;
   const revenue = properties
     ?.filter((property) => property.status.toLowerCase() === "sold")
     .reduce((acc, cur) => acc + cur.price, 0);
 
-  const availableProperties = properties?.filter(
+  const availableProperties = (properties?.filter(
     (property) => property.status.toLowerCase() === "available"
-  ).length;
+  ).length || 0) + propertiesDelta;
 
   const soldProperties = properties?.filter(
     (property) => property.status === "sold"
-  ).length;
+  ).length || 0;
 
-  const soldPercentage = (soldProperties / totalProperties) * 100;
+  const soldPercentage = totalProperties > 0 ? (soldProperties / totalProperties) * 100 : 0;
   const statsData = [
     {
       id: "total-properties",
