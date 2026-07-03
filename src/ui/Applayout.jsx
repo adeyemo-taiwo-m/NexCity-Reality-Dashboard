@@ -5,8 +5,12 @@ import MainContent from "./MainContent";
 import SideNav from "./SideNav";
 import { Outlet } from "react-router-dom";
 import SideNavLap from "./SideNavLap";
+import { useSocket } from "../hooks/useSocket";
 
 const AppLayout = () => {
+  // Initialize real-time Socket.io connection
+  useSocket();
+
   // Manage sidebar open state for small screens
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
