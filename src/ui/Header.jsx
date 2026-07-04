@@ -14,8 +14,8 @@ function Header({ onToggleSidebar }) {
         flex items-center justify-between
         p-6 py-8  lap:p-8 lap:py-10
         flex-shrink-0
-        fixed top-0 left-0 w-full z-50
-        tab:relative tab:z-50
+        fixed top-0 left-0 w-full z-[1005]
+        tab:relative tab:z-[1005]
       "
     >
       <div className="flex items-center gap-4">
