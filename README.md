@@ -89,24 +89,28 @@ Before this assessment, the dashboard featured the following CRM capabilities:
 
 ## 4. 🚀 New Functionality & Improvements
 
-During this assessment, the following integrations and core improvements were added:
-
-### A. Real-Time Socket.io Server Relay
-* A standalone Node/Express server was built and deployed on Render. It subscribes to Supabase replication channels and relays postgres changes over Socket.io.
-* **Security Choice**: All privileged database permissions (`SUPABASE_SERVICE_ROLE_KEY`) are kept on the backend server and never exposed to the client.
-
-### B. Redux Toolkit Client State
-* **Unread badge count** and **live alert feeds** are stored in a Redux Toolkit state, fully separating transient real-time alerts from React Query's request-based caching.
-
-### C. Live Dashboard Stat Cards
-* Dashboard stat counters (Total Properties, Available Properties) update dynamically as socket events are received. Counts increment instantly using Redux deltas before background refetches occur.
-
-### D. Real-Time Map Synchronization
-* We integrated React Query invalidation directly into the Socket client hook. When a new property is received, the cache is invalidated, forcing a background refetch. The Leaflet map instantly draws the new coordinate pin marker without a page refresh!
-
-### E. Axios Address Geocoding with Cancellation
-* Integrated OpenStreetMap's Nominatim geocoding API inside the Property Forms.
-* Uses an `AbortController` signal inside the Axios call to cancel outdated in-flight requests when typing fast, eliminating race conditions.
+  During this assessment, the following integrations and core improvements were added:
+  
+  ### A. Real-Time Socket.io Server Relay
+  * A standalone Node/Express server was built and deployed on Render. It subscribes to Supabase replication channels and relays postgres changes over Socket.io.
+  * **Security Choice**: All privileged database permissions (`SUPABASE_SERVICE_ROLE_KEY`) are kept on the backend server and never exposed to the client.
+  
+  ![Live Notifications Demo](./docs/notifications_demo.png)
+  
+  ### B. Redux Toolkit Client State
+  * **Unread badge count** and **live alert feeds** are stored in a Redux Toolkit state, fully separating transient real-time alerts from React Query's request-based caching.
+  
+  ### C. Live Dashboard Stat Cards
+  * Dashboard stat counters (Total Properties, Available Properties) update dynamically as socket events are received. Counts increment instantly using Redux deltas before background refetches occur.
+  
+  ### D. Real-Time Map Synchronization
+  * We integrated React Query invalidation directly into the Socket client hook. When a new property is received, the cache is invalidated, forcing a background refetch. The Leaflet map instantly draws the new coordinate pin marker without a page refresh!
+  
+  ### E. Axios Address Geocoding with Cancellation
+  * Integrated OpenStreetMap's Nominatim geocoding API inside the Property Forms.
+  * Uses an `AbortController` signal inside the Axios call to cancel outdated in-flight requests when typing fast, eliminating race conditions.
+  
+  ![Address Autocomplete Demo](./docs/geocoding_demo.png)
 
 ### F. Dropdown & Layout Stacking Fixes
 * Rearranged utilities in the navigation bar to support a premium ordered layout.
