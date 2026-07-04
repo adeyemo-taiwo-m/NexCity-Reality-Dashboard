@@ -28,9 +28,6 @@ function Profile() {
         aria-label="Utility navigation"
       >
         <div className="flex items-center gap-2">
-          {/* Real-time Notification Bell */}
-          <NotificationBell />
-
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleDarkMode}
@@ -44,6 +41,9 @@ function Profile() {
               <HiOutlineMoon className={iconSize} />
             )}
           </button>
+
+          {/* Real-time Notification Bell */}
+          <NotificationBell />
         </div>
 
         {/* Separator (Line) - show only on lg+ */}
