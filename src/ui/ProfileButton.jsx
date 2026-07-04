@@ -67,7 +67,7 @@ function ProfileButton({ profileButtonClass }) {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2.5 w-48 bg-white border border-neutral-200 rounded-xl shadow-xl z-50 overflow-hidden animate-fadeIn">
+        <div className="absolute right-0 mt-2.5 w-48 bg-white border border-neutral-200 rounded-xl shadow-xl z-[9999] overflow-hidden animate-fadeIn">
           <div className="py-1">
             {/* Profile settings */}
             <button

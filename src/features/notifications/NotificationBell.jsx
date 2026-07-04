@@ -52,7 +52,7 @@ function NotificationBell() {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2.5 w-80 bg-white border border-neutral-200 rounded-xl shadow-xl z-50 overflow-hidden animate-fadeIn">
+        <div className="absolute right-0 mt-2.5 w-80 bg-white border border-neutral-200 rounded-xl shadow-xl z-[9999] overflow-hidden animate-fadeIn">
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 bg-neutral-50 border-b border-neutral-100">
             <div className="flex items-center gap-1.5">

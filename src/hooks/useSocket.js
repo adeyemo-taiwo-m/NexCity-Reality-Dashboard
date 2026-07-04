@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { useDispatch } from 'react-redux';
-import { toast } from 'react-hot-toast';
+import { useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 import { notificationReceived, setConnectionStatus } from '../features/notifications/notificationsSlice';
 import { incrementStat } from '../features/dashboard/statsSlice';
 
@@ -9,6 +10,7 @@ let socket; // module-level so we don't reconnect on every re-render
 
 export function useSocket() {
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     // Connect to the Socket.io server
@@ -26,6 +28,15 @@ export function useSocket() {
 
     socket.on('notification:new', (payload) => {
       dispatch(notificationReceived(payload));
+
+      // Auto-invalidate React Query caches so UI data (like the map) refetches live!
+      if (payload.type === 'property') {
+        queryClient.invalidateQueries({ queryKey: ['properties'] });
+      } else if (payload.type === 'customer') {
+        queryClient.invalidateQueries({ queryKey: ['customers'] });
+      } else if (payload.type === 'transaction') {
+        queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      }
       
       // Select appropriate icon for toast notification
       let toastIcon = '🔔';
