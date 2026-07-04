@@ -12,42 +12,37 @@ function Profile() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const navigate = useNavigate();
   const iconButtonClass =
-    "relative p-2 rounded-full bg-neutral-200 hover:bg-neutral-300 transition duration-150";
-  const iconSize = "w-6 h-6 text-neutral-500";
+    "relative p-2.5 rounded-full bg-neutral-100 hover:bg-neutral-200 transition-colors duration-150 cursor-pointer";
+  const iconSize = "w-6 h-6 text-neutral-600";
   // Simplified styles for the profile dropdown button
   const profileButtonClass =
     "flex items-center cursor-pointer gap-3 p-1 pl-3 relative bg-white rounded-full shadow-md hover:shadow-lg transition-shadow duration-200";
 
   return (
     <div
-      className=" flex  items-center justify-end w-full h-16 px-0 lg:px-4 bg-transparent"
+      className="flex items-center justify-end w-full h-16 px-0 lg:px-4 bg-transparent"
       role="banner"
     >
       <nav
         className="flex items-center gap-3 relative"
         aria-label="Utility navigation"
       >
-        {/* Notifications Button */}
         <div className="flex items-center gap-2">
+          {/* Real-time Notification Bell */}
           <NotificationBell />
-          <NotificationBtn onClick={() => navigate("/login")} />
-          <NotificationBtn
-            onClick={toggleDarkMode}
-            icon={
-              isDarkMode ? (
-                <HiOutlineSun className={`${iconSize} text-normal`} />
-              ) : (
-                <HiOutlineMoon className={`${iconSize} text-normal`} />
-              )
-            }
-          />
 
+          {/* Dark Mode Toggle */}
           <button
-            className={`${iconButtonClass} hidden lg:inline-flex`}
-            aria-label="Agent Profile Shortcut"
+            onClick={toggleDarkMode}
+            className={iconButtonClass}
+            aria-label="Toggle Dark Mode"
             type="button"
           >
-            <HiOutlineUser className={iconSize} />
+            {isDarkMode ? (
+              <HiOutlineSun className={iconSize} />
+            ) : (
+              <HiOutlineMoon className={iconSize} />
+            )}
           </button>
         </div>
 
@@ -57,7 +52,7 @@ function Profile() {
           aria-hidden="true"
         />
 
-        {/* Main User Menu Dropdown Button */}
+        {/* Main User Profile Button */}
         <ProfileButton profileButtonClass={profileButtonClass} />
       </nav>
     </div>
